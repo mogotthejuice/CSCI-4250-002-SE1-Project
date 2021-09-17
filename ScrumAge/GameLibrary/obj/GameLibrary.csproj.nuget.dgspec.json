@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chandler\\Source\\Repos\\scottcd\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {}
+    "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chandler\\Source\\Repos\\scottcd\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
+    "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\scottcd\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
         "projectName": "GameLibrary",
-        "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\scottcd\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
+        "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
         "packagesPath": "C:\\Users\\Chandler\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\scottcd\\ScrumAge\\GameLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
