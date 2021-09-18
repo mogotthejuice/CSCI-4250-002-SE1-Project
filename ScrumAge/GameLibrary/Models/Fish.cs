@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLibrary {
+namespace GameLibrary.Models {
     public class Fish {
         public string Name { get; set; } = "Anchovie";
         public int Weight { get; set; } = 14;

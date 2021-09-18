@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DDiQbx4wh8LmgBa/zlkoNUCCVZsBfUK/gfLjlnFJUIeCPQk23LAN5UK1zstjcr98AZScOEX7drIL0BJm1igtCQ==",
+  "dgSpecHash": "B4MI1crXhDSpfG9adl1ws+8BQMosxiOK97GeUpYlAqobZj9aKrhkZE4EJB+WGUZRG9B4pK/PZovGYcb67251kA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
+  "projectFilePath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Chandler\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.8\\microsoft.aspnetcore.authorization.5.0.8.nupkg.sha512",
     "C:\\Users\\Chandler\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.8\\microsoft.aspnetcore.components.5.0.8.nupkg.sha512",

@@ -1178,11 +1178,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
+      "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
       "projectName": "BlazorUI",
-      "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
+      "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
       "packagesPath": "C:\\Users\\Chandler\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\BlazorUI\\obj\\",
+      "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\BlazorUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -1205,8 +1205,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
-              "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\Scru\\ScrumAge\\GameLibrary\\GameLibrary.csproj"
+            "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
+              "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj"
             }
           }
         }

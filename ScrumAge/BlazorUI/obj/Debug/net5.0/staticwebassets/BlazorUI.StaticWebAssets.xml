@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\obj\Debug\net5.0\scopedcss\bundle\" />
+</StaticWebAssets>
