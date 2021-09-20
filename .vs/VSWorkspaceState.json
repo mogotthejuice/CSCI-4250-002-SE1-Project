@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ScrumAge",
+    "\\ScrumAge\\BlazorUI",
+    "\\ScrumAge\\BlazorUI\\Properties",
+    "\\ScrumAge\\BlazorUI\\Shared",
+    "\\ScrumAge\\GameLibrary",
+    "\\ScrumAge\\GameLibrary\\bin",
+    "\\ScrumAge\\GameLibrary\\bin\\Release",
+    "\\ScrumAge\\GameLibrary\\Models",
+    "\\ScrumAge\\GameLibrary\\obj"
+  ],
+  "SelectedNode": "\\ScrumAge\\BlazorUI\\Pages\\Index.razor",
+  "PreviewInSolutionExplorer": false
+}

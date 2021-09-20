@@ -4,13 +4,13 @@
 .column[b-kb93bnuiiw] {
     float: left;
     width: 33.33%;
+    column-gap: 40px;
 }
 
 /* Clear floats after the columns */
 .row[b-kb93bnuiiw]:after {
     content: "";
     display: table;
-    clear: both;
 }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-9locippnay] {
