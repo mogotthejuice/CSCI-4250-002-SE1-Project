@@ -3,14 +3,14 @@
     "",
     "\\ScrumAge",
     "\\ScrumAge\\BlazorUI",
-    "\\ScrumAge\\BlazorUI\\Properties",
     "\\ScrumAge\\BlazorUI\\Shared",
     "\\ScrumAge\\GameLibrary",
     "\\ScrumAge\\GameLibrary\\bin",
     "\\ScrumAge\\GameLibrary\\bin\\Release",
     "\\ScrumAge\\GameLibrary\\Models",
-    "\\ScrumAge\\GameLibrary\\obj"
+    "\\ScrumAge\\GameLibrary\\obj",
+    "\\ScrumAge\\TestConsoleUI"
   ],
-  "SelectedNode": "\\ScrumAge\\BlazorUI\\Pages\\Index.razor",
+  "SelectedNode": "\\ScrumAge\\ScrumAge.sln",
   "PreviewInSolutionExplorer": false
 }
