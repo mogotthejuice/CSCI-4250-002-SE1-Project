@@ -1273,3 +1273,6 @@ C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\Scrum
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\obj\Debug\net5.0\BlazorUI.RazorTargetAssemblyInfo.cache
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\obj\Debug\net5.0\BlazorUI.csproj.CopyComplete
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\obj\Debug\net5.0\scopedcss\Pages\Board.razor.rz.scp.css
+C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\obj\Debug\net5.0\RazorDeclaration\Pages\Board.razor.g.cs
+C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\obj\Debug\net5.0\Razor\Pages\Board.razor.g.cs
+C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\obj\Debug\net5.0\scopedcss\Pages\Board.razor.rz.scp.css
