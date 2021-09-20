@@ -1,8 +1,8 @@
 /* /Pages/Board.razor.rz.scp.css */
 .column[b-kb93bnuiiw] {
     column-gap: 2em;
-    float: left;
     width: 33.33%;
+    position: relative, absolute;
 }
 
 .rectangle[b-kb93bnuiiw] {
