@@ -1,11 +1,20 @@
 .column[b-kb93bnuiiw] {
+    column-gap: 2em;
     float: left;
     width: 33.33%;
-    column-gap: 40px;
+}
+
+.rectangle[b-kb93bnuiiw] {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    border: 1px solid #000;
 }
 
 /* Clear floats after the columns */
 .row[b-kb93bnuiiw]:after {
+    
     content: "";
     display: table;
+    column-rule: 4px double #0026ff;
 }
