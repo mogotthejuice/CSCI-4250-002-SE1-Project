@@ -1,20 +1,15 @@
 ﻿@page "/"
+@inject NavigationManager UriHelper
 
-<h1>Hello, world!</h1>
+<h1>SCRUM AGE</h1>
 
-Welcome to your new app.
-
-<p>@fish.Name @fish.Weight</p>
-
-<p>
-    This is a nav link -- <NavLink href="/counter">Navigate 2</NavLink><br />
-</p>
+<button @onclick=@Navigate>Start a New Game</button>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 @code
 {
-    
-    
-    Fish fish = new Fish();
+    void Navigate() {
+        UriHelper.NavigateTo("board");
+    }
 }

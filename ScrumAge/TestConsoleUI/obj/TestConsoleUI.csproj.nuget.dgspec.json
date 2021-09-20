@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj": {}
+    "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
+    "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
         "projectName": "GameLibrary",
-        "projectPath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
-        "packagesPath": "C:\\Users\\sethn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\obj\\",
+        "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj",
+        "packagesPath": "C:\\Users\\Chandler\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\sethn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chandler\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -58,26 +60,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj": {
+    "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
+        "projectUniqueName": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
         "projectName": "TestConsoleUI",
-        "projectPath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
-        "packagesPath": "C:\\Users\\sethn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\obj\\",
+        "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
+        "packagesPath": "C:\\Users\\Chandler\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\sethn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chandler\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -90,8 +94,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
-                "projectPath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\GameLibrary\\GameLibrary.csproj"
+              "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj": {
+                "projectPath": "C:\\Users\\Chandler\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\GameLibrary\\GameLibrary.csproj"
               }
             }
           }
@@ -120,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
