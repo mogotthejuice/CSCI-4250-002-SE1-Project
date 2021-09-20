@@ -1,5 +1,17 @@
 @import '';
 
+/* /Pages/Board.razor.rz.scp.css */
+.column[b-kb93bnuiiw] {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row[b-kb93bnuiiw]:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-9locippnay] {
     position: relative;
