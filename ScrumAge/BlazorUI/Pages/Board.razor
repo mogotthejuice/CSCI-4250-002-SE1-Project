@@ -4,9 +4,9 @@
 
 <table id="board">
     <tr>
-        <th class="padColOne" style="background-color: @color"><button @onclick="Click">Overtime</button></th>
-        <th>Cafe<br>(Coffee)</th>
-        <th>Staples <br> (USB Sticks)</th>
+        <th class="padColOne" style="background-color: @colorOver"><button @onclick="Click">Overtime</button></th>
+        <th class="padColOne" style="background-color: @colorCafe"><button @onclick="Click">Cafe<br>(Coffee)</button></th>
+        <th class="padColOne" style="background-color: @colorStaples"><button @onclick="Click">Staples <br> (USB Sticks)</button></th>
     </tr>
     <tr>
         <th>Field<br>(Bitcoin Investment)</th>
@@ -43,15 +43,16 @@
 
 @code {
     private ElementReference button1;
-    private string color;
+    private string colorOver;
+    private string colorCafe;
+    private string colorStaples;
 
     public void Click()
     {
-        var random = new Random();
 
-        var vrcolor = String.Format("#{0:X6}", random.Next(0x1000000));
+        var vrcolor = String.Format("#{0:X6}", 255);
 
-        color = vrcolor;
+        colorOver = vrcolor;
     }
 
 }

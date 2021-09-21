@@ -105,9 +105,8 @@ using GameLibrary.Models;
 
     public void Click()
     {
-        var random = new Random();
 
-        var vrcolor = String.Format("#{0:X6}", random.Next(0x1000000));
+        var vrcolor = String.Format("#{0:X6}", 255);
 
         color = vrcolor;
     }
