@@ -45,3 +45,4 @@ C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\Scrum
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\GameLibrary\obj\Debug\net5.0\GameLibrary.dll
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\GameLibrary\obj\Debug\net5.0\ref\GameLibrary.dll
 C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\GameLibrary\obj\Debug\net5.0\GameLibrary.pdb
+C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\GameLibrary\obj\Debug\net5.0\GameLibrary.csproj.AssemblyReference.cache

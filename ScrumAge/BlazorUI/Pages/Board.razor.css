@@ -1,14 +1,24 @@
 ﻿.column {
+    column-width: 200px;
     column-gap: 2em;
-    width: 33.33%;
-    position: relative, absolute;
+    min-width: 100px;
+    float: left;
+    padding: 20px;
+    display: inline-block;
 }
 
 .rectangle {
-    position: relative;
+    position: relative, absolute;
+    margin-left: 10px;
     width: 200px;
     height: 100px;
     border: 1px solid #000;
+    border-spacing: 15px;
+}
+
+.padColOne
+{
+    padding: 5px;
 }
 
 /* Clear floats after the columns */

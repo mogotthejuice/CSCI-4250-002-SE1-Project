@@ -2,31 +2,56 @@
 
 <h1>Board</h1>
 
-<div class="row">
-    <div class="column">
-        <h1>Column 1</h1>
-        <div class="rectangle">Overtime</div>
-        <div class="rectangle">Field <br> (Bitcoin Investment)</div>
-        <div class="rectangle">Training Center</div>
-        <div class="rectangle">License Tiles</div>
-        <div class="rectangle">License Tiles</div>
-        <div class="rectangle">License Tiles</div>
-        <div class="rectangle">License Tiles</div>
-    </div>
-    <div class="column">
-        <h1>Column 2</h1>
-        <div class="rectangle">Cafe <br> (Coffee)</div>
-        <div class="rectangle">Overclocking <br> Stack</div>
-        <div class="rectangle">Player Name</div>
-    </div>
-    <div class="column">
-        <h1>Column 3</h1>
-        <div class="rectangle">Staples <br> (USB Sticks)</div>
-        <div class="rectangle">Factory <br> (CPU Cores)</div>
-        <div class="rectangle">Power Plant <br> (Power)</div>
-    </div>
-</div>
+<table id="board">
+    <tr>
+        <th class="padColOne" style="background-color: @color"><button @onclick="Click">Overtime</button></th>
+        <th>Cafe<br>(Coffee)</th>
+        <th>Staples <br> (USB Sticks)</th>
+    </tr>
+    <tr>
+        <th>Field<br>(Bitcoin Investment)</th>
+        <th></th>
+        <th>Factory<br>(CPU Cores)</th>
+    </tr>
+    <tr>
+
+        <th>Training<br>Center</th>
+        <th>Overclocking Stack</th>
+        <th>Power Plant<br>Power</th>
+    </tr>
+    <tr>
+        <th>License Tiles</th>
+        <th></th>
+        <th>Con Card</th>
+        <th>Con Card</th>
+        <th>Con Card</th>
+        <th>Con Card</th>
+    </tr>
+    <tr>
+        <th>License Tiles</th>
+    </tr>
+    <tr>
+        <th>License Tiles</th>
+    </tr>
+    <tr>
+
+        <th>License Tiles</th>
+        <th>Player Name</th>
+        <th></th>
+    </tr>
+</table>
 
 @code {
-    
+    private ElementReference button1;
+    private string color;
+
+    public void Click()
+    {
+        var random = new Random();
+
+        var vrcolor = String.Format("#{0:X6}", random.Next(0x1000000));
+
+        color = vrcolor;
+    }
+
 }

@@ -97,6 +97,25 @@ using GameLibrary.Models;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 44 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\Pages\Board.razor"
+       
+    private ElementReference button1;
+    private string color;
+
+    public void Click()
+    {
+        var random = new Random();
+
+        var vrcolor = String.Format("#{0:X6}", random.Next(0x1000000));
+
+        color = vrcolor;
+    }
+
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591
