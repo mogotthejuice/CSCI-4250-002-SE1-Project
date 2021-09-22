@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLibrary.Interfaces {
-    public abstract class Location {
+using GameLibrary.Models;
+
+namespace GameLibrary.Models {
+    public abstract class AbstractLocation {
         private const int MAX_PLAYERS = 4;
 
         // Number of developers placed on location, with length equal to number of players in game.
@@ -18,17 +20,18 @@ namespace GameLibrary.Interfaces {
             get { return NumDeveloperSpaces - numPlayerDevelopers.Sum(); }
         }
 
-        public int GetNumPlayerDevelopers(int player) {
-            if (player <= 0 || player > MAX_PLAYERS)
+        public int GetNumPlayerDevelopers(Player player) {
+            if (player.Number <= 0 || player.Number > MAX_PLAYERS)
                 throw new ArgumentException($"Player number must be between 1 and {MAX_PLAYERS}.");
 
-            return numPlayerDevelopers[player - 1];
+            return numPlayerDevelopers[player.Number - 1];
         }
 
-        public void PlaceDevelopers(int player, int numDevelopers) {
-            if (player <= 0 || player > MAX_PLAYERS)
-                throw new ArgumentException($"Player number must be between 1 and {MAX_PLAYERS}.");
+        private void SetNumPlayerDevelopers(Player player, int numDevelopers) {
+            numPlayerDevelopers[player.Number - 1] = numDevelopers;
+        }
 
+        public void PlaceDevelopers(Player player, int numDevelopers) {
             if (numDevelopers > SpacesLeft)
                 throw new ArgumentException("Number of developers to place cannot exceed number of spaces left.");
 
@@ -36,9 +39,9 @@ namespace GameLibrary.Interfaces {
                 throw new InvalidOperationException("Cannot place developers on a location where "
                     + "player already has developers.");
 
-            numPlayerDevelopers[player - 1] = numDevelopers;
+            SetNumPlayerDevelopers(player, numDevelopers);
         }
 
-        public void TakeAction(int player);
+        public abstract void TakeAction(ref Player player);
     }
 }

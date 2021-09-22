@@ -29,8 +29,8 @@ namespace GameLibrary.Models {
             Number = number;
             Name = name;
 
-            numDevelopersOwned = START_NUM_DEVELOPERS_OWNED;
-            numDevelopersUnplaced = START_NUM_DEVELOPERS_OWNED;
+            NumDevelopersOwned = START_NUM_DEVELOPERS_OWNED;
+            NumDevelopersUnplaced = START_NUM_DEVELOPERS_OWNED;
             NumBitcoinInvestments = 0;
             //TODO: Add list of ConsultantCards
             //TODO: Add list of LicenseTiles
