@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Binary and Object files
+ScrumAge/BlazorUI/bin/
+ScrumAge/BlazorUI/obj/
+ScrumAge/GameLibrary/bin/
+ScrumAge/GameLibrary/obj/
+ScrumAge/TestConsoleUI/bin/
+ScrumAge/TestConsoleUI/obj/
