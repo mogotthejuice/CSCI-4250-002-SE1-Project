@@ -8,13 +8,12 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public abstract class AbstractLocation {
-        private const int MAX_PLAYERS = 4;
-
         // Number of developers placed on location, with length equal to number of players in game.
         // Ex. List for 4 player game: { P1, P2, P3, P4 }
         private List<int> numPlayerDevelopers;
 
-        public string Name { get; }
+        public int MAX_PLAYERS { get; set; } = 4;
+        public string Name { get; set; }
         public int NumDeveloperSpaces { get; }
         public int SpacesLeft {
             get { return NumDeveloperSpaces - numPlayerDevelopers.Sum(); }
@@ -44,4 +43,5 @@ namespace GameLibrary.Models {
 
         public abstract void TakeAction(ref Player player);
     }
+    
 }
