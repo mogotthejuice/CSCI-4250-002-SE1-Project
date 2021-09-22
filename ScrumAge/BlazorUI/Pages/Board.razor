@@ -4,9 +4,9 @@
 
 <table id="board">
     <tr>
-        <th class="padColOne" style="background-color: @colorOver"><button @onclick="Click">Overtime</button></th>
-        <th class="padColOne" style="background-color: @colorCafe"><button @onclick="Click">Cafe<br>(Coffee)</button></th>
-        <th class="padColOne" style="background-color: @colorStaples"><button @onclick="Click">Staples <br> (USB Sticks)</button></th>
+        <th class="padColOne" style="background-color: @colorOver"><button @onclick="@(() => Click(@buttonOver))">Overtime</button></th>
+        <th class="padColOne" style="background-color: @colorCafe"><button @onclick="@(() => Click(@buttonCafe))">Cafe<br>(Coffee)</button></th>
+        <th class="padColOne" style="background-color: @colorStaples"><button @onclick="@(() => Click(@buttonStaples))">Staples <br> (USB Sticks)</button></th>
     </tr>
     <tr>
         <th>Field<br>(Bitcoin Investment)</th>
@@ -42,17 +42,18 @@
 </table>
 
 @code {
-    private ElementReference button1;
-    private string colorOver;
-    private string colorCafe;
-    private string colorStaples;
 
-    public void Click()
+    public ElementReference buttonOver, buttonCafe, buttonStaples;
+    public List<ElementReference> elementReferences = new List<ElementReference>(){buttonOver, buttonCafe, buttonStaples };
+
+    private string colorOver, colorCafe, colorStaples;
+
+    public void Click(ElementReference element)
     {
+        for (int i = 0; i < length; i++)
+        {
 
-        var vrcolor = String.Format("#{0:X6}", 255);
-
-        colorOver = vrcolor;
+        }
     }
 
 }

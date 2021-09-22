@@ -100,15 +100,23 @@ using GameLibrary.Models;
 #nullable restore
 #line 44 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\Pages\Board.razor"
        
-    private ElementReference button1;
-    private string color;
 
-    public void Click()
+    private static ElementReference buttonOver, buttonCafe, buttonStaples;
+
+    private static string colorOver, colorCafe, colorStaples;
+/*
+    Dictionary<ElementReference, string> ButtonColors = new Dictionary<ElementReference, string>()
+        {
+            {buttonOver, colorOver},
+            {buttonCafe, colorCafe},
+            {buttonStaples, colorStaples}
+        };
+*/
+    public void Click(ElementReference element)
     {
-
         var vrcolor = String.Format("#{0:X6}", 255);
 
-        color = vrcolor;
+        colorOver = vrcolor;
     }
 
 
