@@ -97,7 +97,7 @@ using GameLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 33 "C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Shared\NavMenu.razor"
+#line 23 "C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

@@ -98,15 +98,16 @@ using GameLibrary.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 16 "C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Pages\Index.razor"
+#line 11 "C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Pages\Index.razor"
  
-    
-    
-    Fish fish = new Fish();
+    void Navigate() {
+        UriHelper.NavigateTo("board");
+    }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager UriHelper { get; set; }
     }
 }
 #pragma warning restore 1591

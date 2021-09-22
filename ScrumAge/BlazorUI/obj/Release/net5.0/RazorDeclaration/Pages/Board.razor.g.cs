@@ -97,6 +97,26 @@ using GameLibrary.Models;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 44 "C:\Users\Chandler\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Pages\Board.razor"
+       
+    private ElementReference button1;
+    private string colorOver;
+    private string colorCafe;
+    private string colorStaples;
+
+    public void Click()
+    {
+
+        var vrcolor = String.Format("#{0:X6}", 255);
+
+        colorOver = vrcolor;
+    }
+
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591
