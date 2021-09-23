@@ -11,22 +11,14 @@ namespace GameLibrary.Services {
     /// <summary>
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
-    public class GameController {
-        /// <summary>
-        /// Initialization class. Locations and Resource Board will be initialized here.
-        /// </summary>
-        public GameController() {
-            // initialize players
-            //InitializeLocations();
-            // initialize cards/tiles
-        }
+    public static class GameController {
         /// <summary>
         /// Place developer at a given location
         /// </summary>
         /// <param name="player">Player to move</param>
         /// <param name="numDevelopers">Number of developers to place</param>
         /// <param name="location">Location to place at</param>
-        public void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
+        public static void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
             if (numDevelopers > player.NumDevelopersUnplaced)
                 throw new ArgumentException("Number of developers to place cannot exceed number of developers player has.");
 
@@ -34,7 +26,7 @@ namespace GameLibrary.Services {
             location.PlaceDevelopers(player, numDevelopers);
         }
 
-        public List<Player> InitializePlayers(string[] playerNames) {
+        public static List<Player> InitializePlayers(string[] playerNames) {
             List<Player> players = new List<Player>();
 
             for (int i = 0; i < playerNames.Length; i++) {
@@ -44,7 +36,7 @@ namespace GameLibrary.Services {
             return players;
         }
 
-        public List<ILocation> InitializeLocations() {
+        public static List<ILocation> InitializeLocations() {
             List<ILocation> Locations = new List<ILocation>();
             Locations.Add(new ResourceLocation() {
                 Name = "Cafe",
