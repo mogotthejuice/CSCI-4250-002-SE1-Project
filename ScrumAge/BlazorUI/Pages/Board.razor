@@ -1,5 +1,8 @@
 @page "/board"
 
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
 <h1>Board</h1>
 
 <table id="board">
@@ -9,33 +12,34 @@
         <th class="padColOne" style="background-color: @colorStaples"><button @onclick="@(() => Click(@buttonStaples))">Staples <br> (USB Sticks)</button></th>
     </tr>
     <tr>
-        <th>Field<br>(Bitcoin Investment)</th>
+
+        <th class="padColOne" style="background-color: @colorField"><button @onclick="@(() => Click(@buttonField))">Field<br>(Bitcoin Investment)</button></th>
         <th></th>
-        <th>Factory<br>(CPU Cores)</th>
+        <th class="padColOne" style="background-color: @colorFactory"><button @onclick="@(() => Click(@buttonFactory))">>Factory<br>(CPU Cores)</button></th>
     </tr>
     <tr>
 
-        <th>Training<br>Center</th>
-        <th>Overclocking Stack</th>
-        <th>Power Plant<br>Power</th>
+        <th class="padColOne" style="background-color: @colorTrainingCenter"><button @onclick="@(() => Click(@buttonTrainingCenter))">Training<br>Center</button></th>
+        <th class="padColOne" style="background-color: @colorOverclockingStack"><button @onclick="@(() => Click(@buttonOverclockingStack))">Overclocking Stack</button></th>
+        <th class="padColOne" style="background-color: @colorPowerPlant"><button @onclick="@(() => Click(@buttonPowerPlant))">Power Plant<br>Power</button></th>
     </tr>
     <tr>
-        <th>License Tiles</th>
+        <th class="padColOne" style="background-color: @colorLicense1"><button @onclick="@(() => Click(@buttonLicense1))">License Tiles</button></th>
         <th></th>
-        <th>Con Card</th>
-        <th>Con Card</th>
-        <th>Con Card</th>
-        <th>Con Card</th>
+        <th class="padColOne" style="background-color: @colorCon1"><button @onclick="@(() => Click(@buttonCon1))">Con Card</button></th>
+        <th class="padColOne" style="background-color: @colorCon2"><button @onclick="@(() => Click(@buttonCon2))">Con Card</button></th>
+        <th class="padColOne" style="background-color: @colorCon3"><button @onclick="@(() => Click(@buttonCon3))">Con Card</button></th>
+        <th class="padColOne" style="background-color: @colorCon4"><button @onclick="@(() => Click(@buttonCon4))">Con Card</button></th>
     </tr>
     <tr>
-        <th>License Tiles</th>
+        <th class="padColOne" style="background-color: @colorLicense2"><button @onclick="@(() => Click(@buttonLicense2))">License Tiles</button></th>
     </tr>
     <tr>
-        <th>License Tiles</th>
+        <th class="padColOne" style="background-color: @colorLicense3"><button @onclick="@(() => Click(@buttonLicense3))">License Tiles</button></th>
     </tr>
     <tr>
 
-        <th>License Tiles</th>
+        <th class="padColOne" style="background-color: @colorLicense4"><button @onclick="@(() => Click(@buttonLicense4))">License Tiles</button></th>
         <th>Player Name</th>
         <th></th>
     </tr>
@@ -43,17 +47,13 @@
 
 @code {
 
-    public ElementReference buttonOver, buttonCafe, buttonStaples;
-    public List<ElementReference> elementReferences = new List<ElementReference>(){buttonOver, buttonCafe, buttonStaples };
-
-    private string colorOver, colorCafe, colorStaples;
-
-    public void Click(ElementReference element)
+    public static ElementReference buttonOver, buttonCafe, buttonStaples, buttonField, buttonFactory, buttonTrainingCenter, buttonOverclockingStack, buttonPowerPlant, buttonLicense1, buttonCon1, buttonCon2, buttonCon3, buttonCon4, buttonLicense2, buttonLicense3, buttonLicense4;
+    public List<ElementReference> elementList = new List<ElementReference>() { buttonOver, buttonCafe, buttonStaples, buttonField, buttonFactory, buttonTrainingCenter, buttonOverclockingStack, buttonPowerPlant, buttonLicense1, buttonCon1, buttonCon2, buttonCon3, buttonCon4, buttonLicense2, buttonLicense3, buttonLicense4 };
+    private static string colorOver, colorCafe, colorStaples, colorField, colorFactory, colorTrainingCenter, colorOverclockingStack, colorPowerPlant, colorLicense1, colorCon1, colorCon2, colorCon3, colorCon4, colorLicense2, colorLicense3, colorLicense4;
+    private int OvertimeFigures = 0;
+    public async void Click(ElementReference element)
     {
-        for (int i = 0; i < length; i++)
-        {
-
-        }
+        
     }
 
 }
