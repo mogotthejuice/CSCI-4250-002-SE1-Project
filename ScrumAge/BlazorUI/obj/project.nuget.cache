@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WwlIgrVg6sO6teBVSXh9tmTol0MJOWrzPwmnWULI96RipCSt3do/lnPEo2STDMw6r7XYunVISPhdkKoE67SFOQ==",
+  "dgSpecHash": "AhkPiDjg4UJ1IG5UpCgnzAGPcX1Y8xccN0htt7FAEc58nD9MY5UFukUcRCQs8hDHG16z2KH5dkVLE7h6Z2Ganw==",
   "success": true,
   "projectFilePath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\BlazorUI\\BlazorUI.csproj",
   "expectedPackageFiles": [
@@ -30,7 +30,7 @@
     "C:\\Users\\sethn\\.nuget\\packages\\microsoft.jsinterop.webassembly\\5.0.8\\microsoft.jsinterop.webassembly.5.0.8.nupkg.sha512",
     "C:\\Users\\sethn\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\sethn\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
-    "C:\\Users\\sethn\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.9\\microsoft.netcore.app.runtime.browser-wasm.5.0.9.nupkg.sha512"
+    "C:\\Users\\sethn\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.8\\microsoft.netcore.app.runtime.browser-wasm.5.0.8.nupkg.sha512"
   ],
   "logs": []
 }
