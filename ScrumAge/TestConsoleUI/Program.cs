@@ -9,19 +9,16 @@ namespace TestConsoleUI {
            var players = GameController.InitializePlayers(new string[] { "Player 1", "Player 2", "Player 3", "Player 4" });
             var locations = GameController.InitializeLocations();
 
-            int i = 2;
-            foreach (var item in locations) {
-                
-                Console.WriteLine($"Name: {item.Name} Max Devs: {item.NumDeveloperSpaces} Num Dev Spaces: {item.SpacesLeft} "); // could not cast item as Resource location -- (ResourceLocation)item.Resource
+            int devsToPlace = 2;
+            foreach (var location in locations) {
+                Console.WriteLine($"Name: {location.Name} Max Devs: {location.NumDeveloperSpaces} Num Dev Spaces: {location.SpacesLeft} "); 
 
-                GameController.PlaceDevelopers(players[0], i, item);
-                i=(i+1)%3;
+                GameController.PlaceDevelopers(players[0], devsToPlace, location);
+                devsToPlace=(devsToPlace+1)%3;
             }
             Console.WriteLine("------");
             foreach (var item in locations) {
-
-
-                Console.WriteLine($"Name: {item.Name} Max Devs: {item.NumDeveloperSpaces} Num Dev Spaces: {item.SpacesLeft} "); // could not cast item as Resource location -- (ResourceLocation)item.Resource
+                 Console.WriteLine($"Name: {item.Name} Max Devs: {item.NumDeveloperSpaces} Num Dev Spaces: {item.SpacesLeft} "); 
             }
         }
     }
