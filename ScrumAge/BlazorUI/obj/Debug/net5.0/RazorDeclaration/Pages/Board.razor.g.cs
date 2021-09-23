@@ -13,77 +13,77 @@ namespace BlazorUI.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 1 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 2 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 3 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 4 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 5 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 6 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 7 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 9 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using BlazorUI;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 10 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using BlazorUI.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\_Imports.razor"
+#line 11 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\_Imports.razor"
 using GameLibrary.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\Pages\Board.razor"
+#line 3 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Pages\Board.razor"
 using Microsoft.JSInterop;
 
 #line default
@@ -98,7 +98,7 @@ using Microsoft.JSInterop;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 48 "C:\Users\sethn\Documents\MainComputer\Software Engineering\SemesterProject\ScrumAge\BlazorUI\Pages\Board.razor"
+#line 48 "C:\Users\cdsco\Source\Repos\CSCI-4250-002-SE1-Project\ScrumAge\BlazorUI\Pages\Board.razor"
        
 
     public static ElementReference buttonOver, buttonCafe, buttonStaples, buttonField, buttonFactory, buttonTrainingCenter, buttonOverclockingStack, buttonPowerPlant, buttonLicense1, buttonCon1, buttonCon2, buttonCon3, buttonCon4, buttonLicense2, buttonLicense3, buttonLicense4;

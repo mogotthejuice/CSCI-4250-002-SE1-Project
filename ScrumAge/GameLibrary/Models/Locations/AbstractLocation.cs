@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GameLibrary.Interfaces;
 using GameLibrary.Models;
 
 namespace GameLibrary.Models {
-    public abstract class AbstractLocation {
+    public abstract class AbstractLocation : ILocation{
         // Number of developers placed on location, with length equal to number of players in game.
         // Ex. List for 4 player game: { P1, P2, P3, P4 }
         private List<int> numPlayerDevelopers;

@@ -1,0 +1,15 @@
+﻿@page "/"
+@inject NavigationManager UriHelper
+
+<h1>SCRUM AGE</h1>
+
+<button @onclick=@Navigate>Start a New Game</button>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code
+{
+    void Navigate() {
+        UriHelper.NavigateTo("board");
+    }
+}

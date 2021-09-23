@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g86v9HafX+5FzGhSa2qhKTn8ONYxvJ7v+18CMzf8mUXkS/84YhorGsT5nC6kOv/pZKrZPHIj5Ph/eGHQK0u97Q==",
+  "dgSpecHash": "xHZn3dAZJbIn9MoxSQRkJtUSmqgdtqibr1gUoWJSsH045DyIFO9Ld0jPt7ROL9i1dI1Lw11UR/QSOcoImt7pfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sethn\\Documents\\MainComputer\\Software Engineering\\SemesterProject\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\sethn\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.8\\microsoft.netcore.app.host.win-x64.5.0.8.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\cdsco\\Source\\Repos\\CSCI-4250-002-SE1-Project\\ScrumAge\\TestConsoleUI\\TestConsoleUI.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

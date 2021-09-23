@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLibrary.Interfaces;
 using GameLibrary.Models;
 using GameLibrary.Models.Locations;
 
@@ -11,7 +12,7 @@ namespace GameLibrary.Services {
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
     public class GameController {
-        public List<AbstractLocation> Locations { get; set; }
+        public List<ILocation> Locations { get; set; }
 
         /// <summary>
         /// Initialization class. Locations and Resource Board will be initialized here.
@@ -23,7 +24,7 @@ namespace GameLibrary.Services {
         }
 
         private void InitializeLocations() {
-            Locations = new List<AbstractLocation>();
+            Locations = new List<ILocation>();
             Locations.Add(new ResourceLocation() {
                 Name = "Cafe",
                 Resource =
@@ -58,5 +59,7 @@ namespace GameLibrary.Services {
                 investment field
              */
         }
+
+        
     }
 }
