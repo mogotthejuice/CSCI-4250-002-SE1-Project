@@ -17,7 +17,7 @@ namespace GameLibrary.Models {
         public string Name { get; set; }
         
         public int NumDevelopersOwned { get; private set; }
-        public int NumDevelopersUnplaced { get; private set; }
+        public int NumDevelopersUnplaced { get; set; }
         public int NumBitcoinInvestments { get; private set; }
 
         

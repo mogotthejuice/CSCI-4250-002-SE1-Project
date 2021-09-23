@@ -7,10 +7,22 @@ namespace TestConsoleUI {
     class Program {
         static void Main(string[] args) {
             GameController controller = new GameController();
+            var players = controller.InitializePlayers(new string[] { "Player 1", "Player 2", "Player 3", "Player 4" });
+            var locations = controller.InitializeLocations();
 
-            foreach (var item in controller.Locations) {
+            int i = 2;
+            foreach (var item in locations) {
                 
-                Console.WriteLine($"Name: {item.Name} Max Devs: {item.MAX_PLAYERS} Num Dev Spaces: {item.NumDeveloperSpaces} Resource: {null}"); // could not cast item as Resource location -- (ResourceLocation)item.Resource
+                Console.WriteLine($"Name: {item.Name} Max Devs: {item.NumDeveloperSpaces} Num Dev Spaces: {item.SpacesLeft} "); // could not cast item as Resource location -- (ResourceLocation)item.Resource
+
+                controller.PlaceDevelopers(players[0], i, item);
+                i=(i+1)%3;
+            }
+            Console.WriteLine("------");
+            foreach (var item in locations) {
+
+
+                Console.WriteLine($"Name: {item.Name} Max Devs: {item.NumDeveloperSpaces} Num Dev Spaces: {item.SpacesLeft} "); // could not cast item as Resource location -- (ResourceLocation)item.Resource
             }
         }
     }

@@ -4,18 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Models\Locations\Pages\Board.razor" />
-    <None Remove="Models\Locations\Pages\Index.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Models\Locations\Pages\Board.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-    <Content Include="Models\Locations\Pages\Index.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
-  </ItemGroup>
-
 </Project>

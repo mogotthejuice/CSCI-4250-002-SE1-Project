@@ -10,11 +10,11 @@ namespace GameLibrary.Models {
     public abstract class AbstractLocation : ILocation{
         // Number of developers placed on location, with length equal to number of players in game.
         // Ex. List for 4 player game: { P1, P2, P3, P4 }
-        private List<int> numPlayerDevelopers;
+        protected List<int> numPlayerDevelopers;
 
         public int MAX_PLAYERS { get; set; } = 4;
         public string Name { get; set; }
-        public int NumDeveloperSpaces { get; }
+        public int NumDeveloperSpaces { get; set; }
         public int SpacesLeft {
             get { return NumDeveloperSpaces - numPlayerDevelopers.Sum(); }
         }

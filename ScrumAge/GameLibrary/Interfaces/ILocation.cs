@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace GameLibrary.Interfaces
     {
         public string Name { get; set; }
         public int MAX_PLAYERS { get; set; }
+        public int SpacesLeft { get; }
         public int NumDeveloperSpaces { get; }
-    }
+
+        public void PlaceDevelopers(Player player, int numDevelopers);
+        }
 }
