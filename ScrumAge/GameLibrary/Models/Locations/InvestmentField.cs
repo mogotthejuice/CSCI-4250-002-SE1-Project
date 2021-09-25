@@ -5,13 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations {
-    public class ResourceLocation : AbstractLocation {
-        public Resources Resource { get; set; }
-        public ResourceLocation() {
-            numPlayerDevelopers = new List<int>() {0,0,0,0 };
+    public class InvestmentField : AbstractLocation {
+        public InvestmentField() {
+            Name = "Investment Field";
+            numPlayerDevelopers = new List<int>() { 0};
+            NumDeveloperSpaces = 1;
         }
-
         public override void PlaceDevelopers(Player player, int numDevelopers) {
+            if (numDevelopers != 1)
+                throw new ArgumentException("Number of developers to place must equal 1.");
+
             if (numDevelopers > SpacesLeft)
                 throw new ArgumentException("Number of developers to place cannot exceed number of spaces left.");
 

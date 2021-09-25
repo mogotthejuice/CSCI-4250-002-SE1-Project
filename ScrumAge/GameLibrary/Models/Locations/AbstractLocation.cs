@@ -26,20 +26,11 @@ namespace GameLibrary.Models {
             return numPlayerDevelopers[player.Number - 1];
         }
 
-        private void SetNumPlayerDevelopers(Player player, int numDevelopers) {
+        protected void SetNumPlayerDevelopers(Player player, int numDevelopers) {
             numPlayerDevelopers[player.Number - 1] = numDevelopers;
         }
 
-        public void PlaceDevelopers(Player player, int numDevelopers) {
-            if (numDevelopers > SpacesLeft)
-                throw new ArgumentException("Number of developers to place cannot exceed number of spaces left.");
-
-            if (GetNumPlayerDevelopers(player) > 0)
-                throw new InvalidOperationException("Cannot place developers on a location where "
-                    + "player already has developers.");
-
-            SetNumPlayerDevelopers(player, numDevelopers);
-        }
+        public abstract void PlaceDevelopers(Player player, int numDevelopers);
 
         public abstract void TakeAction(ref Player player);
     }
