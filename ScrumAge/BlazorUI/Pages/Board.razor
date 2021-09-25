@@ -6,54 +6,82 @@
 <h1>Board</h1>
 
 <table id="board">
-    <tr>
-        <th class="padColOne" style="background-color: @colorOver"><button @onclick="@(() => Click(@buttonOver))">Overtime</button></th>
-        <th class="padColOne" style="background-color: @colorCafe"><button @onclick="@(() => Click(@buttonCafe))">Cafe<br>(Coffee)</button></th>
-        <th class="padColOne" style="background-color: @colorStaples"><button @onclick="@(() => Click(@buttonStaples))">Staples <br> (USB Sticks)</button></th>
+    <th>@message</th>
+
+
+
+     <tr>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonOver))">Overtime</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCafe))">Cafe<br>(Coffee)</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonStaples))">Staples <br> (USB Sticks)</button></th>
     </tr>
     <tr>
 
-        <th class="padColOne" style="background-color: @colorField"><button @onclick="@(() => Click(@buttonField))">Field<br>(Bitcoin Investment)</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonInvestmentField))">Field<br>(Bitcoin Investment)</button></th>
         <th></th>
-        <th class="padColOne" style="background-color: @colorFactory"><button @onclick="@(() => Click(@buttonFactory))">>Factory<br>(CPU Cores)</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonFactory))">Factory<br>(CPU Cores)</button></th>
     </tr>
     <tr>
 
-        <th class="padColOne" style="background-color: @colorTrainingCenter"><button @onclick="@(() => Click(@buttonTrainingCenter))">Training<br>Center</button></th>
-        <th class="padColOne" style="background-color: @colorOverclockingStack"><button @onclick="@(() => Click(@buttonOverclockingStack))">Overclocking Stack</button></th>
-        <th class="padColOne" style="background-color: @colorPowerPlant"><button @onclick="@(() => Click(@buttonPowerPlant))">Power Plant<br>Power</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonTrainingCenter))">Training<br>Center</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonToolLocation))">Overclocking Stack</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonOver))">Power Plant<br>Power</button></th>
     </tr>
     <tr>
-        <th class="padColOne" style="background-color: @colorLicense1"><button @onclick="@(() => Click(@buttonLicense1))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic1))">License Tiles</button></th>
         <th></th>
-        <th class="padColOne" style="background-color: @colorCon1"><button @onclick="@(() => Click(@buttonCon1))">Con Card</button></th>
-        <th class="padColOne" style="background-color: @colorCon2"><button @onclick="@(() => Click(@buttonCon2))">Con Card</button></th>
-        <th class="padColOne" style="background-color: @colorCon3"><button @onclick="@(() => Click(@buttonCon3))">Con Card</button></th>
-        <th class="padColOne" style="background-color: @colorCon4"><button @onclick="@(() => Click(@buttonCon4))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon1))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon2))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon3))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon4))">Con Card</button></th>
     </tr>
     <tr>
-        <th class="padColOne" style="background-color: @colorLicense2"><button @onclick="@(() => Click(@buttonLicense2))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic2))">License Tiles</button></th>
     </tr>
     <tr>
-        <th class="padColOne" style="background-color: @colorLicense3"><button @onclick="@(() => Click(@buttonLicense3))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic3))">License Tiles</button></th>
     </tr>
     <tr>
 
-        <th class="padColOne" style="background-color: @colorLicense4"><button @onclick="@(() => Click(@buttonLicense4))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic4))">License Tiles</button></th>
         <th>Player Name</th>
         <th></th>
     </tr>
+
+
+
+
+
+
 </table>
 
-@code {
+@functions {
+    int buttonCafe = 0;
+    int buttonStaples = 1;
+    int buttonFactory = 2;
+    int buttonPowerPlant = 3;
+    int buttonOver = 4;
+    int buttonInvestmentField = 5;
+    int buttonTrainingCenter = 6;
+    int buttonToolLocation = 7;
 
-    public static ElementReference buttonOver, buttonCafe, buttonStaples, buttonField, buttonFactory, buttonTrainingCenter, buttonOverclockingStack, buttonPowerPlant, buttonLicense1, buttonCon1, buttonCon2, buttonCon3, buttonCon4, buttonLicense2, buttonLicense3, buttonLicense4;
-    public List<ElementReference> elementList = new List<ElementReference>() { buttonOver, buttonCafe, buttonStaples, buttonField, buttonFactory, buttonTrainingCenter, buttonOverclockingStack, buttonPowerPlant, buttonLicense1, buttonCon1, buttonCon2, buttonCon3, buttonCon4, buttonLicense2, buttonLicense3, buttonLicense4 };
-    private static string colorOver, colorCafe, colorStaples, colorField, colorFactory, colorTrainingCenter, colorOverclockingStack, colorPowerPlant, colorLicense1, colorCon1, colorCon2, colorCon3, colorCon4, colorLicense2, colorLicense3, colorLicense4;
-    private int OvertimeFigures = 0;
-    public async void Click(ElementReference element)
+    int buttonLic1 = 10;
+    int buttonLic2 = 11;
+    int buttonLic3 = 12;
+    int buttonLic4 = 13;
+
+    int buttonCon1 = 14;
+    int buttonCon2 = 15;
+    int buttonCon3 = 16;
+    int buttonCon4 = 17;
+
+
+
+     private string message = "Select a button to learn its position.";
+
+    private void Click(MouseEventArgs e, int buttonNumber)
     {
-        
+        message = $"You selected Button #{buttonNumber}";
     }
 
 }
