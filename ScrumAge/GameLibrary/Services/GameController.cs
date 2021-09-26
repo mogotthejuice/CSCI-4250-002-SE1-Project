@@ -73,6 +73,13 @@ namespace GameLibrary.Services {
                 NumDeveloperSpaces = int.MaxValue
             });
 
+
+            Locations.Add(new ResourceLocation()
+            {
+                Name = "Training Center",
+               
+            });
+
             return Locations;
             /*still need: 
                 training

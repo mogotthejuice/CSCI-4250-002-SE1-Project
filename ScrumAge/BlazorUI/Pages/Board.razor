@@ -1,9 +1,10 @@
 @page "/board"
 
 @using Microsoft.JSInterop
+@using static GameLibrary.Services.GameController
 
 @inject IJSRuntime JSRuntime
-
+<h1>@message</h1>
 <table>
 
     <tr>
@@ -40,14 +41,21 @@
     </tr>
     <tr>
 
+
         <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic4))">License Tiles</button></th>
         <th>Player Name</th>
         <th></th>
+    </tr>
+    <tr>
+        <th  class="padColOne">
+            <h3>Player Score: @PlayerScore</h3>
+        </th>
     </tr>
 </table>
 
 @code
 {
+    int PlayerScore = 0;
     int buttonCafe = 0;
     int buttonStaples = 1;
     int buttonFactory = 2;
@@ -69,7 +77,7 @@
 
 
 
-     private string message = "Select a button to learn its position.";
+    private string message = "";
 
     private async void Click(MouseEventArgs e, int buttonNumber)
     {
@@ -82,7 +90,9 @@
         //2. Open dialog for players to input how many players they will place
         //3. Ensure player has enough players to place
         #region PlaceFigures
-        int numFiguresPlace = await JSRuntime.InvokeAsync<int>("prompt", "How many players would you like to place? "); 
+        var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
+        int playerPlace = Int32.Parse(temp);
+
         switch(buttonNumber)
         {
             case 0:
@@ -136,13 +146,7 @@
         }
 
         #endregion Place Figures
-        
-
-
-
-
-
-
-        message = $"You wanted to place {numFiguresPlace} figures";
+        message = $"You wanted to place {playerPlace} figures";
+         this.StateHasChanged();
     }
 }
