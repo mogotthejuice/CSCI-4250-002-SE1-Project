@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +8,15 @@ using GameLibrary.Models;
 using GameLibrary.Models.Locations;
 
 namespace GameLibrary.Services {
+    
     /// <summary>
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
     public static class GameController {
+
+        public static List<ILocation> Locations;
+
+
         /// <summary>
         /// Place developer at a given location
         /// </summary>
@@ -37,7 +42,7 @@ namespace GameLibrary.Services {
         }
 
         public static List<ILocation> InitializeLocations() {
-            List<ILocation> Locations = new List<ILocation>();
+            Locations = new List<ILocation>();
             Locations.Add(new ResourceLocation() {
                 Name = "Cafe",
                 Resource =
