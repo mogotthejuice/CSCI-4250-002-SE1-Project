@@ -14,7 +14,7 @@ namespace GameLibrary.Models.Locations {
 
         public override void PlaceDevelopers(Player player, int numDevelopers) {
             if (numDevelopers != 2)
-                throw new ArgumentException("Number of developers to place must equal 1.");
+                throw new ArgumentException("Number of developers to place must equal 2.");
 
             if (numDevelopers > SpacesLeft)
                 throw new ArgumentException("Number of developers to place cannot exceed number of spaces left.");
