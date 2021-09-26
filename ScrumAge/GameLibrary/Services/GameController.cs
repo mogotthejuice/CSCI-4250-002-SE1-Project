@@ -73,10 +73,6 @@ namespace GameLibrary.Services {
             Locations.Add(new TrainingCenter());
 
             return Locations;
-            /*still need: 
-                training
-                investment field
-             */
         }
 
         
