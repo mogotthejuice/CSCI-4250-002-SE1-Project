@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,25 +66,18 @@ namespace GameLibrary.Services {
                 Resource =
                 Resources.Power,
                 NumDeveloperSpaces = 7
-            }); Locations.Add(new ResourceLocation() {
+            }); 
+            Locations.Add(new ResourceLocation() {
                 Name = "Overtime",
                 Resource =
                  Resources.Money,
                 NumDeveloperSpaces = int.MaxValue
             });
 
-
-            Locations.Add(new ResourceLocation()
-            {
-                Name = "Training Center",
-               
-            });
+            Locations.Add(new InvestmentField());
+            Locations.Add(new TrainingCenter());
 
             return Locations;
-            /*still need: 
-                training
-                investment field
-             */
         }
 
         
