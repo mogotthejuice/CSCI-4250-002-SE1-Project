@@ -1,9 +1,9 @@
 @page "/board"
-
+@inject IJSRuntime JSRuntime
 @using Microsoft.JSInterop
 @using static GameLibrary.Services.GameController
+@using GameLibrary.Interfaces
 
-@inject IJSRuntime JSRuntime
 <h1>@message</h1>
 <table>
 
@@ -91,62 +91,14 @@
         //3. Ensure player has enough players to place
         #region PlaceFigures
         var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
-        int playerPlace = Int32.Parse(temp);
 
-        switch(buttonNumber)
-        {
-            case 0:
-                //Player clicked the cafe
-                break;
-            case 1:
-                //Player clicked Staples 
-                break;
-            case 2:
-                //Player clicked the factory
-                break;
-            case 3:
-                //Player clicked the power plant
-                break;
-            case 4:
-                //Player clicked overtime
-                break;
-            case 5:
-                //Player clicked the investment field 
-                break;
-            case 6:
-                //Player clicked the training center
-                break;
-            case 7:
-                //Player clicked the tool location
-                break;
-            case 10:
-                //Player clicked consulting card 1
-                break;
-            case 11:
-                //Player clicked consulting card 2
-                break;
-            case 12:
-                //Player clicked consulting card 3
-                break;
-            case 13:
-                //Player clicked license card 4
-                break;
-            case 14:
-                //Player clicked consulting card 1
-                break;
-            case 15:
-                //Player clicked consulting card 2
-                break;
-            case 16:
-                //Player clicked consulting card 3 
-                break;
-            case 17:
-                //Player clicked consulting card 4
-                break;
-        }
+        int playerPlace = Int32.Parse(temp);
+        Player tempPlayer = new Player(1);
+        PlaceDevelopers(tempPlayer, playerPlace, Locations[buttonNumber]);
+
 
         #endregion Place Figures
         message = $"You wanted to place {playerPlace} figures";
-         this.StateHasChanged();
+        this.StateHasChanged();
     }
 }
