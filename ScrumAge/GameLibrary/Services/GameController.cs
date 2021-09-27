@@ -14,8 +14,9 @@ namespace GameLibrary.Services {
     /// </summary>
     public static class GameController {
 
-        public static List<ILocation> Locations;
-
+        protected override async Task OnInitializedAsync() {
+        List<ILocation> location = GameLibrary.Services.GameController.InitializeLocations(); 
+        }
 
         /// <summary>
         /// Place developer at a given location
