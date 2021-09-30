@@ -14,9 +14,10 @@ namespace GameLibrary.Services {
     /// </summary>
     public static class GameController {
 
-        protected override async Task OnInitializedAsync() {
+        /*
+        public override async Task OnInitializedAsync() {
         List<ILocation> location = GameLibrary.Services.GameController.InitializeLocations(); 
-        }
+        }*/
 
         /// <summary>
         /// Place developer at a given location
@@ -43,7 +44,7 @@ namespace GameLibrary.Services {
         }
 
         public static List<ILocation> InitializeLocations() {
-            Locations = new List<ILocation>();
+            List<ILocation> Locations = new List<ILocation>();
             Locations.Add(new ResourceLocation() {
                 Name = "Cafe",
                 Resource =

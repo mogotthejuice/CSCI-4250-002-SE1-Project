@@ -90,6 +90,7 @@
         //2. Open dialog for players to input how many players they will place
         //3. Ensure player has enough players to place
         #region PlaceFigures
+        List<ILocation> Locations = new List<ILocation>();
         var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
 
         int playerPlace = Int32.Parse(temp);
