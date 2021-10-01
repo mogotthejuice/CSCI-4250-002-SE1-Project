@@ -91,8 +91,12 @@
         //3. Ensure player has enough players to place
         #region PlaceFigures
         List<ILocation> Locations = new List<ILocation>();
+        #if !DEBUG
         var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
-
+        #endif
+        #if DEBUG
+        var temp = "4";
+        #endif
         int playerPlace = Int32.Parse(temp);
         Player tempPlayer = new Player(1);
         PlaceDevelopers(tempPlayer, playerPlace, Locations[buttonNumber]);

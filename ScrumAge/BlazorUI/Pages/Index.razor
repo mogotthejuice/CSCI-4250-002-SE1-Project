@@ -15,16 +15,27 @@
     async void Navigate() 
     {
         //Ask for names before navigating to the board 
+        #if DEBUG
+        int playerCount = 2;
+        #endif 
+        #if !DEBUG
         var playersPro = await JSRuntime.InvokeAsync<string>("prompt", "How many players are playing?");
         int playerCount = Int32.Parse(playersPro);
-        string[] playerNames = new string[playerCount];
+        #endif
 
+        string[] playerNames = new string[playerCount];
+        #if DEBUG
+        playerNames[0] = "Seth";
+        playerNames[1] = "Drew";
+        #endif
+        #if !DEBUG
         //for loop establishing player names
         for(int i = 0; i < playerCount; i++ )
         {
             string name = await JSRuntime.InvokeAsync<string>("prompt", "Player Name: ");
             playerNames[i] = name;
         }
+        #endif
         List<Player> players = InitializePlayers(playerNames);
         List<ILocation> locations = InitializeLocations();
         UriHelper.NavigateTo("board");
