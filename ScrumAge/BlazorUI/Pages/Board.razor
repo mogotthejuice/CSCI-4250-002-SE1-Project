@@ -1,4 +1,4 @@
-@page "/board"
+@page "/board/{playerNames}"
 @inject IJSRuntime JSRuntime
 @using Microsoft.JSInterop
 @using static GameLibrary.Services.GameController
@@ -8,41 +8,41 @@
 <table>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonOver))">Overtime</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCafe))">Cafe<br>(Coffee)</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonStaples))">Staples <br> (USB Sticks)</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonOver))">Overtime</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonCafe))">Cafe<br>(Coffee)</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonStaples))">Staples <br> (USB Sticks)</button></th>
     </tr>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonInvestmentField))">Field<br>(Bitcoin Investment)</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonInvestmentField))">Field<br>(Bitcoin Investment)</button></th>
         <th></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonFactory))">Factory<br>(CPU Cores)</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonFactory))">Factory<br>(CPU Cores)</button></th>
     </tr>
     
     <tr>
 
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonTrainingCenter))">Training<br>Center</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonToolLocation))">Overclocking Stack</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonPowerPlant))">Power Plant<br>Power</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonTrainingCenter))">Training<br>Center</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonToolLocation))">Overclocking Stack</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonToolLocation))">Power Plant<br>Power</button></th>
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic1))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonToolLocation))">License Tiles</button></th>
         <th></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon1))">Con Card</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon2))">Con Card</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon3))">Con Card</button></th>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonCon4))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonPowerPlant))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonLic1))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonCon1))">Con Card</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonCon2))">Con Card</button></th>
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic2))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonCon3))">License Tiles</button></th>
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic3))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonCon4))">License Tiles</button></th>
     </tr>
     <tr>
 
 
-        <th class="padColOne"><button @onclick="@(e => Click(e, buttonLic4))">License Tiles</button></th>
+        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, buttonLic2))">License Tiles</button></th>
         <th>Player Name</th>
         <th></th>
     </tr>
@@ -55,6 +55,10 @@
 
 @code
 {
+    [Parameter]
+    public string playerNames { get; set; }
+    public Gameboard Game { get; set; }
+
     int PlayerScore = 0;
     int buttonCafe = 0;
     int buttonStaples = 1;
@@ -79,8 +83,12 @@
 
     private string message = "";
 
-    private async void Click(MouseEventArgs e, int buttonNumber)
-    {
+    protected override async Task OnInitializedAsync() {
+        Game = InitializeGameboard(playerNames);
+    }
+
+    private async void PlaceDeveloperClick(MouseEventArgs e, int buttonNumber)
+{
 
         //Round divided into three phases and we need to check which phase we are in
 
@@ -94,12 +102,16 @@
         var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
 
         int playerPlace = Int32.Parse(temp);
-        Player tempPlayer = new Player(1);
-        PlaceDevelopers(tempPlayer, playerPlace, Locations[buttonNumber]);
+        Player tempPlayer = Game.Players[0];
+        try {
+            PlaceDevelopers(tempPlayer, playerPlace, Game.Locations[buttonNumber]);
+            message = $"You wanted to place {playerPlace} figures";
+            this.StateHasChanged();
+        }
+        catch (ArgumentException) {
 
-
+            message = $"You wanted to place {playerPlace} figures...that's too many";
+        }
         #endregion Place Figures
-        message = $"You wanted to place {playerPlace} figures";
-        this.StateHasChanged();
     }
 }
