@@ -13,11 +13,14 @@ namespace GameLibrary.Services {
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
     public static class GameController {
-
-        /*
-        public override async Task OnInitializedAsync() {
-        List<ILocation> location = GameLibrary.Services.GameController.InitializeLocations(); 
-        }*/
+        /// <summary>
+        /// Initializes Gameboard object's locations and players
+        /// </summary>
+        /// <param name="players">The name of each player</param>
+        /// <returns>A Gameboard object containing Locations and Players</returns>
+        public static Gameboard InitializeGameboard(string players) {
+            return new Gameboard(players);
+        }       
 
         /// <summary>
         /// Place developer at a given location
@@ -33,55 +36,5 @@ namespace GameLibrary.Services {
             location.PlaceDevelopers(player, numDevelopers);
         }
 
-        public static List<Player> InitializePlayers(string[] playerNames) {
-            List<Player> players = new List<Player>();
-
-            for (int i = 0; i < playerNames.Length; i++) {
-                players.Add(new Player(i+1, playerNames[i]));
-            }
-
-            return players;
-        }
-
-        public static List<ILocation> InitializeLocations() {
-            List<ILocation> Locations = new List<ILocation>();
-            Locations.Add(new ResourceLocation() {
-                Name = "Cafe",
-                Resource =
-                Resources.Coffee,
-                NumDeveloperSpaces = 7
-            });
-            Locations.Add(new ResourceLocation() {
-                Name = "Staples",
-                Resource =
-                Resources.USB_Sticks,
-                NumDeveloperSpaces = 7
-            });
-            Locations.Add(new ResourceLocation() {
-                Name = "Factory",
-                Resource =
-                Resources.CPU_Cores,
-                NumDeveloperSpaces = 7
-            });
-            Locations.Add(new ResourceLocation() {
-                Name = "Power Plant",
-                Resource =
-                Resources.Power,
-                NumDeveloperSpaces = 7
-            }); 
-            Locations.Add(new ResourceLocation() {
-                Name = "Overtime",
-                Resource =
-                 Resources.Money,
-                NumDeveloperSpaces = int.MaxValue
-            });
-
-            Locations.Add(new InvestmentField());
-            Locations.Add(new TrainingCenter());
-
-            return Locations;
-        }
-
-        
     }
 }

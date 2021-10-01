@@ -2,7 +2,7 @@
 @inject NavigationManager UriHelper
 @inject IJSRuntime JSRuntime
 @using static GameLibrary.Services.GameController
-@using GameLibrary.Interfaces
+@using GameLibrary.Services
 
 <h1>SCRUM AGE</h1>
 
@@ -17,16 +17,17 @@
         //Ask for names before navigating to the board 
         var playersPro = await JSRuntime.InvokeAsync<string>("prompt", "How many players are playing?");
         int playerCount = Int32.Parse(playersPro);
-        string[] playerNames = new string[playerCount];
+        string playerNames = string.Empty;
 
         //for loop establishing player names
         for(int i = 0; i < playerCount; i++ )
         {
             string name = await JSRuntime.InvokeAsync<string>("prompt", "Player Name: ");
-            playerNames[i] = name;
+            playerNames += name + ";";
         }
-        List<Player> players = InitializePlayers(playerNames);
-        List<ILocation> locations = InitializeLocations();
-        UriHelper.NavigateTo("board");
+        //var game = GameController.InitializeGameboard(playerNames);
+        //List<Player> players = InitializePlayers(playerNames);
+        //List<ILocation> locations = InitializeLocations();
+        UriHelper.NavigateTo($"board/{playerNames}");
     }
 }
