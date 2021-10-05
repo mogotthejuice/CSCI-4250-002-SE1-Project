@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using GameLibrary.Models;
+
 namespace GameLibrary.Models {
-    public class LicenseTile {
-        
-        public int NumScore { get; private set; }
-        
-        // TODO: Add properties to describe cost
+    public class LowerConCard {
+
     }
 }

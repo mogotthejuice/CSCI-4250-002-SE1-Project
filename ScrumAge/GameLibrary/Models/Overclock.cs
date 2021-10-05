@@ -13,6 +13,11 @@ namespace GameLibrary.Models {
         public int Level { get; set; }
         public bool HasBeenUsed { get; private set; }
 
+        public Overclock(int level = START_LEVEL) {
+            Level = level;
+            HasBeenUsed = false;
+        }
+
         public void Upgrade() {
             if (Level == MAX_LEVEL)
                 throw new InvalidOperationException("Cannot upgrade max level Overclock.");
