@@ -29,10 +29,10 @@ namespace GameLibrary.Services {
         /// <param name="numDevelopers">Number of developers to place</param>
         /// <param name="location">Location to place at</param>
         public static void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
-            if (numDevelopers > player.NumDevelopersUnplaced)
+            if (numDevelopers > player.Board.NumDevelopersUnplaced)
                 throw new ArgumentException("Number of developers to place cannot exceed number of developers player has.");
 
-            player.NumDevelopersUnplaced -= numDevelopers;    
+            player.Board.NumDevelopersUnplaced -= numDevelopers;    
             location.PlaceDevelopers(player, numDevelopers);
         }
 
