@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models {
     public class Gameboard {
+        private static Gameboard instance;
+
         /// <summary>
         /// List of each Location
         /// </summary>
@@ -17,9 +19,21 @@ namespace GameLibrary.Models {
         /// </summary>
         public List<Player> Players{ get; set; }
 
-        public Gameboard(string players) {
+
+        private Gameboard(string players) {
             InitializePlayers(players);
             InitializeLocations();
+        }
+
+        public static Gameboard GetInstance(string players = null) {
+            if (instance == null) {
+                if (players == null)
+                    throw new ArgumentNullException("Gameboard instance not initialized. String for players must be passed.");
+
+                instance = new Gameboard(players);
+            }
+            
+            return instance;
         }
         public void InitializePlayers(string names) {
             Players = new List<Player>();

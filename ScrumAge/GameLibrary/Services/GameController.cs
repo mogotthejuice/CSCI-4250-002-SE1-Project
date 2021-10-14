@@ -19,7 +19,7 @@ namespace GameLibrary.Services {
         /// <param name="players">The name of each player</param>
         /// <returns>A Gameboard object containing Locations and Players</returns>
         public static Gameboard InitializeGameboard(string players) {
-            return new Gameboard(players);
+            return Gameboard.GetInstance(players);
         }       
 
         /// <summary>
