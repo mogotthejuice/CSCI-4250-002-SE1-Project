@@ -20,7 +20,7 @@ namespace GameLibrary.Services {
         /// <returns>A Gameboard object containing Locations and Players</returns>
         public static Gameboard InitializeGameboard(string players) {
             return Gameboard.GetInstance(players);
-        }       
+        }
 
         /// <summary>
         /// Place developer at a given location
@@ -29,12 +29,40 @@ namespace GameLibrary.Services {
         /// <param name="numDevelopers">Number of developers to place</param>
         /// <param name="location">Location to place at</param>
         public static void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
-            if (numDevelopers > player.Board.NumDevelopersUnplaced)
-                throw new ArgumentException("Number of developers to place cannot exceed number of developers player has.");
+            CheckForExceptions(player, numDevelopers, location);
 
-            player.Board.NumDevelopersUnplaced -= numDevelopers;    
+            player.Board.NumDevelopersUnplaced -= numDevelopers;
             location.PlaceDevelopers(player, numDevelopers);
         }
 
+        /// <summary>
+        /// Check user input for exceptions relating player or location attributes.
+        /// </summary>
+        /// <param name="player">Current Player</param>
+        /// <param name="numDevelopers">Number of Developers player is trying to place</param>
+        /// <param name="location">Location the player is trying to place at</param>
+        private static void CheckForExceptions(Player player, int numDevelopers, ILocation location) {
+            // check location specific exceptions
+            if (location is TrainingCenter && numDevelopers != 2) {
+                throw new ArgumentException("Number of developers to place must equal 2.");
+            }
+            else if (location is InvestmentField && numDevelopers != 1) {
+                throw new ArgumentException("Number of developers to place must equal 1.");
+            }
+
+            // check exceptions for all locations
+            if (numDevelopers > player.Board.NumDevelopersUnplaced) {
+                throw new ArgumentException("Number of developers to place cannot exceed number of developers player has.");
+            }
+            if (numDevelopers > location.SpacesLeft) {
+                throw new ArgumentException("Number of developers to place cannot exceed number of spaces left.");
+            }
+            if (location.GetNumPlayerDevelopers(player) > 0) {
+                throw new InvalidOperationException("Cannot place developers on a location where "
+                    + "player already has developers.");
+            }
+
+            
+        }
     }
 }

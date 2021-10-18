@@ -30,7 +30,9 @@ namespace GameLibrary.Models {
             numPlayerDevelopers[player.Number - 1] = numDevelopers;
         }
 
-        public abstract void PlaceDevelopers(Player player, int numDevelopers);
+        public void PlaceDevelopers(Player player, int numDevelopers) {
+            SetNumPlayerDevelopers(player, numDevelopers);
+        }
 
         public abstract void TakeAction(ref Player player);
     }

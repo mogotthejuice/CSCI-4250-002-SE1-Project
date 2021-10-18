@@ -17,7 +17,7 @@ namespace GameLibrary.Models {
         /// <summary>
         /// List of Players
         /// </summary>
-        public List<Player> Players{ get; set; }
+        public Queue<Player> Players{ get; set; }
 
 
         private Gameboard(string players) {
@@ -36,12 +36,12 @@ namespace GameLibrary.Models {
             return instance;
         }
         public void InitializePlayers(string names) {
-            Players = new List<Player>();
+            Players = new Queue<Player>();
             string []playerNames = names.Split(";");
 
 
             for (int i = 0; i < playerNames.Length; i++) {
-                Players.Add(new Player(i + 1, playerNames[i]));
+                Players.Enqueue(new Player(i + 1, playerNames[i]));
             }
             
         }
