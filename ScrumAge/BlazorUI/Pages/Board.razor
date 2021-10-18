@@ -9,41 +9,41 @@
 <table>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[4]))">@Game.Locations[4].Name</button></th>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[0]))">@Game.Locations[0].Name<br>(Coffee)</button></th>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[1]))">@Game.Locations[1].Name <br> (USB Sticks)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[4]))">@Game.Locations[4].SpacesLeft<br>@Game.Locations[4].Name</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[0]))">@Game.Locations[0].SpacesLeft<br>@Game.Locations[0].Name<br>(Coffee)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[1]))">@Game.Locations[1].SpacesLeft<br>@Game.Locations[1].Name <br> (USB Sticks)</button></th>
     </tr>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[5]))">@Game.Locations[5].Name<br>(Bitcoin Investment)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[5]))">@Game.Locations[5].Name<br>(Bitcoin Investment)</button></th>
         <th></th>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[2]))">@Game.Locations[2].Name<br>(CPU Cores)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[2]))">@Game.Locations[2].Name<br>(CPU Cores)</button></th>
     </tr>
 
     <tr>
 
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[6]))">@Game.Locations[6].Name<br>Center</button></th>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">Overclock ~ Nerd</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, Game.Locations[3]))">@Game.Locations[3].Name<br>Power</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].Name<br>Center</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">Overclock ~ Nerd</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].Name<br>Power</button></th>
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
         <th></th>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
     </tr>
     <tr>
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
     </tr>
     <tr>
 
 
-        <th class="padColOne"><button @onclick="@(e => PlaceDeveloperClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, null))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
         <th>Player Name</th>
         <th></th>
     </tr>
@@ -69,7 +69,7 @@
         Game = InitializeGameboard(playerNames);
     }
 
-    private async Task PlaceDeveloperClick(MouseEventArgs e, ILocation location) {
+    private async Task LocationClick(MouseEventArgs e, ILocation location) {
 
         //Round divided into three phases and we need to check which phase we are in
 
@@ -81,7 +81,7 @@
         #region PlaceFigures
         List<ILocation> Locations = new List<ILocation>();
 #if !DEBUG
-    var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
+        var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
 #endif
 
 #if DEBUG
@@ -94,9 +94,9 @@
             message = $"You wanted to place {playerPlace} figures";
             this.StateHasChanged();
         }
-        catch (ArgumentException) {
+        catch (Exception f) {
 
-            message = $"You wanted to place {playerPlace} figures...that's too many";
+            message = $"{f.Message}";
         }
         #endregion Place Figures
     }

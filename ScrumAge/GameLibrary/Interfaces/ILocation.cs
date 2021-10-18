@@ -15,5 +15,6 @@ namespace GameLibrary.Interfaces
         public int NumDeveloperSpaces { get; }
 
         public void PlaceDevelopers(Player player, int numDevelopers);
-        }
+        int GetNumPlayerDevelopers(Player player);
+    }
 }
