@@ -102,7 +102,9 @@ namespace GameLibrary.Services {
                 throw new InvalidOperationException("Cannot place developers on a location where "
                     + "player already has developers.");
             }
-
+            if (numDevelopers < 1) {
+                throw new ArgumentException("Need to place at least one developer.");
+            }
             
         }
     }
