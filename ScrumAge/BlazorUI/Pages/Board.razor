@@ -15,16 +15,16 @@
     </tr>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[5]))">@Game.Locations[5].Name<br>(Bitcoin Investment)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[5]))">@Game.Locations[5].SpacesLeft<br>@Game.Locations[5].Name<br>(Bitcoin Investment)</button></th>
         <th></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[2]))">@Game.Locations[2].Name<br>(CPU Cores)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[2]))">@Game.Locations[2].SpacesLeft<br>@Game.Locations[2].Name<br>(CPU Cores)</button></th>
     </tr>
 
     <tr>
 
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].Name<br>New Developer</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[7]))">@Game.Locations[7].Name<br>Overclock</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].Name<br>Power</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].SpacesLeft<br>@Game.Locations[6].Name<br>New Developer</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[7]))">@Game.Locations[7].SpacesLeft<br>@Game.Locations[7].Name<br>Overclock</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].SpacesLeft<br>@Game.Locations[3].Name<br>Power</button></th>
     </tr>
     <tr>
         <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[12]))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
@@ -49,8 +49,11 @@
     </tr>
     <tr>
         <th class="padColOne">
+            <h3>Game Round: @Game.Round</h3>
             <h3>Player Score: @PlayerScore</h3>
             <h3>Player Developers Left: @Game.PlayersInRound.Peek().Board.NumDevelopersUnplaced</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+            <h3>Player Developers Owned: @Game.PlayersInRound.Peek().Board.NumDevelopersOwned</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+            <h3>Bitcoin Investment Level: @Game.PlayersInRound.Peek().Board.NumBitcoinInvestments</h3>  @*TEMPORARY, will be replaced by visual resource board*@
         </th>
     </tr>
 </table>
@@ -78,7 +81,8 @@
             case GameRound.TAKE_ACTIONS:
                 TakeActionOnLocation(location);
                 break;
-            default:
+            default: // GameRound.TALLY_SCORE not implemented so we go back to round 1
+                Game.Round = GameRound.PLACE_FIGURES;
                 break;
         }
     }
@@ -100,7 +104,7 @@
             catch (Exception f) {
                 // Player hit cancel or didn't input an integer
             }
-            
+
         }
 #endif
 
@@ -121,6 +125,17 @@
     }
 
     private void TakeActionOnLocation(ILocation location) {
-        throw new NotImplementedException();
+        Player player = Game.PlayersInRound.Peek();
+        try {
+            TakeLocationAction(player, location);
+            string output = $"{player.Name} took action.";
+            foreach (var item in player.Board.NumResources) {
+                output += $"{item.Key} {item.Value}\n";
+            }
+            message = output;
+        }
+        catch (Exception f) {
+            message = $"{f.Message}";
+        }
     }
 }

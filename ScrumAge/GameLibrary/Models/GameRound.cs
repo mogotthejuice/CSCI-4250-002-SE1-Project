@@ -8,6 +8,7 @@ namespace GameLibrary.Models
 {
 	public enum GameRound {
 		PLACE_FIGURES,
-		TAKE_ACTIONS
+		TAKE_ACTIONS,
+		TALLY_SCORE
 	}
 }
