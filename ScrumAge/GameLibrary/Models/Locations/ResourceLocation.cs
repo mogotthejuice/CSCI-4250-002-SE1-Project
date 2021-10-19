@@ -8,7 +8,7 @@ namespace GameLibrary.Models.Locations {
     public class ResourceLocation : AbstractLocation {
         public Resources Resource { get; set; }
         public ResourceLocation() {
-            numPlayerDevelopers = new List<int>() {0,0,0,0 };
+            numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
         }
 
         public override void TakeAction(ref Player player) {
