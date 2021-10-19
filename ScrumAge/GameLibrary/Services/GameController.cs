@@ -29,7 +29,7 @@ namespace GameLibrary.Services {
         /// <param name="numDevelopers">Number of developers to place</param>
         /// <param name="location">Location to place at</param>
         public static void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
-            CheckForExceptions(player, numDevelopers, location);
+            CheckExceptionsPlaceDevelopers(player, numDevelopers, location);
 
             player.Board.NumDevelopersUnplaced -= numDevelopers;
             location.PlaceDevelopers(player, numDevelopers);
@@ -50,13 +50,39 @@ namespace GameLibrary.Services {
             }
         }
 
+        public static void TakeLocationAction(Player player, ILocation location) {
+            int numberofDevelopers = location.GetNumPlayerDevelopers(player);
+
+            // check that the player can take action at the given location
+            if (numberofDevelopers == 0) {
+                throw new ArgumentException($"Player does not have any developers at {location.Name}");
+            }
+            location.TakeAction(ref player);
+
+            Gameboard gameboard = Gameboard.GetInstance();
+            // move to next player if all developers have been used
+            if (player.Board.NumDevelopersUnplaced == player.Board.NumDevelopersOwned) {
+                gameboard.CyclePlayersInRound();
+            }
+
+            int totalDevsUnplaced = 0, totalDevsOwned = 0;
+            // move to next round if all player developers have been used
+            foreach (var p in gameboard.Players) {
+                totalDevsOwned += p.Board.NumDevelopersOwned;
+                totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
+            }
+            if (totalDevsOwned == totalDevsUnplaced) {
+                gameboard.Round = GameRound.TALLY_SCORE;
+            }
+        }
+
         /// <summary>
         /// Check user input for exceptions relating player or location attributes.
         /// </summary>
         /// <param name="player">Current Player</param>
         /// <param name="numDevelopers">Number of Developers player is trying to place</param>
         /// <param name="location">Location the player is trying to place at</param>
-        private static void CheckForExceptions(Player player, int numDevelopers, ILocation location) {
+        private static void CheckExceptionsPlaceDevelopers(Player player, int numDevelopers, ILocation location) {
             // check location specific exceptions
             if (location is TrainingCenter && numDevelopers != 2) {
                 throw new ArgumentException("Number of developers to place must equal 2.");

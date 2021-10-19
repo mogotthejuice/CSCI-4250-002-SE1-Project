@@ -58,25 +58,29 @@ namespace GameLibrary.Models {
                 Name = "Cafe",
                 Resource =
                 Resources.Coffee,
-                NumDeveloperSpaces = 7
+                NumDeveloperSpaces = 7,
+                Divisor = 3
             });
             Locations.Add(new ResourceLocation() {
                 Name = "Staples",
                 Resource =
                 Resources.USB_Sticks,
-                NumDeveloperSpaces = 7
+                NumDeveloperSpaces = 7,
+                Divisor = 4
             });
             Locations.Add(new ResourceLocation() {
                 Name = "Factory",
                 Resource =
                 Resources.CPU_Cores,
-                NumDeveloperSpaces = 7
+                NumDeveloperSpaces = 7,
+                Divisor = 5
             });
             Locations.Add(new ResourceLocation() {
                 Name = "Power Plant",
                 Resource =
                 Resources.Power,
-                NumDeveloperSpaces = 7
+                NumDeveloperSpaces = 7,
+                Divisor = 6
             });
             Locations.Add(new ResourceLocation() {
                 Name = "Overtime",

@@ -13,14 +13,13 @@ namespace GameLibrary.Models {
         private const int MAX_OVERCLOCKS = 3;
         private const int START_NUM_DEVELOPERS_OWNED = 5;
         private const int START_NUM_MONEY = 12;
-        
+
         public int NumDevelopersOwned { get; private set; }
         public int NumDevelopersUnplaced { get; set; }
         public int NumBitcoinInvestments { get; private set; }
-
         // Mapping of Resource type to number of resource owned by the player
         // Holds number of resource for Money, Coffee, Usb sticks, CPU Cores, and Power
-        private Dictionary<Resources, int> numResources;
+        public  Dictionary<Resources, int> NumResources { get; set; }
         private List<ConsultantCard> consultantCards;
         private List<LicenseTile> licenseTiles;
         private List<Overclock> overclocks;
@@ -30,13 +29,13 @@ namespace GameLibrary.Models {
             NumDevelopersUnplaced = START_NUM_DEVELOPERS_OWNED;
             NumBitcoinInvestments = 0;
 
-            numResources = new Dictionary<Resources, int>();
+            NumResources = new Dictionary<Resources, int>();
             Resources[] resources = { Resources.Coffee, Resources.USB_Sticks,
                                       Resources.CPU_Cores, Resources.Power };
             foreach (Resources resource in resources) {
-                numResources[resource] = 0;
+                NumResources[resource] = 0;
             }
-            numResources[Resources.Money] = START_NUM_MONEY;
+            NumResources[Resources.Money] = START_NUM_MONEY;
 
             consultantCards = new List<ConsultantCard>();
             licenseTiles = new List<LicenseTile>();
@@ -47,7 +46,16 @@ namespace GameLibrary.Models {
             if (resource == Resources.Overclock)
                 throw new ArgumentException("Cannot get number of overclocks. Use overclock-specific methods.");
 
-            return numResources[resource];
+            return NumResources[resource];
+        }
+
+        public void AddBitcoin() {
+            NumBitcoinInvestments += 1;   
+        }
+
+        public void AddDeveloper() {
+            NumDevelopersOwned += 1;
+            NumDevelopersUnplaced += 1;
         }
         
         public void AddConsultantCard(ConsultantCard consultantCard) {

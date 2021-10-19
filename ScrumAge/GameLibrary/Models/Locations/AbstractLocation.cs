@@ -10,7 +10,7 @@ namespace GameLibrary.Models {
     public abstract class AbstractLocation : ILocation {
         // Number of developers placed on location, with length equal to number of players in game.
         // Ex. List for 4 player game: { P1, P2, P3, P4 }
-        protected List<int> numPlayerDevelopers;
+        protected List<int> numPlayerDevelopers { get; set; }
 
         public int MaxPlayers { get; set; } = 4;
         public string Name { get; set; }
@@ -33,8 +33,18 @@ namespace GameLibrary.Models {
         public void PlaceDevelopers(Player player, int numDevelopers) {
             SetNumPlayerDevelopers(player, numDevelopers);
         }
+        /// <summary>
+        /// Sets the developers from the current Player to 0 after taking action.
+        /// Adds the developers back to the Player's board.
+        /// </summary>
+        /// <param name="player">Current Player</param>
+        public void ResetPlayerDevelopers(Player player) {
+            player.Board.NumDevelopersUnplaced += GetNumPlayerDevelopers(player);
+            SetNumPlayerDevelopers(player, 0);
+        }
 
         public abstract void TakeAction(ref Player player);
+
     }
     
 }

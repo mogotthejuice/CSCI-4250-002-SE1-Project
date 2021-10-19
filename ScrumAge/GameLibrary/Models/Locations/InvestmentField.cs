@@ -13,7 +13,8 @@ namespace GameLibrary.Models.Locations {
         }
 
         public override void TakeAction(ref Player player) {
-            throw new NotImplementedException();
+            player.Board.AddBitcoin();
+            ResetPlayerDevelopers(player);
         }
     }
 }
