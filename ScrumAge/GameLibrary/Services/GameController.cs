@@ -33,6 +33,21 @@ namespace GameLibrary.Services {
 
             player.Board.NumDevelopersUnplaced -= numDevelopers;
             location.PlaceDevelopers(player, numDevelopers);
+            Gameboard gameboard = Gameboard.GetInstance();
+
+            if (player.Board.NumDevelopersUnplaced == 0)
+            {
+                gameboard.PlayersInRound.Dequeue();
+                if (gameboard.PlayersInRound.Count == 0)
+                {
+                    gameboard.PlayersInRound = new Queue<Player>(gameboard.Players);
+                    gameboard.Round = GameRound.TAKE_ACTIONS;
+                }
+            }
+            else
+            {
+                gameboard.CyclePlayersInRound();
+            }
         }
 
         /// <summary>

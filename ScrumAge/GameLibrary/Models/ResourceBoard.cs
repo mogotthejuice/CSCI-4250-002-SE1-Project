@@ -12,6 +12,7 @@ namespace GameLibrary.Models {
         private const int MAX_BITCOIN_INVESTMENTS = 10;
         private const int MAX_OVERCLOCKS = 3;
         private const int START_NUM_DEVELOPERS_OWNED = 5;
+        private const int START_NUM_MONEY = 12;
         
         public int NumDevelopersOwned { get; private set; }
         public int NumDevelopersUnplaced { get; set; }
@@ -30,11 +31,12 @@ namespace GameLibrary.Models {
             NumBitcoinInvestments = 0;
 
             numResources = new Dictionary<Resources, int>();
-            Resources[] resources = { Resources.Money, Resources.Coffee, Resources.USB_Sticks,
+            Resources[] resources = { Resources.Coffee, Resources.USB_Sticks,
                                       Resources.CPU_Cores, Resources.Power };
             foreach (Resources resource in resources) {
                 numResources[resource] = 0;
             }
+            numResources[Resources.Money] = START_NUM_MONEY;
 
             consultantCards = new List<ConsultantCard>();
             licenseTiles = new List<LicenseTile>();
