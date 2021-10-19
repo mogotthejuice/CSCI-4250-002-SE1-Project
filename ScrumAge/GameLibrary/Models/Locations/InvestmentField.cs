@@ -8,7 +8,7 @@ namespace GameLibrary.Models.Locations {
     public class InvestmentField : AbstractLocation {
         public InvestmentField() {
             Name = "Investment Field";
-            numPlayerDevelopers = new List<int>() { 0};
+            numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
             NumDeveloperSpaces = 1;
         }
 

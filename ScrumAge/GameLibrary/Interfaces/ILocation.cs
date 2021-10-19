@@ -10,7 +10,7 @@ namespace GameLibrary.Interfaces
     public interface ILocation
     {
         public string Name { get; set; }
-        public int MAX_PLAYERS { get; set; }
+        public int MaxPlayers { get; set; }
         public int SpacesLeft { get; }
         public int NumDeveloperSpaces { get; }
 

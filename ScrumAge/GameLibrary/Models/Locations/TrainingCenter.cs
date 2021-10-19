@@ -8,7 +8,7 @@ namespace GameLibrary.Models.Locations {
     public class TrainingCenter : AbstractLocation {
         public TrainingCenter() {
             Name = "Training Center";
-            numPlayerDevelopers = new List<int>() { 0 };
+            numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
             NumDeveloperSpaces = 2;
         }
 
