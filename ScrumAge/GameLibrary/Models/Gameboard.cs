@@ -42,6 +42,13 @@ namespace GameLibrary.Models {
             
             return instance;
         }
+        public ILocation GetLocation(string locationName) {
+            ILocation location;
+
+            location = Locations.Find(x => x.Name.Equals(locationName));
+
+            return location;
+        }
 
         public void InitializePlayers(string names) {
             Players = new Queue<Player>();
