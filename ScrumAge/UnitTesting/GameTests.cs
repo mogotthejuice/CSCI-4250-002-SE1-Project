@@ -23,10 +23,31 @@ namespace UnitTesting {
 
         
         [TestCaseSource("LocationTestCases")]
-        public void Throw_InvalidNumDevs_ResourceLocation_PlacedDevs_Test(int devs, ILocation loc) {
+        public void InvalidNumDevs_ResourceLocation_PlacedDevs_Test(int devs, ILocation loc) {
             Assert.Throws<ArgumentException>(() => GameController.PlaceDevelopers(game.Players.Peek(), devs,loc));
         }
 
+        [Test]
+        public void DiceRoll_Test() {
+            int x = GameFunctions.DiceRoll();
+            Assert.Multiple(() => {
+                Assert.Greater(x, 0);
+                Assert.Less(x, 13);
+            });
+            
+        }
+        [TestCase(1, 1, 6)]
+        [TestCase(2, 2, 12)]
+        [TestCase(3, 3, 18)]
+        [TestCase(4, 4, 24)]
+        [TestCase(5, 5, 30)]
+        public void OvertimeDiceRoll_Test(int numDevs, int expectedMin, int expectedMax) {
+            int x = GameFunctions.OvertimeDiceRoll(numDevs);
+            Assert.Multiple(() => {
+                Assert.Greater(x, expectedMin);
+                Assert.Less(x, expectedMax);
+            });
+        }
 
         public static IEnumerable LocationTestCases {
             get
