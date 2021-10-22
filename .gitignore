@@ -110,12 +110,16 @@ ScrumAge/GameLibrary/bin/
 ScrumAge/GameLibrary/obj/
 ScrumAge/TestConsoleUI/bin/
 ScrumAge/TestConsoleUI/obj/
+ScrumAge/UnitTesting/bin/
+ScrumAge/UnitTesting/obj/
 BlazorUI/bin/
 BlazorUI/obj/
 GameLibrary/bin/
 GameLibrary/obj/
 TestConsoleUI/bin/
 TestConsoleUI/obj/
+UnitTesting/bin/
+UnitTesting/obj/
 
 # Visual Studio files
 .vs
