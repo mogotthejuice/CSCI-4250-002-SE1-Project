@@ -47,18 +47,12 @@
 
     <tr>
         <th class="padColOne">
-
             <h3 style="display: block">Game Round: @Game.Round</h3>
-            
 
-
-           <h3 style="display: block">Bitcoin Investment Level: @Game.PlayersInRound.Peek().Board.NumBitcoinInvestments</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-           
-         
+            <h3 style="display: block">Bitcoin Investment Level: @Game.PlayersInRound.Peek().Board.NumBitcoinInvestments</h3>  @*TEMPORARY, will be replaced by visual resource board*@
 
             <h3 style="display: block">Player Score: @PlayerScore</h3>
             
-
             <h3 style="display: block">Player Developers Left: @Game.PlayersInRound.Peek().Board.NumDevelopersUnplaced</h3>  @*TEMPORARY, will be replaced by visual resource board*@
             
             <h3 style="display: block">Player Developers Owned: @Game.PlayersInRound.Peek().Board.NumDevelopersOwned</h3>  @*TEMPORARY, will be replaced by visual resource board*@
@@ -67,8 +61,8 @@
             <h3 style="display: block">Power: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.Power)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
             <h3 style="display: block">CPU Cores: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.CPU_Cores)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
             <h3 style="display: block">USB Sticks: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.USB_Sticks)</h3>  @*TEMPORARY, will be replaced by visual resource board*@ 
-            </th>
-      </tr>
+        </th>
+    </tr>
 </table>
 
 @code
