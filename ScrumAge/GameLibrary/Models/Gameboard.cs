@@ -93,7 +93,8 @@ namespace GameLibrary.Models {
                 Name = "Overtime",
                 Resource =
                  Resources.Money,
-                NumDeveloperSpaces = int.MaxValue
+                NumDeveloperSpaces = int.MaxValue,
+                Divisor = 2
             });
 
             Locations.Add(new InvestmentField());

@@ -6,17 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations {
-    public class ResourceLocation : AbstractLocation {
-        public Resources Resource { get; set; }
-        public int Divisor { get; set; }
-        public ResourceLocation() {
-            numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
-        }
-
+    public class OvertimeLocation : ResourceLocation {
         public override void TakeAction(ref Player player) {
-            int diceRoll = GameFunctions.DiceRoll();
+            int diceRoll = GameFunctions.OvertimeDiceRoll(numPlayerDevelopers[player.Number - 1]);
             int numberOfDevs = numPlayerDevelopers[player.Number - 1];
-            
+
             int amountToAdd = diceRoll * numberOfDevs / Divisor;
 
             int currentCount;

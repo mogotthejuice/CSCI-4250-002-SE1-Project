@@ -20,5 +20,20 @@ namespace GameLibrary.Services {
 
             return dice1 + dice2;
         }
+
+        /// <summary>
+        /// Rolls a dice for each dev on the location belonging to the player
+        /// </summary>
+        /// <param name="numberDice">number of player's devs at the location</param>
+        /// <returns>the sum total of the dice rolls</returns>
+        public static int OvertimeDiceRoll(int numberDice) {
+            int sum = 0;
+            Random random = new Random();
+            for (int i = 0; i < numberDice; i++) {
+                sum+= random.Next(1, 6); ;
+            }
+
+            return sum;
+        }
     }
 }
