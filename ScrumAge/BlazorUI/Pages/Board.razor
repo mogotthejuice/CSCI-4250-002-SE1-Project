@@ -40,6 +40,10 @@
     <tr>
         <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[14]))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
     </tr>
+    <tr>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[15]))">License Tiles</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th>Player: @Game.PlayersInRound.Peek().Name</th>
+    </tr>
 
     <tr>
         <th class="padColOne">
