@@ -22,14 +22,16 @@ namespace GameLibrary.Models {
 		/// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
 		public Queue<Player> PlayersInRound { get; set; }
         public GameRound Round { get; set; }
-
-
+        
         private Gameboard(string players) {
             InitializePlayers(players);
             PlayersInRound = new Queue<Player>(Players);
 
             InitializeLocations();
             Round = GameRound.PLACE_FIGURES;
+
+            GameLog gamelog = GameLog.GetInstance();
+            AddToGameLog($"Welcome to SCRUM Age!");
         }
 
         public static Gameboard GetInstance(string players = null) {
@@ -114,6 +116,15 @@ namespace GameLibrary.Models {
 
         public void CyclePlayersInRound() {
             PlayersInRound.Enqueue(PlayersInRound.Dequeue());
+        }
+
+        /// <summary>
+        /// Adds a message to the Game Log
+        /// </summary>
+        /// <param name="message">Message to be added</param>
+        public void AddToGameLog(string message) {
+            GameLog log = GameLog.GetInstance();
+            log.AddMessage(message);
         }
     }
 }

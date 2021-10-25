@@ -49,6 +49,14 @@ namespace UnitTesting {
             });
         }
 
+        [Test]
+        public void GameLog_Init_Test() {
+            Gameboard.GetInstance("p1;p2;p3;p4");
+            GameLog log = GameLog.GetInstance();
+
+            Assert.AreEqual($"Welcome to SCRUM Age!", log.CurrentMessage);
+        }
+
         public static IEnumerable LocationTestCases {
             get
             {
