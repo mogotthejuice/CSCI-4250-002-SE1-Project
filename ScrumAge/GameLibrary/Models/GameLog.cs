@@ -46,7 +46,7 @@ namespace GameLibrary.Models {
         /// <param name="message">Message to be added to the log.</param>
         public  void AddMessage(string message) {
             Messages.Add(message);
-            
+            CurrentMessage = message;
         }
     }
 }
