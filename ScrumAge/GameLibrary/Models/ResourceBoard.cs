@@ -51,19 +51,31 @@ namespace GameLibrary.Models {
         }
 
         public void AddBitcoin() {
+            if (NumBitcoinInvestments == MAX_BITCOIN_INVESTMENTS)
+                throw new InvalidOperationException("Cannot add bitcoin investment when max number of investments owned.");
+
             NumBitcoinInvestments += 1;   
         }
 
         public void AddDeveloper() {
+            if (NumDevelopersOwned == MAX_DEVELOPERS_OWNED)
+                throw new InvalidOperationException("Cannot add developer when max number of developers owned.");
+
             NumDevelopersOwned += 1;
             NumDevelopersUnplaced += 1;
         }
         
         public void AddConsultantCard(ConsultantCard consultantCard) {
+            if (consultantCard is null)
+                throw new ArgumentNullException("Cannot add null ConsultantCard.");
+
             ConsultantCards.Add(consultantCard);
         }
 
         public void AddLicenseTile(LicenseTile licenseTile) {
+            if (licenseTile is null)
+                throw new ArgumentNullException("Cannot add null LicenseTile.");
+
             LicenseTiles.Add(licenseTile);
         }
     }
