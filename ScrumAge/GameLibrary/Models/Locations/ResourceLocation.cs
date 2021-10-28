@@ -23,6 +23,7 @@ namespace GameLibrary.Models.Locations {
             player.Board.NumResources.TryGetValue(Resource, out currentCount);
             player.Board.NumResources[Resource] = currentCount + amountToAdd;
             ResetPlayerDevelopers(player);
+            Gameboard.GetInstance().AddToGameLog($"{player.Name} has gained {amountToAdd} {Resource}.");
         }
     }
 }

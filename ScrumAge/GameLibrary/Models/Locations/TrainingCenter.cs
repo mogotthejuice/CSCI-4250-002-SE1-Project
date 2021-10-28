@@ -15,6 +15,7 @@ namespace GameLibrary.Models.Locations {
         public override void TakeAction(ref Player player) {
             player.Board.AddDeveloper();
             ResetPlayerDevelopers(player);
+            Gameboard.GetInstance().AddToGameLog($"{player.Name} has gained a developer.");
         }
     }
 }

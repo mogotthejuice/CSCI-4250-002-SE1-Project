@@ -15,13 +15,13 @@ namespace TestConsoleUI {
             foreach (var location in gameboard.Locations) {
                 Console.WriteLine($"Name: {location.Name} Max Devs: {location.NumDeveloperSpaces} Num Dev Spaces: {location.SpacesLeft} ");
                 if (location is ResourceLocation) {
-                    GameController.PlaceDevelopers(gameboard.Players.Peek(), 0, location);
+                    GameController.PlaceDevelopers(0, location);
                 }
                 if (location is InvestmentField) {
-                    GameController.PlaceDevelopers(gameboard.Players.Peek(), 1, location);
+                    GameController.PlaceDevelopers(1, location);
                 }
                 if (location is TrainingCenter) {
-                    GameController.PlaceDevelopers(gameboard.Players.Peek(), 2, location);
+                    GameController.PlaceDevelopers(2, location);
                 }
              }
             Console.WriteLine("------");

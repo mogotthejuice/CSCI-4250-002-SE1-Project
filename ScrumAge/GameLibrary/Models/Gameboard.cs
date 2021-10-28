@@ -21,6 +21,10 @@ namespace GameLibrary.Models {
 
 		/// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
 		public Queue<Player> PlayersInRound { get; set; }
+        public Player CurrentPlayer { get {
+                return PlayersInRound.Peek();        
+            } 
+        }
         public GameRound Round { get; set; }
         
         private Gameboard(string players) {

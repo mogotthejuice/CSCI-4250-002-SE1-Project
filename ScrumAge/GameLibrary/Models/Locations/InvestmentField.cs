@@ -15,6 +15,7 @@ namespace GameLibrary.Models.Locations {
         public override void TakeAction(ref Player player) {
             player.Board.AddBitcoin();
             ResetPlayerDevelopers(player);
+            Gameboard.GetInstance().AddToGameLog($"{player.Name} has increased their Bitcoin Investment Level to {player.Board.NumBitcoinInvestments}");
         }
     }
 }
