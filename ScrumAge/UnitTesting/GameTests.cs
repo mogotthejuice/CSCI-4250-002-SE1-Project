@@ -61,13 +61,77 @@ namespace UnitTesting {
             get
             {
                 Gameboard game = GameController.InitializeGameboard("p1;p2;p3;p4");
-                
+
+                yield return new TestCaseData(100, game.GetLocation("Cafe"));
+                yield return new TestCaseData(0, game.GetLocation("Cafe"));
+                yield return new TestCaseData(-1, game.GetLocation("Cafe"));
+                yield return new TestCaseData(11, game.GetLocation("Cafe"));
+                yield return new TestCaseData(52, game.GetLocation("Cafe"));
+
                 yield return new TestCaseData(100, game.GetLocation("Staples"));
                 yield return new TestCaseData(0, game.GetLocation("Staples"));
-                yield return new TestCaseData(-5, game.GetLocation("Staples"));
-                yield return new TestCaseData(12, game.GetLocation("Staples"));
+                yield return new TestCaseData(-1, game.GetLocation("Staples"));
+                yield return new TestCaseData(11, game.GetLocation("Staples"));
                 yield return new TestCaseData(52, game.GetLocation("Staples"));
-                yield return new TestCaseData(12, game.GetLocation("Staples"));
+
+                yield return new TestCaseData(100, game.GetLocation("Factory"));
+                yield return new TestCaseData(0, game.GetLocation("Factory"));
+                yield return new TestCaseData(-1, game.GetLocation("Factory"));
+                yield return new TestCaseData(11, game.GetLocation("Factory"));
+                yield return new TestCaseData(52, game.GetLocation("Factory"));
+
+                yield return new TestCaseData(100, game.GetLocation("Power Plant"));
+                yield return new TestCaseData(0, game.GetLocation("Power Plant"));
+                yield return new TestCaseData(-1, game.GetLocation("Power Plant"));
+                yield return new TestCaseData(11, game.GetLocation("Power Plant"));
+                yield return new TestCaseData(52, game.GetLocation("Power Plant"));
+
+                yield return new TestCaseData(0, game.GetLocation("Overtime"));
+                yield return new TestCaseData(-1, game.GetLocation("Overtime"));
+
+                yield return new TestCaseData(3, game.GetLocation("Training Center"));
+                yield return new TestCaseData(0, game.GetLocation("Training Center"));
+                yield return new TestCaseData(-1, game.GetLocation("Training Center"));
+
+                yield return new TestCaseData(2, game.GetLocation("Investment Field"));
+                yield return new TestCaseData(0, game.GetLocation("Investment Field"));
+                yield return new TestCaseData(-1, game.GetLocation("Investment Field"));
+
+                yield return new TestCaseData(2, game.GetLocation("Nerd"));
+                yield return new TestCaseData(0, game.GetLocation("Nerd"));
+                yield return new TestCaseData(-1, game.GetLocation("Nerd"));
+
+                yield return new TestCaseData(2, game.GetLocation("ConsultantCard0"));
+                yield return new TestCaseData(0, game.GetLocation("ConsultantCard0"));
+                yield return new TestCaseData(-1, game.GetLocation("ConsultantCard0"));
+
+                yield return new TestCaseData(2, game.GetLocation("ConsultantCard1"));
+                yield return new TestCaseData(0, game.GetLocation("ConsultantCard1"));
+                yield return new TestCaseData(-1, game.GetLocation("ConsultantCard1"));
+
+                yield return new TestCaseData(2, game.GetLocation("ConsultantCard2"));
+                yield return new TestCaseData(0, game.GetLocation("ConsultantCard2"));
+                yield return new TestCaseData(-1, game.GetLocation("ConsultantCard2"));
+
+                yield return new TestCaseData(2, game.GetLocation("ConsultantCard3"));
+                yield return new TestCaseData(0, game.GetLocation("ConsultantCard3"));
+                yield return new TestCaseData(-1, game.GetLocation("ConsultantCard3"));
+
+                yield return new TestCaseData(2, game.GetLocation("License Tile0"));
+                yield return new TestCaseData(0, game.GetLocation("License Tile0"));
+                yield return new TestCaseData(-1, game.GetLocation("License Tile0"));
+
+                yield return new TestCaseData(2, game.GetLocation("License Tile1"));
+                yield return new TestCaseData(0, game.GetLocation("License Tile1"));
+                yield return new TestCaseData(-1, game.GetLocation("License Tile1"));
+
+                yield return new TestCaseData(2, game.GetLocation("License Tile2"));
+                yield return new TestCaseData(0, game.GetLocation("License Tile2"));
+                yield return new TestCaseData(-1, game.GetLocation("License Tile2"));
+
+                yield return new TestCaseData(2, game.GetLocation("License Tile3"));
+                yield return new TestCaseData(0, game.GetLocation("License Tile3"));
+                yield return new TestCaseData(-1, game.GetLocation("License Tile3"));
             }
         }
     }

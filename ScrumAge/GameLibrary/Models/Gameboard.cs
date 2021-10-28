@@ -103,10 +103,14 @@ namespace GameLibrary.Models {
             Locations.Add(new TrainingCenter());
             Locations.Add(new NerdLocation());
 			for (int i = 0; i < 4; i++) {
-                Locations.Add(new ConsultantCardLocation());
+                ConsultantCardLocation cardLoc = new ConsultantCardLocation();
+                cardLoc.Name = cardLoc.Name + i.ToString();
+                Locations.Add(cardLoc);
             }
             for (int i = 0; i < 4; i++) {
-                Locations.Add(new LicenseTileLocation());
+                LicenseTileLocation tileLoc = new LicenseTileLocation();
+                tileLoc.Name = tileLoc.Name + i.ToString();
+                Locations.Add(tileLoc);
             }
         }
 
