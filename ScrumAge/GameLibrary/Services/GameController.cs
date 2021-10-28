@@ -41,6 +41,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
+                return;
             }
 
             Gameboard gameboard = Gameboard.GetInstance();
@@ -72,6 +73,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
+                return;
             }
 
             Gameboard gameboard = Gameboard.GetInstance();
