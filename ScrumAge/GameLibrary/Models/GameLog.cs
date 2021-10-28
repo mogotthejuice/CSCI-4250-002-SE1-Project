@@ -19,7 +19,12 @@ namespace GameLibrary.Models {
         /// <summary>
         /// Last added message to the Game Log
         /// </summary>
-        public string CurrentMessage { get { return Messages[^1]; } private set { } } 
+        public string CurrentMessage { 
+            get {
+                string unparsedMessage = Messages[^1];    
+                string message = unparsedMessage[(unparsedMessage.LastIndexOf(':') + 2)..];
+                return message; 
+            } private set { } } 
         
         /// <summary>
         /// private constructor for singleton Game Log
@@ -45,8 +50,7 @@ namespace GameLibrary.Models {
         /// </summary>
         /// <param name="message">Message to be added to the log.</param>
         public  void AddMessage(string message) {
-            Messages.Add(message);
-            CurrentMessage = message;
+            Messages.Add($"{DateTime.Now}: " + message);
         }
     }
 }

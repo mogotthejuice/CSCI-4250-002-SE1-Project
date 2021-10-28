@@ -18,6 +18,7 @@ namespace GameLibrary.Models.Locations
         public override void TakeAction(ref Player player) {
             if (player.Board.Overclocks.Count < MAX_OVERCLOCKS) {
                 player.Board.Overclocks.Add(new Overclock());
+                Gameboard.GetInstance().AddToGameLog($"{player.Name} has has added a new overclock.");
             }
             else {
                 if (player.Board.Overclocks[MAX_OVERCLOCKS - 1].Level == Overclock.MAX_LEVEL) {
@@ -28,6 +29,7 @@ namespace GameLibrary.Models.Locations
                 for (int i = 1; i < player.Board.Overclocks.Count; i++) {
                     if (player.Board.Overclocks[i].Level < maxLevelOverclockOwned) {
                         player.Board.Overclocks[i].Upgrade();
+                        Gameboard.GetInstance().AddToGameLog($"{player.Name} has upgraded Overclock {i} to level {player.Board.Overclocks[i].Level}.");
                         return;
                     }
                 }

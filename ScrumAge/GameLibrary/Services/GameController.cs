@@ -28,13 +28,23 @@ namespace GameLibrary.Services {
         /// <param name="player">Player to move</param>
         /// <param name="numDevelopers">Number of developers to place</param>
         /// <param name="location">Location to place at</param>
-        public static void PlaceDevelopers(Player player, int numDevelopers, ILocation location) {
-            CheckExceptionsPlaceDevelopers(player, numDevelopers, location);
+        public static void PlaceDevelopers(int numDevelopers, ILocation location) {
+            Player player = Gameboard.GetInstance().PlayersInRound.Peek();
+            // try to place developer
+            try {
+                CheckExceptionsPlaceDevelopers(player, numDevelopers, location);
 
-            player.Board.NumDevelopersUnplaced -= numDevelopers;
-            location.PlaceDevelopers(player, numDevelopers);
+                player.Board.NumDevelopersUnplaced -= numDevelopers;
+                location.PlaceDevelopers(player, numDevelopers);
+                Gameboard.GetInstance().AddToGameLog($"{player.Name} placed " +
+                    $"{numDevelopers} figures.");
+            }
+            catch (Exception e) {
+                Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
+                return;
+            }
+
             Gameboard gameboard = Gameboard.GetInstance();
-
             if (player.Board.NumDevelopersUnplaced == 0)
             {
                 gameboard.PlayersInRound.Dequeue();
@@ -50,14 +60,21 @@ namespace GameLibrary.Services {
             }
         }
 
-        public static void TakeLocationAction(Player player, ILocation location) {
+        public static void TakeLocationAction(ILocation location) {
+            Player player = Gameboard.GetInstance().PlayersInRound.Peek();
             int numberofDevelopers = location.GetNumPlayerDevelopers(player);
 
-            // check that the player can take action at the given location
-            if (numberofDevelopers == 0) {
-                throw new ArgumentException($"Player does not have any developers at {location.Name}");
+            try {
+                // check that the player can take action at the given location
+                if (numberofDevelopers == 0) {
+                    throw new ArgumentException($"Player does not have any developers at {location.Name}");
+                }
+                location.TakeAction(ref player);
             }
-            location.TakeAction(ref player);
+            catch (Exception e) {
+                Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
+                return;
+            }
 
             Gameboard gameboard = Gameboard.GetInstance();
             // move to next player if all developers have been used

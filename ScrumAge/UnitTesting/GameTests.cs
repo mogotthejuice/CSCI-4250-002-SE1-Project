@@ -24,7 +24,8 @@ namespace UnitTesting {
         
         [TestCaseSource("LocationTestCases")]
         public void InvalidNumDevs_ResourceLocation_PlacedDevs_Test(int devs, ILocation loc) {
-            Assert.Throws<ArgumentException>(() => GameController.PlaceDevelopers(game.Players.Peek(), devs,loc));
+            GameController.PlaceDevelopers(devs,loc);
+            Assert.That(GameLog.GetInstance().CurrentMessage.StartsWith("Sorry, "), Is.True);
         }
 
         [Test]
@@ -44,8 +45,8 @@ namespace UnitTesting {
         public void OvertimeDiceRoll_Test(int numDevs, int expectedMin, int expectedMax) {
             int x = GameFunctions.OvertimeDiceRoll(numDevs);
             Assert.Multiple(() => {
-                Assert.Greater(x, expectedMin);
-                Assert.Less(x, expectedMax);
+                Assert.GreaterOrEqual(x, expectedMin);
+                Assert.LessOrEqual(x, expectedMax);
             });
         }
 
