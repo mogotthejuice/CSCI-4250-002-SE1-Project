@@ -100,7 +100,7 @@
         //2. Open dialog for players to input how many players they will place
         //3. Ensure player has enough players to place
         int numDevelopersPlaced = 0;
-#if !DEBUG
+//#if !DEBUG
         bool notInput = true;
         while (notInput) {
             try {
@@ -113,11 +113,11 @@
             }
 
         }
-#endif
+//#endif
 
-#if DEBUG
-        numDevelopersPlaced = 2;
-#endif
+//#if DEBUG
+       // numDevelopersPlaced = 2;
+//#endif
 
         Player player = Game.PlayersInRound.Peek();
         try {
@@ -139,10 +139,10 @@
             foreach (var item in player.Board.NumResources) {
                 output += $"{item.Key} {item.Value}\n";
             }
-            message = output;
+            message = $"{output}";
         }
         catch (Exception f) {
             message = $"{f.Message}";
-        }
     }
+        }
 }
