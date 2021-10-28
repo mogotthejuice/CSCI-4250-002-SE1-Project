@@ -135,6 +135,38 @@ namespace UnitTesting {
                 yield return new TestCaseData(-1, game.GetLocation("License Tile3"));
             }
         }
+
+        [TestCaseSource("LocationTestsInteractingUI")]
+        public void Take_Action_Testing_UI_Test(ILocation location)
+        {
+            //in this instance we should have four players each with 5 developers
+            Player player = game.PlayersInRound.Peek();
+            GameController.PlaceDevelopers(3, game.GetLocation("Cafe"));    //player 1 should have 2 developers
+            Assert.AreEqual(2, player.Board.NumDevelopersUnplaced);
+
+            //We are on player 2 now
+            player = game.PlayersInRound.Peek();
+            GameController.PlaceDevelopers(3, game.GetLocation("Cafe"));    //player 1 should have 2 developers
+            Assert.AreEqual(2, player.Board.NumDevelopersUnplaced);
+            //We are on player 3 now
+            player = game.PlayersInRound.Peek();
+            GameController.PlaceDevelopers(1, game.GetLocation("Cafe"));    //player 1 should have 4 developers
+            Assert.AreEqual(4, player.Board.NumDevelopersUnplaced);
+
+
+            Assert.AreEqual(0, game.GetLocation("Cafe").SpacesLeft);
+        }
+
+        public static IEnumerable LocationTestsInteractingUI
+        {
+            get
+            {
+                Gameboard game = GameController.InitializeGameboard("p1;p2;p3;p4");
+
+                yield return new TestCaseData(game.GetLocation("Cafe"));
+
+            }
+        }
     }
     
 }
