@@ -17,12 +17,13 @@ namespace GameLibrary.Models {
         public int NumDevelopersOwned { get; private set; }
         public int NumDevelopersUnplaced { get; set; }
         public int NumBitcoinInvestments { get; private set; }
+
         // Mapping of Resource type to number of resource owned by the player
         // Holds number of resource for Money, Coffee, Usb sticks, CPU Cores, and Power
-        public  Dictionary<Resources, int> NumResources { get; set; }
-        private List<ConsultantCard> consultantCards;
-        private List<LicenseTile> licenseTiles;
-        private List<Overclock> overclocks;
+        public Dictionary<Resources, int> NumResources { get; set; }
+        public List<Overclock> Overclocks { get; private set; }
+        public List<ConsultantCard> ConsultantCards;
+        public List<LicenseTile> LicenseTiles;
 
         public ResourceBoard() {
             NumDevelopersOwned = START_NUM_DEVELOPERS_OWNED;
@@ -37,9 +38,9 @@ namespace GameLibrary.Models {
             }
             NumResources[Resources.Money] = START_NUM_MONEY;
 
-            consultantCards = new List<ConsultantCard>();
-            licenseTiles = new List<LicenseTile>();
-            overclocks = new List<Overclock>();
+            ConsultantCards = new List<ConsultantCard>();
+            LicenseTiles = new List<LicenseTile>();
+            Overclocks = new List<Overclock>();
         }
 
         public int GetNumResource(Resources resource) {
@@ -59,32 +60,11 @@ namespace GameLibrary.Models {
         }
         
         public void AddConsultantCard(ConsultantCard consultantCard) {
-            consultantCards.Add(consultantCard);
+            ConsultantCards.Add(consultantCard);
         }
 
         public void AddLicenseTile(LicenseTile licenseTile) {
-            licenseTiles.Add(licenseTile);
-        }
-        
-        public void UpgradeOverclock() {
-            if (overclocks.Count < MAX_OVERCLOCKS) {
-                overclocks.Add(new Overclock());
-            }
-            else {
-                if (overclocks[MAX_OVERCLOCKS - 1].Level == Overclock.MAX_LEVEL) {
-                    throw new InvalidOperationException("Cannot upgrade Overclock when all are max level.");
-                }
-
-                int maxLevelOverclockOwned = overclocks[0].Level;
-                for (int i = 1; i < overclocks.Count; i++) {
-                    if (overclocks[i].Level < maxLevelOverclockOwned) {
-                        overclocks[i].Upgrade();
-                        return;
-                    }
-                }
-
-                overclocks[0].Upgrade();
-            }
+            LicenseTiles.Add(licenseTile);
         }
     }
 }
