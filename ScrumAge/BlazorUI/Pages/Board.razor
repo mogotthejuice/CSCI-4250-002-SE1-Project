@@ -9,9 +9,9 @@
 <table>
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[4]))">@Game.Locations[4].SpacesLeft<br>@Game.Locations[4].Name</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[4]))">@Game.Locations[4].Name<br>(Money)</button></th>
         <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[0]))">@Game.Locations[0].SpacesLeft<br>@Game.Locations[0].Name<br>(Coffee)</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[1]))">@Game.Locations[1].SpacesLeft<br>@Game.Locations[1].Name <br> (USB Sticks)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[1]))">@Game.Locations[1].SpacesLeft<br>@Game.Locations[1].Name<br>(USB Sticks)</button></th>
     </tr>
 
     <tr>
@@ -21,10 +21,9 @@
     </tr>
 
     <tr>
-
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].SpacesLeft<br>@Game.Locations[6].Name<br>New Developer</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[7]))">@Game.Locations[7].SpacesLeft<br>@Game.Locations[7].Name<br>Overclock</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].SpacesLeft<br>@Game.Locations[3].Name<br>Power</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].SpacesLeft<br>@Game.Locations[6].Name<br>(New Developer)</button></th>
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[7]))">@Game.Locations[7].SpacesLeft<br>@Game.Locations[7].Name<br>(Overclock)</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
+        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].SpacesLeft<br>@Game.Locations[3].Name<br>(Power)</button></th>
     </tr>
     <tr>
         <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[12]))">License Tile</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
