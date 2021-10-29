@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations
 {
-    class NerdLocation : AbstractLocation {
+    public class NerdLocation : AbstractLocation {
         private const int MAX_OVERCLOCKS = 4;
 
         public NerdLocation() {
