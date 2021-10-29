@@ -20,7 +20,7 @@ namespace GameLibrary.Models {
         public string AgriculturalExtraSpace{ get; set; }
         public int CivilizationCard{ get; set; }
 
-        public UpperConCard(int diceRollNnumber, int cardResources, int  foodTokens,int victoryPoints,int diceRollResources, string toolTiles, string agriculturalSpaces, int civCard)
+        public UpperConCard(int diceRollNumber, int cardResources, int  foodTokens,int victoryPoints,int diceRollResources, string toolTiles, string agriculturalSpaces, int civCard)
             {
                 
             }

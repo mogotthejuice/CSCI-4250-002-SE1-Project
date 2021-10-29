@@ -15,7 +15,7 @@ namespace GameLibrary.Models
         private int BuildingPoints;
         private int ShamanFigurePoints;
 
-   public int farmerNumber { get; set; }
+   public int FarmerNumber { get; set; }
    public int Marker { get; set; }
    public int ToolMakers{ get; set; }
    public int ToolTiles{ get; set; }
