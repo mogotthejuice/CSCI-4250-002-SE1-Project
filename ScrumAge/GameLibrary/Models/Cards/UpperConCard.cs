@@ -11,49 +11,16 @@ namespace GameLibrary.Models {
     {
         
         public enum UpperCardComponents{}
-         public int DiceRollNumber
-            {
-                get => diceRollNumber;
-                set => diceRollNumber = Value;
-            }
-            public string CardResources
-            {
-                get => resources;
-                set => resources = Value;
-            }
+        public int DiceRollNumber { get; set; }
+        public int CardResources { get; set; }
+        public int FoodTokens { get; set; }
+        public int VictoryPoints { get; set; }
+        public int DiceRollResources { get; set; }
+        public string ToolTiles{ get; set; }
+        public string AgriculturalExtraSpace{ get; set; }
+        public int CivilizationCard{ get; set; }
 
-        public string FoodTokens
-            {
-                get => tokens;
-                set => tokens = Value;
-            }
-        public int VictoryPoints
-            {
-                get => victoryPoints;
-                set => victoryPoints = Value;
-            }
-        public string DiceRollResources
-            {
-                get => diceResources;
-                set => diceResources = Value;
-            }
-        public string ToolTiles
-            {
-                get => toolTiles;
-                set => toolTiles = Value;
-            }
-        public string AgriculturalExtraSpace
-            {
-                get => Aspace;
-                set => Aspace = Value;
-            }
-        public int CivilizationCard
-            {
-                get => civCard;
-                set => civCard = Value;
-            }
-
-        public UpperConCard(int diceRollNumber, string resources)
+        public UpperConCard(int diceRollNnumber, int cardResources, int  foodTokens,int victoryPoints,int diceRollResources, string toolTiles, string agriculturalSpaces, int civCard)
             {
                 
             }

@@ -12,8 +12,8 @@ namespace GameLibrary.Models {
         public LowerConCard Lower { get; private set; }
 
         public ConsultantCard() {
-            UpperConCard = new UpperConCard(diceRollNnumber,cardResources, foodTokens,victoryPoints,diceRollResources,toolTiles, agriculturalSpaces,civCard);
-            lowerConCard = new LowerConCard(FarmerNumber,Marker,ToolMakers, ToolTiles,Builders,BuildingTiles,Shamans, BoardFigures);
+            UpperConCard Upper = new UpperConCard(diceRollNnumber,cardResources, foodTokens,victoryPoints,diceRollResources,toolTiles, agriculturalSpaces,civCard);
+            LowerConCard  Lower = new LowerConCard(FarmerNumber,Marker,ToolMakers, ToolTiles,Builders,BuildingTiles,Shamans, BoardFigures);
         }
     }
 }

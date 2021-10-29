@@ -15,68 +15,24 @@ namespace GameLibrary.Models
         private int BuildingPoints;
         private int ShamanFigurePoints;
 
-         
+   public int farmerNumber { get; set; }
+   public int Marker { get; set; }
+   public int ToolMakers{ get; set; }
+   public int ToolTiles{ get; set; }
+   public int Builders{ get; set; }
+   public int BuildingTiles{ get; set; }
+   public int Shamans{ get; set; }
+   public int BoardFigures{ get; set; }
 
-        
-   public int farmerNumber
-   {
-      get => fNumber;
-      set => fNumber = fNumberValue;
-   }
+  // public int calcPoints{}
 
-   public int Marker
-   {
-      get => marker;
-      set => marker = markerValue;
-   }
-    public int ToolMakers
-   {
-      get => fNumber;
-      set => TMakers = TMakersValue;
-   }
-   public int ToolTiles
-   {
-      get => Ttiles;
-      set => Ttiles = TtilesValue;
-
-   }
-   public int Builders
-   {
-      get => BuilderNum;
-      set => BuilderNum = BuilderNumValue;
-
-   }
-   public int BuildingTiles
-   {
-      get => buildingTiles;
-      set => buildingTiles = buildingTilesValue;
-
-   }
-   public int Shamans
-   {
-      get => shamans;
-      set => shamans = shamansValue;
-
-   }
-   public int BoardFigures
-   {
-    
-      get => bFigures;
-      set => bFigures = bFiguresValue;
-
-   }
-   public int calcPoints{
-
-       
-   }
-
-    public LowerConCard()
+    public LowerConCard(int FarmerNumber,int Marker,int ToolMakers, int ToolTiles,int Builders,int BuildingTiles,int Shamans,int  BoardFigures)
     {
         //determine ties or winner
-        points = 0;
-            if (points.isEqual())
-            { }
-            else {}
+        //points = 0;
+           // if (points.isEqual())
+            //{ }
+            //else {}
         }
 
 
