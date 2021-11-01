@@ -25,7 +25,9 @@ namespace GameLibrary.Models {
         public int Builders ;
         public int BuildingTiles ;
         public int Shamans;
-        public int BoardFigures;    
+        public int BoardFigures;  
+        public Upper UpperConCard  { get; private set; }
+        public Lower LowerConCard  { get; private set; }  
 
 
         public ConsultantCard() 
