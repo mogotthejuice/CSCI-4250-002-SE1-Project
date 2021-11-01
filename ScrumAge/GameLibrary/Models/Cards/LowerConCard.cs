@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using GameLibrary.Models;
 
 namespace GameLibrary.Models {
-    public class LowerConCard {
+    public abstract class LowerConCard {
+        //TEMP: These properties are now not needed; subclasses handle all data
+        //TODO: Remove all attributes and properties
         private int FarmerMarkerPoints;
         private int ToolPoints;
         private int BuildingPoints;
@@ -23,6 +25,9 @@ namespace GameLibrary.Models {
         public int Shamans{ get; set; }
         public int BoardFigures{ get; set; }
         // public int calcPoints{}
+
+        //TEMP: Constructor is now also not needed, this class now only exists for Sand and Green subclasses to inherit from
+        //TODO: Remove both constructors
         public LowerConCard(int FarmerNumber,int Marker,int ToolMakers, int ToolTiles,int Builders,int BuildingTiles,int Shamans,int  BoardFigures)
         {
         //determine ties or winner
@@ -32,6 +37,9 @@ namespace GameLibrary.Models {
             //else {}
         }
 
-
+        public LowerConCard()
+        {
+            //temp constructor so subclasses' constructors don't show errors
+        }
     }
 }

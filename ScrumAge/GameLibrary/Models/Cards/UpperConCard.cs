@@ -8,6 +8,18 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class UpperConCard {
+        /*
+         * TODO: Move UpperConCardComponent enum to new file with the following constants:
+         * DICE_ROLL
+         * RESOURCE (will cover food and resource)
+         * RESOURCE_DICE_ROLL
+         * VICTORY_POINTS
+         * OVERCLOCK
+         * BITCOIN_INVESTMENT
+         * CONSULTANT_CARD
+         * ONE_USE_OVERCLOCK
+         * ANY_TWO_RESOURCES
+         */
         public enum UpperCardComponents{}
         public int DiceRollNumber { get; set; }
         public int CardResources { get; set; }
