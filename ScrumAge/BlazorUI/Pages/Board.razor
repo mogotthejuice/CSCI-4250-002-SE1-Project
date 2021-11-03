@@ -4,65 +4,100 @@
 @using static GameLibrary.Services.GameController
 @using GameLibrary.Interfaces
 @using GameLibrary.Models
+@using GameboardComponents
+
+
 
 <h1>@message</h1>
+
+
 <table>
 
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[4]))">@Game.Locations[4].Name<br>(Money)</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[0]))">@Game.Locations[0].SpacesLeft<br>@Game.Locations[0].Name<br>(Coffee)</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[1]))">@Game.Locations[1].SpacesLeft<br>@Game.Locations[1].Name<br>(USB Sticks)</button></th>
-    </tr>
+    <!-- #region Location Buttons -->
 
     <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[5]))">@Game.Locations[5].SpacesLeft<br>@Game.Locations[5].Name<br>(Bitcoin Investment)</button></th>
-        <th></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[2]))">@Game.Locations[2].SpacesLeft<br>@Game.Locations[2].Name<br>(CPU Cores)</button></th>
-    </tr>
-
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[6]))">@Game.Locations[6].SpacesLeft<br>@Game.Locations[6].Name<br>(New Developer)</button></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[7]))">@Game.Locations[7].SpacesLeft<br>@Game.Locations[7].Name<br>(Overclock)</button></th>                                                @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[3]))">@Game.Locations[3].SpacesLeft<br>@Game.Locations[3].Name<br>(Power)</button></th>
-    </tr>
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[12]))">License Tile</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th></th>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[8]))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[9]))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[10]))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[11]))">Con Card</button></th>                                                        @*This button needs to be updated with the object -- NOT YET CREATED*@
-    </tr>
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[13]))">License Tile</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
-    </tr>
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[14]))">License Tile</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
-    </tr>
-    <tr>
-        <th class="padColOne"><button @onclick="@(e => LocationClick(e, Game.Locations[15]))">License Tile</button></th>                                                   @*This button needs to be updated with the object -- NOT YET CREATED*@
-        <th>Player: @Game.PlayersInRound.Peek().Name</th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[1] LocationClick="@(e => LocationClick(e, Game.Locations[1]))" />
+        </th>
     </tr>
 
     <tr>
         <th class="padColOne">
-            <h3 style="display: block">Game Round: @Game.Round</h3>
-
-            <h3 style="display: block">Bitcoin Investment Level: @Game.PlayersInRound.Peek().Board.NumBitcoinInvestments</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-
-            <h3 style="display: block">Player Score: @PlayerScore</h3>
-            
-            <h3 style="display: block">Player Developers Left: @Game.PlayersInRound.Peek().Board.NumDevelopersUnplaced</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-            
-            <h3 style="display: block">Player Developers Owned: @Game.PlayersInRound.Peek().Board.NumDevelopersOwned</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-
-            <h3 style="display: block">Coffee: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.Coffee)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-            <h3 style="display: block">Power: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.Power)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-            <h3 style="display: block">CPU Cores: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.CPU_Cores)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
-            <h3 style="display: block">USB Sticks: @Game.PlayersInRound.Peek().Board.GetNumResource(Resources.USB_Sticks)</h3>  @*TEMPORARY, will be replaced by visual resource board*@ 
+            <LocationButton Location=@Game.Locations[5] LocationClick="@(e => LocationClick(e, Game.Locations[5]))" />
+        </th>
+        <th></th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[2] LocationClick="@(e => LocationClick(e, Game.Locations[2]))" />
         </th>
     </tr>
+
+    <tr>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[6] LocationClick="@(e => LocationClick(e, Game.Locations[6]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[7] LocationClick="@(e => LocationClick(e, Game.Locations[7]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[3] LocationClick="@(e => LocationClick(e, Game.Locations[3]))" />
+        </th>
+    </tr>
+    <tr>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
+        </th>
+        <th></th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[8] LocationClick="@(e => LocationClick(e, Game.Locations[8]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[9] LocationClick="@(e => LocationClick(e, Game.Locations[9]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[10] LocationClick="@(e => LocationClick(e, Game.Locations[10]))" />
+        </th>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[11] LocationClick="@(e => LocationClick(e, Game.Locations[11]))" />
+        </th>
+    </tr>
+    <tr>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[13] LocationClick="@(e => LocationClick(e, Game.Locations[13]))" />
+        </th>
+    </tr>
+    <tr>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[14] LocationClick="@(e => LocationClick(e, Game.Locations[14]))" />
+        </th>
+    </tr>
+    <tr>
+        <th class="padColOne">
+            <LocationButton Location=@Game.Locations[15] LocationClick="@(e => LocationClick(e, Game.Locations[15]))" />
+        </th>
+    </tr>
+
+    <!-- #endregion -->
+
+    <!-- #region Player Resource Board -->
+
+    <tr>
+        <th class="padColOne">
+            <h3 style="display: block">Game Round: @Game.Round</h3>
+            <ResourceBoardComponent _Player="Game.PlayersInRound.Peek()" />
+        </th>
+    </tr>
+
+    <!-- #endregion -->
+
 </table>
+
+<!-- #region Code-Behind -->
 
 @code
 {
@@ -70,12 +105,11 @@
     public string playerNames { get; set; }
     public Gameboard Game { get; set; }
 
-    int PlayerScore = 0;
-
     private string message = "";
 
     protected override void OnInitialized() {
         Game = InitializeGameboard(playerNames);
+        message = GameLog.GetInstance().CurrentMessage;
     }
 
     private async Task LocationClick(MouseEventArgs e, ILocation location) {
@@ -115,13 +149,15 @@
 
         PlaceDevelopers(numDevelopersPlaced, location);
         message = GameLog.GetInstance().CurrentMessage;
-        
+
         this.StateHasChanged();
     }
 
     private void TakeActionOnLocation(ILocation location) {
         TakeLocationAction(location);
         message = GameLog.GetInstance().CurrentMessage;
-        
+
     }
 }
+
+<!-- #endregion -->

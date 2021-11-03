@@ -1,0 +1,44 @@
+﻿@namespace GameboardComponents
+@using GameLibrary.Models.Locations
+@using GameLibrary.Interfaces
+@using static GameLibrary.Services.GameController
+
+<div ResourceCard>
+    <h3>Player: @_Player.Name</h3>
+
+    <h3 style="display: block">Bitcoin Investment Level:@_Player.Board.NumBitcoinInvestments</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+
+    <h3 style="display: block">Player Score: @PlayerScore</h3>
+
+    <h3 style="display: block">Player Developers Left: @_Player.Board.NumDevelopersUnplaced</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+
+    <h3 style="display: block">Player Developers Owned: @_Player.Board.NumDevelopersOwned</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+
+    <h3 style="display: block">Coffee: @_Player.Board.GetNumResource(Resources.Coffee)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+    <h3 style="display: block">Power: @_Player.Board.GetNumResource(Resources.Power)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+    <h3 style="display: block">CPU Cores: @_Player.Board.GetNumResource(Resources.CPU_Cores)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+    <h3 style="display: block">USB Sticks: @_Player.Board.GetNumResource(Resources.USB_Sticks)</h3>  @*TEMPORARY, will be replaced by visual resource board*@
+</div>
+
+<style>
+    div[ResourceCard] {
+        padding:25px;
+        height: 300px;
+        width: 300px;
+        border: none;
+        display: inline-block;
+        background-color: aquamarine;
+    }
+    h3 {
+        font-size:medium;
+        font-style:oblique;
+    }
+</style>
+
+
+@code {
+    public int PlayerScore = 0;
+
+    [Parameter]
+    public Player _Player { get; set; }
+}

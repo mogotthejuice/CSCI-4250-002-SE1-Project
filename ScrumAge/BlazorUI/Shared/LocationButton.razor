@@ -1,0 +1,47 @@
+﻿@namespace GameboardComponents
+@using GameLibrary.Models.Locations
+@using GameLibrary.Interfaces
+@using static GameLibrary.Services.GameController
+
+<div>
+    <button @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+        @if (IsOverButton == false) {
+        <p>@Location.Name</p>
+        }
+        else if (IsOverButton == true) {
+        <p>Spaces left: @Location.SpacesLeft</p>
+            if(Location is ResourceLocation){
+                ResourceLocation loc = (ResourceLocation)Location;
+        <p>Resource: @loc.Resource</p>
+            }
+        }
+    </button>
+</div>
+
+<style>
+    button {
+        width: 175px;
+        border: none;
+        display: inline-block;
+        transition-duration: 0.4s;
+    }
+</style>
+
+@code {
+    public bool IsOverButton { get; set; } = false;
+
+
+    [Parameter]
+    public ILocation Location { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> LocationClick {get; set;}
+
+    public void MouseHover() {
+        IsOverButton = true;
+    }
+
+    public void MouseExit() {
+        IsOverButton = false;
+    }
+}
