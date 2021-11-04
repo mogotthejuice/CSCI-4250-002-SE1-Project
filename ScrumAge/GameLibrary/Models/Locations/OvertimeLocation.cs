@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GameLibrary.Models.Locations {
     public class OvertimeLocation : ResourceLocation {
         public override void TakeAction(ref Player player) {
-            int diceRoll = GameFunctions.OvertimeDiceRoll(numPlayerDevelopers[player.Number - 1]);
+            int diceRoll = GameFunctions.DiceRoll(numPlayerDevelopers[player.Number - 1]);
             int numberOfDevs = numPlayerDevelopers[player.Number - 1];
 
             int amountToAdd = diceRoll * numberOfDevs / Divisor;

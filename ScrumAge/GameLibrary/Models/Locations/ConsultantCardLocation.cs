@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations
 {
-	class ConsultantCardLocation : AbstractLocation	{
+	public class ConsultantCardLocation : AbstractLocation	{
 		public ConsultantCard Card { get; set; }
 
 		public ConsultantCardLocation() {
