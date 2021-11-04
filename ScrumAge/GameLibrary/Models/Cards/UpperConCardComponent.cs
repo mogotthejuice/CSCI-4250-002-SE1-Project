@@ -8,7 +8,7 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models 
 {
-    public enum UpperEnum
+    public enum UpperConCardComponents
     {
         DICE_ROLL,
         RESOURCE,
