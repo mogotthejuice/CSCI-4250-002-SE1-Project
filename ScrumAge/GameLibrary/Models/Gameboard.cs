@@ -2,6 +2,7 @@
 using GameLibrary.Models.Locations;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,10 +59,13 @@ namespace GameLibrary.Models {
 
         public void InitializePlayers(string names) {
             Players = new Queue<Player>();
-            string []playerNames = names.Split(";");
+            string[] playerNames = names.Split(";");
+
+            //Added assiging colors to each player
+            List<Color> colorList = new List<Color>() { Color.Yellow, Color.Green, Color.Red, Color.Blue };
 
             for (int i = 0; i < playerNames.Length - 1; i++) {
-                Players.Enqueue(new Player(i + 1, playerNames[i]));
+                Players.Enqueue(new Player(i + 1, colorList[i], playerNames[i]));
             }
         }
 

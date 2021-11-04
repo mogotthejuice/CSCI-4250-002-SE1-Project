@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,25 @@ namespace GameLibrary.Models {
         public int Number { get; set; }
         public string Name { get; set; }
         public int Score { get; set; }
+        private Color figColor;
+        public string FigColor 
+        { 
+          get
+          {
+                return figColor.Name;
+          }
+          set
+          {
+                
+          }
+            
+        }
         public ResourceBoard Board { get; private set; }
         
-        public Player(int number, string name = "Player") {
+        public Player(int number, Color color, string name = "Player") {
             Number = number;
             Name = name;
+            figColor = color;
             Board = new ResourceBoard();
         }
     }

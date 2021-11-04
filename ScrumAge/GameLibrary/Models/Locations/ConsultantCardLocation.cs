@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations
 {
-	class ConsultantCardLocation : AbstractLocation	{
+	public class ConsultantCardLocation : AbstractLocation	{
 		public ConsultantCard Card { get; set; }
 
 		public ConsultantCardLocation() {
-			Name = "ConsultantCard";
+			Name = "Consultant Card";
 			numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
 			NumDeveloperSpaces = 1;
 		}

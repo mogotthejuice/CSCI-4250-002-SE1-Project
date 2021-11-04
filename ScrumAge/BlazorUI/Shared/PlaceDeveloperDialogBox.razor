@@ -1,0 +1,57 @@
+﻿@namespace GameboardComponents
+@using GameLibrary.Services;
+@using GameLibrary.Interfaces;
+
+<div takeactionarea>
+    <div takeactiondialog>
+        <p>How many developers would you like to place at @Location.Name?</p>
+        <p>Current count: @numDevelopers</p>
+        <button class="btn btn-primary" @onclick="IncrementCount">+1</button>
+        <button class="btn btn-primary" @onclick="DecrementCount">-1</button>
+        <button class="btn btn-primary" @onclick="PlaceDevelopers">Place!</button>
+    </div>
+</div>
+
+<style>
+    div[takeactionarea] {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        background-color: transparent;
+        z-index: 5;
+    }
+
+    div[takeactiondialog] {
+        height: 200px;
+        width: 400px;
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: darkseagreen;
+        z-index: 4;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public ILocation Location { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnPlaceDeveloper { get; set; }
+
+    private int numDevelopers = 0;
+
+    private void IncrementCount() {
+        numDevelopers++;
+    }
+    private void DecrementCount() {
+        numDevelopers--;
+    }
+    public EventCallback<bool> ClickChanged { get; set; }
+
+
+    private async Task PlaceDevelopers() {
+        GameController.PlaceDevelopers(numDevelopers, Location);
+        await OnPlaceDeveloper.InvokeAsync(false);
+    }
+}

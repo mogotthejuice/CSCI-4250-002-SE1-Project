@@ -1,19 +1,23 @@
 ﻿@namespace GameboardComponents
 @using GameLibrary.Models.Locations
+@using GameLibrary.Models
 @using GameLibrary.Interfaces
 @using static GameLibrary.Services.GameController
 
 <div>
     <button @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
         @if (IsOverButton == false) {
-        <p>@Location.Name</p>
+            <p front-title>@Location.Name</p>
         }
         else if (IsOverButton == true) {
-        <p>Spaces left: @Location.SpacesLeft</p>
-            if(Location is ResourceLocation){
-                ResourceLocation loc = (ResourceLocation)Location;
-        <p>Resource: @loc.Resource</p>
-            }
+            <p back-title>@Location.Name</p>
+            <p back-details>
+                @if (Location != Gameboard.GetInstance().GetLocation("Overtime")) {
+                    @GetSpaces() <br>
+               }
+
+                @GetResource()
+            </p>
         }
     </button>
 </div>
@@ -21,9 +25,25 @@
 <style>
     button {
         width: 175px;
+        height: 135px;
         border: none;
         display: inline-block;
         transition-duration: 0.4s;
+    }
+    p[front-title] {
+        font-size: larger;
+        font-weight: bolder;
+    }
+    p[back-title] {
+        height: 20%;
+        z-index: 1;
+        font-size: medium;
+        font-weight: bolder;
+    }
+    p[back-details] {
+        height: 85%;
+        font-size: small;
+        z-index: 2;
     }
 </style>
 
@@ -35,7 +55,7 @@
     public ILocation Location { get; set; }
 
     [Parameter]
-    public EventCallback<MouseEventArgs> LocationClick {get; set;}
+    public EventCallback<MouseEventArgs> LocationClick { get; set; }
 
     public void MouseHover() {
         IsOverButton = true;
@@ -43,5 +63,48 @@
 
     public void MouseExit() {
         IsOverButton = false;
+    }
+
+    public string GetSpaces() {
+        string details = string.Empty;
+
+
+        if (Location != Gameboard.GetInstance().GetLocation("Overtime")) {
+            details += $"Spaces Left:  {Location.SpacesLeft}";
+        }
+
+
+        return details;
+    }
+
+    public string GetResource() {
+        string details = string.Empty;
+
+        if (Location is ResourceLocation) {
+            ResourceLocation loc = (ResourceLocation)Location;
+            details += $"Resource:     {loc.Resource}";
+        }
+        else if (Location is InvestmentField) {
+            InvestmentField loc = (InvestmentField)Location;
+            details += $"Resource:     Bitcoin Investment Level";
+        }
+        else if (Location is TrainingCenter) {
+            TrainingCenter loc = (TrainingCenter)Location;
+            details += $"Resource:     Add a Developer";
+        }
+        else if (Location is NerdLocation) {
+            NerdLocation loc = (NerdLocation)Location;
+            details += $"Resource:     Overclock Upgrade";
+        }
+        else if (Location is ConsultantCardLocation) {
+            ConsultantCardLocation loc = (ConsultantCardLocation)Location;
+            details += $"Resource:     insert cons card details";
+        }
+        else if (Location is LicenseTileLocation) {
+            LicenseTileLocation loc = (LicenseTileLocation)Location;
+            details += $"Resource:     insert lic tile details";
+        }
+
+        return details;
     }
 }

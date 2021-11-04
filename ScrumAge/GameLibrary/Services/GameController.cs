@@ -92,6 +92,41 @@ namespace GameLibrary.Services {
                 gameboard.Round = GameRound.PAY_DEVELOPERS;
             }
         }
+        public static void TakeLocationAction(ILocation location, int overlockAddition) {
+            Player player = Gameboard.GetInstance().PlayersInRound.Peek();
+            int numberofDevelopers = location.GetNumPlayerDevelopers(player);
+
+            ResourceLocation loc = (ResourceLocation)location;
+
+            try {
+                // check that the player can take action at the given location
+                if (numberofDevelopers == 0) {
+                    throw new ArgumentException($"Player does not have any developers at {loc.Name}");
+                }
+                loc.TakeAction(ref player, overlockAddition);
+            }
+            catch (Exception e) {
+                Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
+                return;
+            }
+
+            Gameboard gameboard = Gameboard.GetInstance();
+            // move to next player if all developers have been used
+            if (player.Board.NumDevelopersUnplaced == player.Board.NumDevelopersOwned) {
+                gameboard.CyclePlayersInRound();
+            }
+
+            int totalDevsUnplaced = 0, totalDevsOwned = 0;
+            // move to next round if all player developers have been used
+            foreach (var p in gameboard.Players) {
+                totalDevsOwned += p.Board.NumDevelopersOwned;
+                totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
+            }
+            if (totalDevsOwned == totalDevsUnplaced) {
+                gameboard.Round = GameRound.TALLY_SCORE;
+            }
+        }
+
 
         /// <summary>
         /// Check user input for exceptions relating player or location attributes.

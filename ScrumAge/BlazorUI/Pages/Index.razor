@@ -3,6 +3,7 @@
 @inject IJSRuntime JSRuntime
 @using static GameLibrary.Services.GameController
 @using GameLibrary.Services
+@using System.Drawing
 
 <h1>SCRUM AGE</h1>
 
@@ -21,17 +22,41 @@
         #if DEBUG
         var playersPro = "2";
         #endif
+
+       
+
+
+
+
         int playerCount = Int32.Parse(playersPro);
+        
+        while(playerCount > 4)
+        {
+            playersPro = await JSRuntime.InvokeAsync<string>("prompt", "Player count must be less than four. Enter a player count less than four");
+            playerCount = Int32.Parse(playersPro);
+        }
+
+
+
+        
+        
+        
         string playerNames = string.Empty;
 
         #if !DEBUG
-        //for loop establishing player names
+        
+        //for loop establishing player names and assigning colors
         for(int i = 0; i < playerCount; i++ )
         {
             string name = await JSRuntime.InvokeAsync<string>("prompt", "Player Name: ");
             playerNames += name + ";";
+
         }
         #endif
+
+
+        
+
 
         #if DEBUG
         playerNames = "seth;drew;";

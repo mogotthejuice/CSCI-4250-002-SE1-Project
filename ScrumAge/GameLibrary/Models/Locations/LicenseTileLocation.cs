@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Locations
 {
-	class LicenseTileLocation : AbstractLocation
+	public class LicenseTileLocation : AbstractLocation
 	{
 		public LicenseTile Tile { get; set; }
 
