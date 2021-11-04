@@ -1,0 +1,92 @@
+﻿@namespace GameboardComponents
+@using GameLibrary.Services;
+@using GameLibrary.Interfaces;
+@using GameLibrary.Models.Locations
+
+<div takeactionarea>
+    <div takeactiondialog>
+
+        @if (Location is OvertimeLocation || Location is ResourceLocation) {
+            <p>At @Location.Name, Would you like to add Overclocks? (@TotalOverclock)</p>
+            @foreach (Overclock overclock in Gameboard.GetInstance().CurrentPlayer.Board.Overclocks) {
+                <input type="checkbox"
+                       @onchange="async eventArgs => { await OverclockSelect(overclock, eventArgs.Value); }"
+                       tabindex="" />
+                @overclock.Level<br />
+            }
+            <button @onclick="TakeLocationActionwithOverclock">Do it!!</button>
+        }
+        else {
+            <p>At @Location.Name, Take action?</p>
+            <button @onclick="TakeLocationAction">Do it!!</button>
+        }
+
+    </div>
+</div>
+
+<style>
+    div[takeactionarea] {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        background-color: transparent;
+        z-index: 5;
+    }
+
+    div[takeactiondialog] {
+        height: 200px;
+        width: 400px;
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: darkseagreen;
+        z-index: 4;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public ILocation Location { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnPlaceDeveloper { get; set; }
+    public EventCallback<bool> ClickChanged { get; set; }
+    List<int> OverclockIndexes { get; set; }
+    public int TotalOverclock { get; set; }
+
+
+
+    protected override void OnInitialized() {
+        OverclockIndexes = new List<int>();
+        TotalOverclock = 0;
+    }
+
+    private async Task OverclockSelect(Overclock overclock, object value) {
+        int index = Gameboard.GetInstance().CurrentPlayer.Board.GetOverclockIndex(overclock);
+        if ((bool)value == true) {
+            TotalOverclock += overclock.Level;
+            OverclockIndexes.Add(index);
+        }
+        else {
+            TotalOverclock -= overclock.Level;
+            OverclockIndexes.Remove(index);
+        }
+    }
+
+    private async Task TakeLocationActionwithOverclock() {
+        // call other method sig
+        GameController.TakeLocationAction(Location, TotalOverclock);
+
+        foreach (var index in OverclockIndexes) {
+            Gameboard.GetInstance().CurrentPlayer.Board.Overclocks.RemoveAt(index);
+        }
+
+        await OnPlaceDeveloper.InvokeAsync(false);
+    }
+
+    private async Task TakeLocationAction() {
+        GameController.TakeLocationAction(Location);
+
+        await OnPlaceDeveloper.InvokeAsync(false);
+    }
+}

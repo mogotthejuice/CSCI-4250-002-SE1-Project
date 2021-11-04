@@ -14,9 +14,21 @@ namespace GameLibrary.Models.Locations {
         }
 
         public override void TakeAction(ref Player player) {
-            int diceRoll = GameFunctions.DiceRoll();
+            int diceRoll = GameFunctions.DiceRoll(numPlayerDevelopers[player.Number - 1]);
             int numberOfDevs = numPlayerDevelopers[player.Number - 1];
             
+            int amountToAdd = diceRoll * numberOfDevs / Divisor;
+
+            int currentCount;
+            player.Board.NumResources.TryGetValue(Resource, out currentCount);
+            player.Board.NumResources[Resource] = currentCount + amountToAdd;
+            ResetPlayerDevelopers(player);
+            Gameboard.GetInstance().AddToGameLog($"{player.Name} has gained {amountToAdd} {Resource}.");
+        }
+        public void TakeAction(ref Player player, int overclockAddition) {
+            int diceRoll = GameFunctions.DiceRoll(numPlayerDevelopers[player.Number - 1],overclockAddition);
+            int numberOfDevs = numPlayerDevelopers[player.Number - 1];
+
             int amountToAdd = diceRoll * numberOfDevs / Divisor;
 
             int currentCount;

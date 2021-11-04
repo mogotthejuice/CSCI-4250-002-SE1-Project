@@ -43,6 +43,14 @@ namespace GameLibrary.Models {
             Overclocks = new List<Overclock>();
         }
 
+        public int GetOverclockIndex(Overclock overclock) {
+            int index;
+
+            index = Overclocks.IndexOf(overclock);
+
+            return index;
+        }
+
         public int GetNumResource(Resources resource) {
             if (resource == Resources.Overclock)
                 throw new ArgumentException("Cannot get number of overclocks. Use overclock-specific methods.");

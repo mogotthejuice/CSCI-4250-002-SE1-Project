@@ -10,92 +10,100 @@
 
 <h1>@message</h1>
 
+@if (ButtonClicked == true && Game.Round == GameRound.PLACE_FIGURES) {
+    <PlaceDeveloperDialogBox Location="ClickedLocation" OnPlaceDeveloper="ButtonClickedChanged" />
+}
+else if (ButtonClicked == true && Game.Round == GameRound.TAKE_ACTIONS) {
+    <TakeActionDialogBox Location="ClickedLocation" OnPlaceDeveloper="ButtonClickedChanged" />
+}
+else {
+    <table>
 
-<table>
+        <!-- #region Location Buttons -->
 
-    <!-- #region Location Buttons -->
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[1] LocationClick="@(e => LocationClick(e, Game.Locations[1]))" />
+            </th>
+        </tr>
 
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[1] LocationClick="@(e => LocationClick(e, Game.Locations[1]))" />
-        </th>
-    </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[5] LocationClick="@(e => LocationClick(e, Game.Locations[5]))" />
+            </th>
+            <th></th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[2] LocationClick="@(e => LocationClick(e, Game.Locations[2]))" />
+            </th>
+        </tr>
 
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[5] LocationClick="@(e => LocationClick(e, Game.Locations[5]))" />
-        </th>
-        <th></th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[2] LocationClick="@(e => LocationClick(e, Game.Locations[2]))" />
-        </th>
-    </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[6] LocationClick="@(e => LocationClick(e, Game.Locations[6]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[7] LocationClick="@(e => LocationClick(e, Game.Locations[7]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[3] LocationClick="@(e => LocationClick(e, Game.Locations[3]))" />
+            </th>
+        </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
+            </th>
+            <th></th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[8] LocationClick="@(e => LocationClick(e, Game.Locations[8]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[9] LocationClick="@(e => LocationClick(e, Game.Locations[9]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[10] LocationClick="@(e => LocationClick(e, Game.Locations[10]))" />
+            </th>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[11] LocationClick="@(e => LocationClick(e, Game.Locations[11]))" />
+            </th>
+        </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[13] LocationClick="@(e => LocationClick(e, Game.Locations[13]))" />
+            </th>
+        </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[14] LocationClick="@(e => LocationClick(e, Game.Locations[14]))" />
+            </th>
+        </tr>
+        <tr>
+            <th class="padColOne">
+                <LocationButton Location=@Game.Locations[15] LocationClick="@(e => LocationClick(e, Game.Locations[15]))" />
+            </th>
+        </tr>
 
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[6] LocationClick="@(e => LocationClick(e, Game.Locations[6]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[7] LocationClick="@(e => LocationClick(e, Game.Locations[7]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[3] LocationClick="@(e => LocationClick(e, Game.Locations[3]))" />
-        </th>
-    </tr>
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
-        </th>
-        <th></th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[8] LocationClick="@(e => LocationClick(e, Game.Locations[8]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[9] LocationClick="@(e => LocationClick(e, Game.Locations[9]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[10] LocationClick="@(e => LocationClick(e, Game.Locations[10]))" />
-        </th>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[11] LocationClick="@(e => LocationClick(e, Game.Locations[11]))" />
-        </th>
-    </tr>
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[13] LocationClick="@(e => LocationClick(e, Game.Locations[13]))" />
-        </th>
-    </tr>
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[14] LocationClick="@(e => LocationClick(e, Game.Locations[14]))" />
-        </th>
-    </tr>
-    <tr>
-        <th class="padColOne">
-            <LocationButton Location=@Game.Locations[15] LocationClick="@(e => LocationClick(e, Game.Locations[15]))" />
-        </th>
-    </tr>
+        <!-- #endregion -->
+        <!-- #region Player Resource Board -->
 
-    <!-- #endregion -->
+        <tr>
+            <th class="padColOne">
+                <h3 style="display: block">Game Round: @Game.Round</h3>
+                <ResourceBoardComponent _Player="Game.PlayersInRound.Peek()" />
+            </th>
+        </tr>
 
-    <!-- #region Player Resource Board -->
+        <!-- #endregion -->
 
-    <tr>
-        <th class="padColOne">
-            <h3 style="display: block">Game Round: @Game.Round</h3>
-            <ResourceBoardComponent _Player="Game.PlayersInRound.Peek()" />
-        </th>
-    </tr>
+    </table>
+}
 
-    <!-- #endregion -->
 
-</table>
 
 <!-- #region Code-Behind -->
 
@@ -103,60 +111,35 @@
 {
     [Parameter]
     public string playerNames { get; set; }
+
     public Gameboard Game { get; set; }
+
+    public bool ButtonClicked { get; set; }
+
+    public ILocation ClickedLocation { get; set; }
 
     private string message = "";
 
     protected override void OnInitialized() {
         Game = InitializeGameboard(playerNames);
         message = GameLog.GetInstance().CurrentMessage;
+        ButtonClicked = false;
     }
 
     private async Task LocationClick(MouseEventArgs e, ILocation location) {
-        //Round divided into three phases and we need to check which phase we are in
-        switch (Game.Round) {
-            case GameRound.PLACE_FIGURES:
-                await PlaceDevelopersOnLocation(location);
-                break;
-            case GameRound.TAKE_ACTIONS:
-                TakeActionOnLocation(location);
-                break;
-            default: // GameRound.TALLY_SCORE not implemented so we go back to round 1
-                Game.Round = GameRound.PLACE_FIGURES;
-                break;
-        }
-    }
-
-    private async Task PlaceDevelopersOnLocation(ILocation location) {
-        int numDevelopersPlaced = 0;
-#if !DEBUG
-        bool notInput = true;
-        while (notInput) {
-            try {
-                var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
-                numDevelopersPlaced = Int32.Parse(temp);
-                notInput = false;
-            }
-            catch (Exception f) {
-                // Player hit cancel or didn't input an integer
-            }
-        }
-#endif
-
-#if DEBUG
-        numDevelopersPlaced = 2;
-#endif
-
-        PlaceDevelopers(numDevelopersPlaced, location);
-        message = GameLog.GetInstance().CurrentMessage;
-
+        ButtonClicked = true;
+        ClickedLocation = location;
         this.StateHasChanged();
+
+        if (Game.Round == GameRound.TALLY_SCORE) {
+            Game.Round = GameRound.PLACE_FIGURES;
+        }
+        
     }
 
-    private void TakeActionOnLocation(ILocation location) {
-        TakeLocationAction(location);
+    protected async Task ButtonClickedChanged() {
+        ButtonClicked = false;
         message = GameLog.GetInstance().CurrentMessage;
-
     }
 }
 
