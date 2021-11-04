@@ -89,7 +89,7 @@ namespace GameLibrary.Services {
                 totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
             }
             if (totalDevsOwned == totalDevsUnplaced) {
-                gameboard.Round = GameRound.TALLY_SCORE;
+                gameboard.Round = GameRound.PAY_DEVELOPERS;
             }
         }
         public static void TakeLocationAction(ILocation location, int overlockAddition) {
