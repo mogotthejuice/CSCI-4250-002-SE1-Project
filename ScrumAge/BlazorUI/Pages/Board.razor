@@ -23,7 +23,7 @@ else {
 
         <tr>
             <th class="padColOne">
-                <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
+                     <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
             </th>
             <th class="padColOne">
                 <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
@@ -144,3 +144,16 @@ else {
 }
 
 <!-- #endregion -->
+
+<style>
+
+#wrapperBox
+{
+    width: 300px;
+    height: 150px;
+    background: red;
+    display: inline-block;
+}
+
+
+</style>
