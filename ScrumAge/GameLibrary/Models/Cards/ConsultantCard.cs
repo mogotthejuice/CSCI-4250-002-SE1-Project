@@ -8,36 +8,13 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class ConsultantCard {
-        // TODO: Remove all attributes/properties except Upper and Lower.
-        public int diceRollNumber;
-        public int cardResources;
-
-        public int foodTokens;
-        public int victoryPoints ;
-        public int diceRollResources;
-        public string toolTiles ;
-        public string agriculturalSpaces;
-        public int civCard;
-        public int FarmerNumber ;
-        public int Marker ;
-        public int ToolMakers ;
-        public int ToolTiles ;
-        public int Builders ;
-        public int BuildingTiles ;
-        public int Shamans;
-        public int BoardFigures;  
-
-        // TODO: Fix both of these properties, declare like:
-        //       public UpperConCard Upper { get; private set; }
-        public Upper UpperConCard  { get; private set; }
-        public Lower LowerConCard  { get; private set; }  
-
-        // TODO: Make constructor parameterized e.g. ConsultantCard(UpperConCard upper, LowerConCard lower)
-        // and assign Upper and Lower properties to passed values e.g. Upper = upper;
-        public ConsultantCard() 
+        public UpperConCard Upper   { get; private set; }
+        public LowerConCard Lower  { get; private set; }  
+        
+        public ConsultantCard(UpperConCard upper,LowerConCard  lower ) 
         {
-            UpperConCard Upper = new UpperConCard(diceRollNumber,cardResources, foodTokens,victoryPoints,diceRollResources,toolTiles, agriculturalSpaces,civCard);
-            LowerConCard  Lower = new LowerConCard(FarmerNumber,Marker,ToolMakers, ToolTiles,Builders,BuildingTiles,Shamans, BoardFigures);
+            Upper = upper;
+            Lower  =  lower;
         
         }
     }
