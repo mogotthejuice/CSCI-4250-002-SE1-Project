@@ -8,7 +8,7 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models 
 {
-    public class LowerConCard{
+    public interface ILowerConCard{
 
     }  
 }
