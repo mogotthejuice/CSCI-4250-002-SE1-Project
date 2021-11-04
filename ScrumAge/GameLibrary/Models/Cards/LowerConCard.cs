@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 using GameLibrary.Models;
 
-namespace GameLibrary.Models {
-    public class LowerConCard {
+namespace GameLibrary.Models 
+{
+    public interface ILowerConCard{
 
-    }
+    }  
 }
