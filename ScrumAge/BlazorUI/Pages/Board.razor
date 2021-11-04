@@ -4,6 +4,7 @@
 @using static GameLibrary.Services.GameController
 @using GameLibrary.Interfaces
 @using GameLibrary.Models
+@using GameLibrary.Services
 @using GameboardComponents
 
 
@@ -129,7 +130,6 @@
 
     private async Task PlaceDevelopersOnLocation(ILocation location) {
         int numDevelopersPlaced = 0;
-#if !DEBUG
         bool notInput = true;
         while (notInput) {
             try {
@@ -137,15 +137,10 @@
                 numDevelopersPlaced = Int32.Parse(temp);
                 notInput = false;
             }
-            catch (Exception f) {
+            catch (Exception) {
                 // Player hit cancel or didn't input an integer
             }
         }
-#endif
-
-#if DEBUG
-        numDevelopersPlaced = 2;
-#endif
 
         PlaceDevelopers(numDevelopersPlaced, location);
         message = GameLog.GetInstance().CurrentMessage;
@@ -153,10 +148,34 @@
         this.StateHasChanged();
     }
 
-    private void TakeActionOnLocation(ILocation location) {
+    private void TakeActionOnLocation(ILocation location)
+    {
         TakeLocationAction(location);
         message = GameLog.GetInstance().CurrentMessage;
+        if (Game.Round == GameRound.PAY_DEVELOPERS)
+        {
+            PayDevelopers();
+        }
+    }
 
+    private void PayDevelopers()
+    {
+        Dictionary<int, int> playerNumberToNumDevelopersLeft = PayDevelopersHandler.PayDevelopers();
+        foreach (int playerNumber in playerNumberToNumDevelopersLeft.Keys)
+        {
+            Dictionary<Resources, int> resourcesPaid = PromptForResourcesInput();
+
+            //TODO: Ensure correct amount of resources, and subtract from player
+        }
+    }
+
+    private Dictionary<Resources, int> PromptForResourcesInput()
+    {
+        Dictionary<Resources, int> numResources = new Dictionary<Resources, int>();
+
+        //TODO: Get number for each resource through jQuery Dialog
+
+        return numResources;
     }
 }
 

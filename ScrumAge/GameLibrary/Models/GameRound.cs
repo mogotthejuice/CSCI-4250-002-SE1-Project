@@ -9,6 +9,7 @@ namespace GameLibrary.Models
 	public enum GameRound {
 		PLACE_FIGURES,
 		TAKE_ACTIONS,
+		PAY_DEVELOPERS,
 		TALLY_SCORE
 	}
 }

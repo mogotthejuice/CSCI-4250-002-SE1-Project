@@ -10,6 +10,7 @@ namespace GameLibrary.Models {
     public class Player {
         public int Number { get; set; }
         public string Name { get; set; }
+        public int Score { get; set; }
         public ResourceBoard Board { get; private set; }
         
         public Player(int number, string name = "Player") {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameLibrary.Models.Locations
 {
     public class NerdLocation : AbstractLocation {
-        private const int MAX_OVERCLOCKS = 4;
+        private const int MAX_OVERCLOCKS = 3;
 
         public NerdLocation() {
             Name = "Nerd";
