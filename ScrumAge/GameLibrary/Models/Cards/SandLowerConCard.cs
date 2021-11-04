@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Cards
 {
-	public class SandLowerConCard : LowerConCard
+	public class SandLowerConCard : ILowerConCard
 	{
 		public SandConCardPerson Person { get; private set; }
 		public int NumPeople { get; private set; }

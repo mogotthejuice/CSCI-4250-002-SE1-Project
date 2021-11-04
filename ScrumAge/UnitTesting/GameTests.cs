@@ -30,20 +30,20 @@ namespace UnitTesting {
 
         [Test]
         public void DiceRoll_Test() {
-            int x = GameFunctions.DiceRoll();
+            int x = GameFunctions.DiceRoll(2);
             Assert.Multiple(() => {
-                Assert.Greater(x, 0);
+                Assert.Greater(x, 1);
                 Assert.Less(x, 13);
             });
-            
         }
+
         [TestCase(1, 1, 6)]
         [TestCase(2, 2, 12)]
         [TestCase(3, 3, 18)]
         [TestCase(4, 4, 24)]
         [TestCase(5, 5, 30)]
         public void OvertimeDiceRoll_Test(int numDevs, int expectedMin, int expectedMax) {
-            int x = GameFunctions.OvertimeDiceRoll(numDevs);
+            int x = GameFunctions.DiceRoll(numDevs);
             Assert.Multiple(() => {
                 Assert.GreaterOrEqual(x, expectedMin);
                 Assert.LessOrEqual(x, expectedMax);
@@ -145,7 +145,6 @@ namespace UnitTesting {
             GameController.PlaceDevelopers(1, game.GetLocation("Cafe"));    //player 1 should have 4 developers
             Assert.AreEqual(4, player.Board.NumDevelopersUnplaced);
 
-
             Assert.AreEqual(0, game.GetLocation("Cafe").SpacesLeft);
         }
 
@@ -159,6 +158,5 @@ namespace UnitTesting {
 
             }
         }
-    }
-    
+    }   
 }

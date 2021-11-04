@@ -11,14 +11,14 @@ namespace GameLibrary.Services {
     public static class GameFunctions {
        
 
-        public static int DiceRoll(int numberDice, int overtimeAddition) {
+        public static int DiceRoll(int numberDice, int overclockAddition) {
             int sum = 0;
             Random random = new Random();
             for (int i = 0; i < numberDice; i++) {
                 sum += random.Next(1, 6); ;
             }
 
-            sum += overtimeAddition;
+            sum += overclockAddition;
 
             return sum;
         }
