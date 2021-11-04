@@ -23,7 +23,7 @@ else {
 
         <tr>
             <th class="padColOne">
-                     <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
+                <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
             </th>
             <th class="padColOne">
                 <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
@@ -32,7 +32,6 @@ else {
                 <LocationButton Location=@Game.Locations[1] LocationClick="@(e => LocationClick(e, Game.Locations[1]))" />
             </th>
         </tr>
-
         <tr>
             <th class="padColOne">
                 <LocationButton Location=@Game.Locations[5] LocationClick="@(e => LocationClick(e, Game.Locations[5]))" />
@@ -42,7 +41,6 @@ else {
                 <LocationButton Location=@Game.Locations[2] LocationClick="@(e => LocationClick(e, Game.Locations[2]))" />
             </th>
         </tr>
-
         <tr>
             <th class="padColOne">
                 <LocationButton Location=@Game.Locations[6] LocationClick="@(e => LocationClick(e, Game.Locations[6]))" />
@@ -103,8 +101,6 @@ else {
     </table>
 }
 
-
-
 <!-- #region Code-Behind -->
 
 @code
@@ -134,7 +130,6 @@ else {
         if (Game.Round == GameRound.TALLY_SCORE) {
             Game.Round = GameRound.PLACE_FIGURES;
         }
-        
     }
 
     protected async Task ButtonClickedChanged() {
@@ -142,7 +137,6 @@ else {
         message = GameLog.GetInstance().CurrentMessage;
     }
 }
-
 <!-- #endregion -->
 
 <style>
@@ -154,6 +148,4 @@ else {
     background: red;
     display: inline-block;
 }
-
-
 </style>
