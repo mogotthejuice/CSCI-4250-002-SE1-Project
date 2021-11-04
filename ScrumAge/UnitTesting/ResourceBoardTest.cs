@@ -81,7 +81,7 @@ namespace UnitTesting {
 		[Test]
 		public void AddConsultantCard_WithValidCard_AddsCard()
 		{
-			ConsultantCard card = new ConsultantCard();
+			ConsultantCard card = new ConsultantCard(null, null);
 
 			board.AddConsultantCard(card);
 

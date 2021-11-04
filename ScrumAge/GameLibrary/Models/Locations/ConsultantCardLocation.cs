@@ -10,7 +10,7 @@ namespace GameLibrary.Models.Locations
 		public ConsultantCard Card { get; set; }
 
 		public ConsultantCardLocation() {
-			Name = "ConsultantCard";
+			Name = "Consultant Card";
 			numPlayerDevelopers = new List<int>() { 0, 0, 0, 0 };
 			NumDeveloperSpaces = 1;
 		}

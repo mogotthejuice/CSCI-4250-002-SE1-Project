@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models.Cards
 {
-	public class GreenLowerConCard : LowerConCard
+	public class GreenLowerConCard : ILowerConCard
 	{
 		public GreenConCardBackground Background { get; private set; }
 
