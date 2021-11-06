@@ -123,7 +123,7 @@ namespace GameLibrary.Services {
                 totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
             }
             if (totalDevsOwned == totalDevsUnplaced) {
-                gameboard.Round = GameRound.TALLY_SCORE;
+                gameboard.Round = GameRound.PAY_DEVELOPERS;
             }
         }
 
@@ -158,6 +158,19 @@ namespace GameLibrary.Services {
                 throw new ArgumentException("Need to place at least one developer.");
             }
             
+        }
+
+        public static void StartNewRound() {
+            Gameboard game = Gameboard.GetInstance();
+
+            game.CyclePlayers();
+            game.PlayersInRound = new Queue<Player>(game.Players);
+            game.Round = GameRound.PLACE_FIGURES;
+
+            //TODO: Slide ConCards to right
+            //TODO: Reveal new LicenseTiles
+            //TODO: Check for end of game
+            //TODO: Reset player tool tiles
         }
     }
 }
