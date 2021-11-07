@@ -1,0 +1,80 @@
+@namespace GameboardComponents
+@using BlazorUI.Pages
+@using GameLibrary.Models
+@using GameLibrary.Services;
+@using GameLibrary.Interfaces;
+
+<div resourceselectorarea>
+    <div resourceselectordialog>
+        <p>Please select a number for each resource.</p>
+        <p>
+            &#x2615 @numResources[Resources.Coffee] &#x1F4BE @numResources[Resources.USB_Sticks]
+            &#x1F4BB @numResources[Resources.CPU_Cores] &#x26A1 @numResources[Resources.Power]
+        </p>
+        <p>
+            <button class="btn btn-primary" @onclick="() => IncrementCount(Resources.Coffee)">&#x2615 +1</button>
+            <button class="btn btn-primary" @onclick="() => IncrementCount(Resources.USB_Sticks)">&#x1F4BE +1</button>
+            <button class="btn btn-primary" @onclick="() => IncrementCount(Resources.CPU_Cores)">&#x1F4BB +1</button>
+            <button class="btn btn-primary" @onclick="() => IncrementCount(Resources.Power)">&#x26A1 +1</button>
+        </p>
+        <p>
+            <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.Coffee)">&#x2615 -1</button>
+            <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.USB_Sticks)">&#x1F4BE -1</button>
+            <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.CPU_Cores)">&#x1F4BB -1</button>
+            <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.Power)">&#x26A1 -1</button>
+        </p>
+        <button class="btn btn-primary" @onclick="Confirm">Confirm</button>
+</div>
+
+    <ResourceBoardComponent _Player="player" />
+</div>
+
+<style>
+    div[resourceselectorarea] {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        background-color: transparent;
+        z-index: 5;
+    }
+
+    div[resourceselectordialog] {
+        height: 250px;
+        width: 400px;
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: darkseagreen;
+        z-index: 4;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> OnConfirm { get; set; }
+
+    private static Gameboard game = Gameboard.GetInstance();
+    private static GameLog log = GameLog.GetInstance();
+    private static Player player = game.CurrentPlayer;
+
+    private Dictionary<Resources, int> numResources = new Dictionary<Resources, int>() {
+        { Resources.Coffee, 0 }, { Resources.USB_Sticks, 0 },
+        { Resources.CPU_Cores, 0 }, { Resources.Power, 0 }
+    };
+
+    private void IncrementCount(Resources resource) {
+        if (numResources[resource] < player.Board.GetNumResource(resource))
+            numResources[resource]++;
+    }
+
+    private void DecrementCount(Resources resource) {
+        if (numResources[resource] > 0)
+            numResources[resource]--;
+    }
+
+    private async Task Confirm() {
+        Board.NumResources = numResources;
+        await OnConfirm.InvokeAsync(false);
+    }
+}

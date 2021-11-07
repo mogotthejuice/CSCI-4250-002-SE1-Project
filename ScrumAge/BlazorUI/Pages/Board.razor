@@ -4,17 +4,30 @@
 @using static GameLibrary.Services.GameController
 @using GameLibrary.Interfaces
 @using GameLibrary.Models
+@using GameLibrary.Services
 @using GameboardComponents
 
 
 
 <h1>@message</h1>
 
-@if (ButtonClicked == true && Game.Round == GameRound.PLACE_FIGURES) {
-    <PlaceDeveloperDialogBox Location="ClickedLocation" OnPlaceDeveloper="ButtonClickedChanged" />
+@if (ShowDialog) {
+    @switch(Game.Round) {
+        case GameRound.PLACE_FIGURES:
+            <PlaceDeveloperDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
+            break;
+        case GameRound.TAKE_ACTIONS:
+            <TakeActionDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
+            break;
+        case GameRound.PAY_DEVELOPERS:
+            <ResourceSelectorDialogBox OnConfirm="ShowDialogChanged" />
+            break;
+        default:
+            break;
+    }
 }
-else if (ButtonClicked == true && Game.Round == GameRound.TAKE_ACTIONS) {
-    <TakeActionDialogBox Location="ClickedLocation" OnPlaceDeveloper="ButtonClickedChanged" />
+else if (Game.Round == GameRound.PAY_DEVELOPERS) {
+    CheckPayDevelopers();
 }
 else {
     <table>
@@ -92,7 +105,7 @@ else {
         <tr>
             <th class="padColOne">
                 <h3 style="display: block">Game Round: @Game.Round</h3>
-                <ResourceBoardComponent _Player="Game.PlayersInRound.Peek()" />
+                <ResourceBoardComponent _Player="Game.CurrentPlayer" />
             </th>
         </tr>
 
@@ -109,21 +122,27 @@ else {
     public string playerNames { get; set; }
 
     public Gameboard Game { get; set; }
+    public GameLog Log { get; set; }
 
-    public bool ButtonClicked { get; set; }
+    public bool ShowDialog { get; set; }
 
     public ILocation ClickedLocation { get; set; }
+
+    public Dictionary<int, int> PlayerNumberToNumDevelopersLeft { get; set; }
+    public static Dictionary<Resources, int> NumResources { get; set; }
 
     private string message = "";
 
     protected override void OnInitialized() {
         Game = InitializeGameboard(playerNames);
-        message = GameLog.GetInstance().CurrentMessage;
-        ButtonClicked = false;
+        Log = GameLog.GetInstance();
+        UpdateMessage();
+        ShowDialog = false;
+        NumResources = null;
     }
 
     private async Task LocationClick(MouseEventArgs e, ILocation location) {
-        ButtonClicked = true;
+        ShowDialog = true;
         ClickedLocation = location;
         this.StateHasChanged();
 
@@ -132,9 +151,71 @@ else {
         }
     }
 
-    protected async Task ButtonClickedChanged() {
-        ButtonClicked = false;
-        message = GameLog.GetInstance().CurrentMessage;
+    private async Task PlaceDevelopersOnLocation(ILocation location) {
+        int numDevelopersPlaced = 0;
+        bool notInput = true;
+        while (notInput) {
+            try {
+                var temp = await JSRuntime.InvokeAsync<string>("prompt", "How many players would you like to place? ");
+                numDevelopersPlaced = Int32.Parse(temp);
+                notInput = false;
+            }
+            catch (Exception) {
+                // Player hit cancel or didn't input an integer
+            }
+        }
+
+        PlaceDevelopers(numDevelopersPlaced, location);
+        UpdateMessage();
+
+        this.StateHasChanged();
+    }
+
+    private void TakeActionOnLocation(ILocation location) {
+        TakeLocationAction(location);
+        UpdateMessage();
+    }
+
+    private void StartPayDevelopers() {
+        PlayerNumberToNumDevelopersLeft = PayDevelopersHandler.AutoPayDevelopers();
+        if (PlayerNumberToNumDevelopersLeft.Count > 0) {
+            Log.AddMessage($"{Game.CurrentPlayer.Name} must pay {PlayerNumberToNumDevelopersLeft[Game.CurrentPlayer.Number]} developers with resources.");
+            ShowDialog = true;
+        }
+        else {
+            GameController.StartNewRound();
+        }
+
+        UpdateMessage();
+        this.StateHasChanged();
+    }
+
+    private void CheckPayDevelopers() {
+        // Pay developers round has just started. Call StartPayDevelopers and exit.
+        if (NumResources == null) {
+            StartPayDevelopers();
+            return;
+        }
+
+        if (PayDevelopersHandler.CheckResourcePayment(PlayerNumberToNumDevelopersLeft, NumResources)) {
+            ShowDialog = true;
+            UpdateMessage();
+        }
+
+        NumResources = null;
+        this.StateHasChanged();
+    }
+
+    public void UpdateMessage(string _message = null) {
+        if (_message is null)
+            _message = Log.CurrentMessage;
+
+        message = _message;
+    }
+
+    protected async Task ShowDialogChanged() {
+        ShowDialog = false;
+        UpdateMessage();
     }
 }
 <!-- #endregion -->
