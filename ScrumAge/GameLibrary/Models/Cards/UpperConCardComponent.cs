@@ -10,7 +10,7 @@ namespace GameLibrary.Models
 {
     public enum UpperConCardComponents
     {
-        DICE_ROLL,
+        MONEY,
         RESOURCE,
         RESOURCE_DICE_ROLL,
         VICTORY_POINTS,
@@ -18,7 +18,6 @@ namespace GameLibrary.Models
         BITCOIN_INVESTMENT,
         CONSULTANT_CARD,
         ONE_USE_OVERCLOCK,
-        EXTRA_TOOL_TILE,
-        AGRICULTURE_SPACE
+        ANY_2_RESOURCES
     }
 }
