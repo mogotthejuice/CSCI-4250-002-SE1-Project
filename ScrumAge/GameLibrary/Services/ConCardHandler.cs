@@ -34,6 +34,8 @@ namespace GameLibrary.Services
                 case UpperConCardComponents.ANY_2_RESOURCES:
                     Any2Resources();
                     break;
+                default:
+                    break;
             }
         }
 
