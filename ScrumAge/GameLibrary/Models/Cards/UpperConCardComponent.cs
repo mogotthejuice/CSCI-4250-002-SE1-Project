@@ -10,7 +10,6 @@ namespace GameLibrary.Models
 {
     public enum UpperConCardComponents
     {
-        MONEY,
         RESOURCE,
         RESOURCE_DICE_ROLL,
         VICTORY_POINTS,
