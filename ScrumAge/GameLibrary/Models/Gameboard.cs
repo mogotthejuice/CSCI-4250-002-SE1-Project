@@ -19,9 +19,17 @@ namespace GameLibrary.Models {
         /// Queue of Players; First player in queue is the starting player for the round.
         /// </summary>
         public Queue<Player> Players { get; set; }
+        /// <summary>
+        /// The pile of Consultant Cards
+        /// </summary>
+        public Queue<ConsultantCard> ConCards { get; set; }
+        /// <summary>
+        /// The pile of License Tiles
+        /// </summary>
+        public Queue<LicenseTile> LicenseTiles { get; set; }
 
-		/// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
-		public Queue<Player> PlayersInRound { get; set; }
+        /// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
+        public Queue<Player> PlayersInRound { get; set; }
         public Player CurrentPlayer { get {
                 return PlayersInRound.Peek();        
             } 

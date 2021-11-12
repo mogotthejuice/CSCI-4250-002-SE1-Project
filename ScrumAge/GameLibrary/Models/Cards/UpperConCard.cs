@@ -8,61 +8,15 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class UpperConCard {
-        public List<UpperConCardComponents> Components { get; private set;}
-        public int Number {get; private set;}
+        public UpperConCardComponents Components { get; private set; }
+        public int Number { get; private set; }
+        public Resources Resource { get; private set; }
 
-        public UpperConCard(List<UpperConCardComponents> component, int number)
+        public UpperConCard(UpperConCardComponents component, int number, Resources resource = Resources.No_Resource)
         {
             Components = component;
             Number = number;
-        }
-
-        public void MethodPicker() {
-            foreach (var c in Components)
-            {
-                switch (c) {
-                    //execute Method based on component
-                }
-            }
-        }
-
-        //respective behaviors for the components
-        //immediate reward cards
-        public void MoneyCard() {
-
-        }
-
-        public void ResourceCard() {
-
-        }
-
-        public void ResourceDiceRollCard() {
-
-        }
-
-        public void VictoryPointsCard() {
-
-        }
-
-        public void OverclockCard() {
-
-        }
-
-        public void BitcoinCard() {
-
-        }
-
-        public void ConConCard() {
-
-        }
-
-        //later reward cards
-        public void OneUseOverclockCard() {
-
-        }
-
-        public void Any2Resources() {
-            
+            Resource = resource;
         }
     }
 }

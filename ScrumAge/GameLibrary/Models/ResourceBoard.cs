@@ -22,8 +22,8 @@ namespace GameLibrary.Models {
         // Holds number of resource for Money, Coffee, Usb sticks, CPU Cores, and Power
         public Dictionary<Resources, int> NumResources { get; set; }
         public List<Overclock> Overclocks { get; private set; }
-        public List<ConsultantCard> ConsultantCards;
-        public List<LicenseTile> LicenseTiles;
+        public List<ConsultantCard> ConsultantCards { get; private set; }
+        public List<LicenseTile> LicenseTiles { get; private set; }
 
         public ResourceBoard() {
             NumDevelopersOwned = START_NUM_DEVELOPERS_OWNED;
@@ -32,7 +32,8 @@ namespace GameLibrary.Models {
 
             NumResources = new Dictionary<Resources, int>();
             Resources[] resources = { Resources.Coffee, Resources.USB_Sticks,
-                                      Resources.CPU_Cores, Resources.Power };
+                                      Resources.CPU_Cores, Resources.Power,
+                                      Resources.Victory_Points };
             foreach (Resources resource in resources) {
                 NumResources[resource] = 0;
             }
@@ -52,8 +53,8 @@ namespace GameLibrary.Models {
         }
 
         public int GetNumResource(Resources resource) {
-            if (resource == Resources.Overclock)
-                throw new ArgumentException("Cannot get number of overclocks. Use overclock-specific methods.");
+            if (resource == Resources.No_Resource)
+                throw new ArgumentException("Cannot get number of resources for given type with no resources.");
 
             return NumResources[resource];
         }
