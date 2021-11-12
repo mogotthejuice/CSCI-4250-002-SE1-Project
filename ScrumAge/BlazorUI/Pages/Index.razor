@@ -60,10 +60,8 @@
 
         #if DEBUG
         playerNames = "seth;drew;";
-        #endif 
-        //var game = GameController.InitializeGameboard(playerNames);
-        //List<Player> players = InitializePlayers(playerNames);
-        //List<ILocation> locations = InitializeLocations();
+        #endif
+
         UriHelper.NavigateTo($"board/{playerNames}");
     }
 }
