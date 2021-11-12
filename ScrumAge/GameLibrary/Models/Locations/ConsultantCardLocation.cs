@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameLibrary.Models.Locations
 {
 	public class ConsultantCardLocation : AbstractLocation	{
-		public List<ConsultantCard> Card { get; set; }
+		public ConsultantCard Card { get; set; }
 
 		public ConsultantCardLocation() {
 			Name = "Consultant Card";
