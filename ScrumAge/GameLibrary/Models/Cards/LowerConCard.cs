@@ -9,6 +9,6 @@ using GameLibrary.Models;
 namespace GameLibrary.Models 
 {
     public interface ILowerConCard{
-
+        //this section is only used for end game scoring
     }  
 }

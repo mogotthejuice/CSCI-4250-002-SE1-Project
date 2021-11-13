@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLibrary.Services;
 
 namespace GameLibrary.Models.Locations
 {
@@ -17,7 +18,10 @@ namespace GameLibrary.Models.Locations
 		}
 
 		public override void TakeAction(ref Player player) {
-			throw new NotImplementedException();
+			player.Board.AddLicenseTile(Tile);
+			Tile = null;
+			ResetPlayerDevelopers(player);
+			GameController.CheckEndOfTakeActionsRound();
 		}
 	}
 }

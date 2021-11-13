@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace GameLibrary.Models {
     public enum Resources {
-        Money, 
-        Overclock, 
+        No_Resource,
+        Money,
         Coffee, 
         USB_Sticks, 
         CPU_Cores, 
-        Power
+        Power,
+        Victory_Points
     }
 }

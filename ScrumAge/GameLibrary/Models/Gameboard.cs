@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLibrary.Models.Cards;
 
 namespace GameLibrary.Models {
     public class Gameboard {
@@ -19,9 +20,17 @@ namespace GameLibrary.Models {
         /// Queue of Players; First player in queue is the starting player for the round.
         /// </summary>
         public Queue<Player> Players { get; set; }
+        /// <summary>
+        /// The pile of Consultant Cards
+        /// </summary>
+        public Queue<ConsultantCard> ConCards { get; set; }
+        /// <summary>
+        /// The pile of License Tiles
+        /// </summary>
+        public Queue<LicenseTile> LicenseTiles { get; set; }
 
-		/// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
-		public Queue<Player> PlayersInRound { get; set; }
+        /// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
+        public Queue<Player> PlayersInRound { get; set; }
         public Player CurrentPlayer { get {
                 return PlayersInRound.Peek();        
             } 
@@ -111,7 +120,7 @@ namespace GameLibrary.Models {
             Locations.Add(new TrainingCenter());
             Locations.Add(new NerdLocation());
 			for (int i = 0; i < 4; i++) {
-                ConsultantCardLocation cardLoc = new ConsultantCardLocation();
+                ConsultantCardLocation cardLoc = new ConsultantCardLocation(cost: 4 - i);
                 cardLoc.Name = cardLoc.Name + i.ToString();
                 Locations.Add(cardLoc);
             }
@@ -120,6 +129,8 @@ namespace GameLibrary.Models {
                 tileLoc.Name = tileLoc.Name + i.ToString();
                 Locations.Add(tileLoc);
             }
+
+            TempInitializeCardsAndTiles();
         }
 
         public void CyclePlayers() {
@@ -137,6 +148,48 @@ namespace GameLibrary.Models {
         public void AddToGameLog(string message) {
             GameLog log = GameLog.GetInstance();
             log.AddMessage(message);
+        }
+
+        // Initialize cards and tiles locations with instances of cards/tiles for testing
+        private void TempInitializeCardsAndTiles() {
+            ConCards = new Queue<ConsultantCard>();
+            ConCards.Enqueue(new ConsultantCard(null, null));
+
+            ConsultantCard card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.RESOURCE, 2, Resources.Power),
+                new SandLowerConCard(SandConCardPerson.NERD, 1));
+            ((ConsultantCardLocation) GetLocation("Consultant Card0")).Card = card;
+
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ((ConsultantCardLocation) GetLocation("Consultant Card1")).Card = card;
+
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.CONSULTANT_CARD, 1),
+                new SandLowerConCard(SandConCardPerson.INVESTOR, 3));
+            ((ConsultantCardLocation) GetLocation("Consultant Card2")).Card = card;
+
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.RESOURCE_DICE_ROLL, 1, Resources.Coffee),
+                new SandLowerConCard(SandConCardPerson.THERAPIST, 1));
+            ((ConsultantCardLocation) GetLocation("Consultant Card3")).Card = card;
+
+            Dictionary<Resources, int> reqResources = new Dictionary<Resources, int>() {
+                { Resources.Coffee, 2 }, { Resources.Power, 1 } };
+            LicenseTile tile = new LicenseTile(reqResources);
+            ((LicenseTileLocation) GetLocation("License Tile0")).Tile = tile;
+
+            reqResources = new Dictionary<Resources, int>() {
+                { Resources.USB_Sticks, 2 }, { Resources.CPU_Cores, 1 } };
+            tile = new LicenseTile(reqResources);
+            ((LicenseTileLocation) GetLocation("License Tile1")).Tile = tile;
+
+            tile = new LicenseTile(4, 2);
+            ((LicenseTileLocation) GetLocation("License Tile2")).Tile = tile;
+
+            tile = new LicenseTile();
+            ((LicenseTileLocation) GetLocation("License Tile3")).Tile = tile;
         }
     }
 }

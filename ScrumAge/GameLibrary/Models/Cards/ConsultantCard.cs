@@ -12,8 +12,8 @@ namespace GameLibrary.Models {
         
         public ConsultantCard(UpperConCard upper, ILowerConCard lower) 
         {
-            Upper = upper;
-            Lower = lower;
+            Upper = upper; //either immediate or later reward 
+            Lower = lower; //either green or sand
         }
     }
 }

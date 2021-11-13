@@ -16,6 +16,12 @@ namespace GameLibrary.Models.Locations
         }
 
         public override void TakeAction(ref Player player) {
+            UpgradeTool(ref player);
+            ResetPlayerDevelopers(player);
+        }
+
+        public static void UpgradeTool(ref Player player)
+        {
             if (player.Board.Overclocks.Count < MAX_OVERCLOCKS) {
                 player.Board.Overclocks.Add(new Overclock());
                 Gameboard.GetInstance().AddToGameLog($"{player.Name} has has added a new overclock.");
@@ -36,8 +42,6 @@ namespace GameLibrary.Models.Locations
 
                 player.Board.Overclocks[0].Upgrade();
             }
-
-            ResetPlayerDevelopers(player);
         }
     }
 }

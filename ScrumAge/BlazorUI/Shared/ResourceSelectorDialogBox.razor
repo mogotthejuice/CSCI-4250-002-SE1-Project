@@ -6,6 +6,7 @@
 
 <div resourceselectorarea>
     <div resourceselectordialog>
+        <p>@Message</p>
         <p>Please select a number for each resource.</p>
         <p>
             &#x2615 @numResources[Resources.Coffee] &#x1F4BE @numResources[Resources.USB_Sticks]
@@ -40,7 +41,7 @@
     }
 
     div[resourceselectordialog] {
-        height: 250px;
+        height: 280px;
         width: 400px;
         width: 50%;
         margin: 0 auto;
@@ -51,6 +52,8 @@
 </style>
 
 @code {
+    [Parameter]
+    public string Message { get; set; } = "";
     [Parameter]
     public EventCallback<bool> OnConfirm { get; set; }
 

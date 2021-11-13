@@ -8,15 +8,15 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class UpperConCard {
-    
-    public UpperConCardComponents Component {get; private set;}
+        public UpperConCardComponents Components { get; private set; }
+        public int Number { get; private set; }
+        public Resources Resource { get; private set; }
 
-    public int Number {get; private set;}
-
-        public UpperConCard(UpperConCardComponents component, int number)
+        public UpperConCard(UpperConCardComponents component, int number, Resources resource = Resources.No_Resource)
         {
-            Component = component;
+            Components = component;
             Number = number;
+            Resource = resource;
         }
     }
 }
