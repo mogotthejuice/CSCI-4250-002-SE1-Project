@@ -15,14 +15,5 @@ namespace GameLibrary.Models {
             Upper = upper; //either immediate or later reward 
             Lower = lower; //either green or sand
         }
-
-        //the associated methods should only be called if that type of card is being used
-        public void ImmediateAction(){ 
-
-        }
-
-        public void EndGameAction() {
-
-        }
     }
 }
