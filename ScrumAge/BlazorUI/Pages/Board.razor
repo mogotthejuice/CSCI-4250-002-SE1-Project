@@ -4,6 +4,7 @@
 @using static GameLibrary.Services.GameController
 @using GameLibrary.Interfaces
 @using GameLibrary.Models
+@using GameLibrary.Models.Locations
 @using GameLibrary.Services
 @using GameboardComponents
 
@@ -17,7 +18,19 @@
             <PlaceDeveloperDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
             break;
         case GameRound.TAKE_ACTIONS:
-            <TakeActionDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
+            @if (ClickedLocation.GetNumPlayerDevelopers(Game.CurrentPlayer) > 0) {
+                @if (ClickedLocation.Name.StartsWith("License Tile") || ClickedLocation.Name.StartsWith("Consultant Card")) {
+                    <ResourceSelectorDialogBox Message="@GetCardLocationMessage()" OnConfirm="ShowDialogChanged" />
+                }
+                else {
+                    <TakeActionDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
+                }
+            }
+            else {
+                UpdateMessage("Must have developers placed on location to take action. Try again.");
+                ShowDialog = false;
+                this.StateHasChanged();
+            }
             break;
         case GameRound.PAY_DEVELOPERS:
             <ResourceSelectorDialogBox OnConfirm="ShowDialogChanged" />
@@ -25,6 +38,9 @@
         default:
             break;
     }
+}
+else if (Game.Round == GameRound.TAKE_ACTIONS && NumResources is not null) {
+    CheckCardPayment();
 }
 else if (Game.Round == GameRound.PAY_DEVELOPERS) {
     CheckPayDevelopers();
@@ -206,11 +222,79 @@ else {
         this.StateHasChanged();
     }
 
-    public void UpdateMessage(string _message = null) {
-        if (_message is null)
-            _message = Log.CurrentMessage;
+    private string GetCardLocationMessage() {
+        string _message = "";
 
-        message = _message;
+        if (ClickedLocation.Name.StartsWith('L')) {
+            // License Tile
+            LicenseTile tile = ((LicenseTileLocation) ClickedLocation).Tile;
+            switch(tile.Type) {
+                case LicenseTileType.FIXED_RESOURCES:
+                    _message = "Buy License Tile for";
+                    foreach (Resources r in tile.RequiredResources.Keys)
+                        _message += $" {tile.RequiredResources[r]} {r.ToString()},";
+
+                    _message = _message.Remove(_message.Length - 1) + '?';
+                    break;
+                case LicenseTileType.FIXED_NUM_RESOURCES:
+                    _message = $"Buy License Tile for {tile.NumResources} resources of {tile.NumResourceTypes} different types?";
+                    break;
+                case LicenseTileType.VARIABLE_NUM_RESOURCES:
+                    _message = "Buy License Tile for between 1 and 7 resources?";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            // Consultant Card
+            _message = $"Buy Consultant Card with {((ConsultantCardLocation) ClickedLocation).Cost} resources.";
+        }
+
+        return _message;
+    }
+
+    private void CheckCardPayment() {
+        Player player = Game.CurrentPlayer;
+
+        if (ClickedLocation.Name.StartsWith('C')) {
+            // Consultant Card
+            int cost = ((ConsultantCardLocation) ClickedLocation).Cost;
+            if (HelperFunctions.TotalNumResources(NumResources) == cost) {
+                // Correct payment
+                player.Board.RemoveResources(NumResources);
+                ClickedLocation.TakeAction(ref player);
+            }
+            else {
+                // Incorrect payment
+                UpdateMessage($"Must purchase consultant card with {cost} resources.");
+                ShowDialog = true;
+            }
+        }
+        else {
+            // License Tile
+            LicenseTile tile = ((LicenseTileLocation) ClickedLocation).Tile;
+            try {
+                int score = tile.GetScore(NumResources);
+                player.Score += score;
+                ClickedLocation.TakeAction(ref player);
+            }
+            catch (InvalidOperationException f) {
+                // Incorrect payment
+                UpdateMessage(f.Message);
+                ShowDialog = true;
+            }
+        }
+
+        NumResources = null;
+        this.StateHasChanged();
+    }
+
+    public void UpdateMessage(string _message = null) {
+        if (_message is not null)
+            Log.AddMessage(_message);
+
+        message = Log.CurrentMessage;
     }
 
     protected async Task ShowDialogChanged() {

@@ -48,12 +48,12 @@ namespace GameLibrary.Services
 
             if (card.Upper.Components.Equals(UpperConCardComponents.RESOURCE))
             {
-                player.NumResources.Add(card.Upper.Resource, card.Upper.Number);
+                player.NumResources[card.Upper.Resource] += card.Upper.Number;
             }
             else if (card.Upper.Components.Equals(UpperConCardComponents.RESOURCE_DICE_ROLL))
             {
                 int roll = GameFunctions.DiceRoll(2);
-                player.NumResources.Add(card.Upper.Resource, roll);
+                player.NumResources[card.Upper.Resource] += roll;
             }
         }
 

@@ -39,7 +39,7 @@ namespace GameLibrary.Services {
 					numDevelopersToPay -= player.Board.NumResources[Resources.Money];
 					player.Board.NumResources[Resources.Money] = 0;
 
-					if (player.Board.TotalNumResources() < numDevelopersToPay) {
+					if (HelperFunctions.TotalNumResources(player.Board.NumResources) < numDevelopersToPay) {
 						// Cannot pay developers with resources
 						player.Score -= SCORE_PENALTY;
 						log.AddMessage($"{player.Name} could not pay developers, and lost {SCORE_PENALTY} points.");

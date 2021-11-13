@@ -61,7 +61,7 @@ namespace GameLibrary.Services {
         }
 
         public static void TakeLocationAction(ILocation location) {
-            Player player = Gameboard.GetInstance().PlayersInRound.Peek();
+            Player player = Gameboard.GetInstance().CurrentPlayer;
             int numberofDevelopers = location.GetNumPlayerDevelopers(player);
 
             try {
@@ -76,24 +76,11 @@ namespace GameLibrary.Services {
                 return;
             }
 
-            Gameboard gameboard = Gameboard.GetInstance();
-            // move to next player if all developers have been used
-            if (player.Board.NumDevelopersUnplaced == player.Board.NumDevelopersOwned) {
-                gameboard.CyclePlayersInRound();
-            }
-
-            int totalDevsUnplaced = 0, totalDevsOwned = 0;
-            // move to next round if all player developers have been used
-            foreach (var p in gameboard.Players) {
-                totalDevsOwned += p.Board.NumDevelopersOwned;
-                totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
-            }
-            if (totalDevsOwned == totalDevsUnplaced) {
-                gameboard.Round = GameRound.PAY_DEVELOPERS;
-            }
+            CheckEndOfTakeActionsRound();
         }
+
         public static void TakeLocationAction(ILocation location, int overlockAddition) {
-            Player player = Gameboard.GetInstance().PlayersInRound.Peek();
+            Player player = Gameboard.GetInstance().CurrentPlayer;
             int numberofDevelopers = location.GetNumPlayerDevelopers(player);
 
             ResourceLocation loc = (ResourceLocation)location;
@@ -110,19 +97,28 @@ namespace GameLibrary.Services {
                 return;
             }
 
+            CheckEndOfTakeActionsRound();
+        }
+
+        public static void CheckEndOfTakeActionsRound() {
             Gameboard gameboard = Gameboard.GetInstance();
+            Player player = gameboard.CurrentPlayer;
+
             // move to next player if all developers have been used
-            if (player.Board.NumDevelopersUnplaced == player.Board.NumDevelopersOwned) {
+            if (player.Board.NumDevelopersUnplaced == player.Board.NumDevelopersOwned)
+            {
                 gameboard.CyclePlayersInRound();
             }
 
             int totalDevsUnplaced = 0, totalDevsOwned = 0;
             // move to next round if all player developers have been used
-            foreach (var p in gameboard.Players) {
+            foreach (var p in gameboard.Players)
+            {
                 totalDevsOwned += p.Board.NumDevelopersOwned;
                 totalDevsUnplaced += p.Board.NumDevelopersUnplaced;
             }
-            if (totalDevsOwned == totalDevsUnplaced) {
+            if (totalDevsOwned == totalDevsUnplaced)
+            {
                 gameboard.Round = GameRound.PAY_DEVELOPERS;
             }
         }

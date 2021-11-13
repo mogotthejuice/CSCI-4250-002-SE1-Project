@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLibrary.Services;
 
 namespace GameLibrary.Models {
     public class LicenseTile {
@@ -15,70 +16,76 @@ namespace GameLibrary.Models {
 
         public LicenseTileType Type { get; private set; }
         
-        private List<Resources> requiredResources;  //used when type = FIXED_RESOURCES
-        private int numResources;                   //used when type = FIXED_NUM_RESOURCES
-        private int numResourceTypes;               //used when type = FIXED_NUM_RESOURCES
+        public Dictionary<Resources, int> RequiredResources { get; private set; }  //used when type = FIXED_RESOURCES
+        public int NumResources { get; private set; }                   //used when type = FIXED_NUM_RESOURCES
+        public int NumResourceTypes { get; private set; }               //used when type = FIXED_NUM_RESOURCES
 
         public LicenseTile() {
             Type = LicenseTileType.VARIABLE_NUM_RESOURCES;
         }
 
-        public LicenseTile(List<Resources> _requiredResources) {
-            requiredResources = _requiredResources;
+        public LicenseTile(Dictionary<Resources, int> requiredResources) {
+            RequiredResources = requiredResources;
             Type = LicenseTileType.FIXED_RESOURCES;
         }
 
-        public LicenseTile(int _numResources, int _numResourceTypes) {
-            numResources = _numResources;
-            numResourceTypes = _numResourceTypes;
+        public LicenseTile(int numResources, int numResourceTypes) {
+            NumResources = numResources;
+            NumResourceTypes = numResourceTypes;
+            Type = LicenseTileType.FIXED_NUM_RESOURCES;
         }
 
-        public int GetScore() {
-            if (Type != LicenseTileType.FIXED_RESOURCES)
-                throw new InvalidOperationException($"LicenseTile of type {Type} does not have a fixed score."
-                    + " Pass a List<Resources> parameter.");
-
-            return calcScore(requiredResources);
-        }
-
-        public int GetScore(List<Resources> resources) {
-            if (Type == LicenseTileType.FIXED_RESOURCES)
-                return GetScore();  //wrong method call
-
+        public int GetScore(Dictionary<Resources, int> resources) {
+            if (Type == LicenseTileType.FIXED_RESOURCES) {
+                foreach (Resources resource in RequiredResources.Keys)
+                    if (RequiredResources[resource] != resources[resource]) {
+                        throw new InvalidOperationException("Must use correct numbers of resources to purchase LicenseTile.");
+                    }
+            }
             else if (Type == LicenseTileType.FIXED_NUM_RESOURCES) {
-                if (resources.Count != numResources)
-                    throw new InvalidOperationException($"Must use {numResources} resources to purchase LicenseTile.");
-                else if (resources.Distinct().Count() != numResourceTypes)
-                    throw new InvalidOperationException($"Must use {numResourceTypes} resource types to purchase LicenseTile.");
+                if (HelperFunctions.TotalNumResources(resources) != NumResources) {
+                    throw new InvalidOperationException($"Must use {NumResources} resources to purchase LicenseTile.");
+                }
+                else {
+                    int numTypes = 0;
+                    foreach (int value in resources.Values)
+                        if (value > 0)
+                            numTypes++;
+
+                    if (numTypes != NumResourceTypes)
+                        throw new InvalidOperationException($"Must use {NumResourceTypes} resource types to purchase LicenseTile.");
+                }
             }
             else {  //type == VARIABLE_NUM_RESOURCES
-                if (resources.Count > MAX_RESOURCES_USED)
-                    throw new InvalidOperationException($"Must purchase LicenseTile using a max of {MAX_RESOURCES_USED} resources.");
+                int numResources = HelperFunctions.TotalNumResources(resources);
+                if (numResources > MAX_RESOURCES_USED || numResources <= 0)
+                    throw new InvalidOperationException($"Must purchase LicenseTile using between 1 and {MAX_RESOURCES_USED} resources.");
             }
 
             return calcScore(resources);
         }
 
-        private int calcScore(List<Resources> resources) {
+        private int calcScore(Dictionary<Resources, int> resources) {
             int score = 0;
-            foreach (Resources resource in requiredResources)
+            foreach (Resources resource in resources.Keys)
             {
                 switch (resource)
                 {
                     case Resources.Coffee:
-                        score += COFFEE_VALUE;
+                        score += resources[resource] * COFFEE_VALUE;
                         break;
                     case Resources.USB_Sticks:
-                        score += USB_STICKS_VALUE;
+                        score += resources[resource] * USB_STICKS_VALUE;
                         break;
                     case Resources.CPU_Cores:
-                        score += CPU_CORES_VALUE;
+                        score += resources[resource] * CPU_CORES_VALUE;
                         break;
                     case Resources.Power:
-                        score += POWER_VALUE;
+                        score += resources[resource] * POWER_VALUE;
                         break;
                     default:
                         throw new InvalidOperationException($"Cannot calculate score using invalid resource {resource}.");
+                        break;
                 }
             }
 

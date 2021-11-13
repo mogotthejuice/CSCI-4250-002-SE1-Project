@@ -88,17 +88,9 @@ namespace GameLibrary.Models {
             LicenseTiles.Add(licenseTile);
         }
 
-        public int TotalNumResources() {
-            int total = 0;
-
-            Resources[] resources = { Resources.Coffee, Resources.USB_Sticks,
-                                      Resources.CPU_Cores, Resources.Power };
-            foreach (Resources resource in resources)
-            {
-                total += NumResources[resource];
-            }
-
-            return total;
+        public void RemoveResources(Dictionary<Resources, int> numResources) {
+            foreach (Resources resource in numResources.Keys)
+                NumResources[resource] -= numResources[resource];
         }
     }
 }
