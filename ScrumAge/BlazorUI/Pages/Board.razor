@@ -277,6 +277,7 @@ else {
             try {
                 int score = tile.GetScore(NumResources);
                 player.Score += score;
+                player.Board.RemoveResources(NumResources);
                 ClickedLocation.TakeAction(ref player);
             }
             catch (InvalidOperationException f) {
