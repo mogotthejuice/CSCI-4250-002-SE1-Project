@@ -2,6 +2,7 @@
 @using GameLibrary.Models.Locations
 @using GameLibrary.Models
 @using GameLibrary.Interfaces
+@using System.Drawing
 @using static GameLibrary.Services.GameController
 
 <div>
@@ -25,7 +26,7 @@
     <div style="float:right">
     @for(int i = 0; i < @Gameboard.GetInstance().Players.Count; i++)
     {
-        <p style="display: inline-block;padding-right:3px;">P: @Gameboard.GetInstance().Players.ElementAt(i).Name C: @Gameboard.GetInstance().Players.ToArray()[i].FigColor F: @GetFigures(@Gameboard.GetInstance().Players.ToArray()[i], @Gameboard.GetInstance().GetLocation(@Location.Name).Name)</p>
+        <p style="display: inline-block;padding-right:100px;">@((MarkupString)@GetFigures(@Gameboard.GetInstance().Players.ToArray()[i], @Gameboard.GetInstance().GetLocation(@Location.Name).Name))</p>
         <br>
     } 
     </div>
@@ -125,7 +126,24 @@
 
     public string GetFigures(Player p, string location)
     {
+        string color = "";
+        if(p.FigColor.ToUpper() == "RED")
+        {
+            color = $"&#x1F534";
+        }
+        else if(p.FigColor.ToUpper() == "YELLOW")
+        {
+            color = $"&#x1F7E1";
+        }
+        else if(p.FigColor.ToUpper() == "BLUE")
+        {
+            color = $"&#x1F535";
+        } 
+        else
+        {
+            color = $"&#x1F7E2";
+        }
 
-        return Gameboard.GetInstance().GetLocation(location).GetNumPlayerDevelopers(p).ToString();
+        return color + " " + Gameboard.GetInstance().GetLocation(location).GetNumPlayerDevelopers(p).ToString();
     }
 }
