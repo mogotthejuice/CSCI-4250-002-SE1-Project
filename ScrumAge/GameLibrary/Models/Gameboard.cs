@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLibrary.Models.Cards;
+using GameLibrary.Services;
 
 namespace GameLibrary.Models {
     public class Gameboard {
@@ -43,6 +44,9 @@ namespace GameLibrary.Models {
 
             InitializeLocations();
             Round = GameRound.PLACE_FIGURES;
+
+            ConCards = new Queue<ConsultantCard>();
+            LicenseTiles = new Queue<LicenseTile>();
 
             GameLog gamelog = GameLog.GetInstance();
             AddToGameLog($"Welcome to SCRUM Age!");
@@ -130,7 +134,7 @@ namespace GameLibrary.Models {
                 Locations.Add(tileLoc);
             }
 
-            TempInitializeCardsAndTiles();
+            InitializeCardsAndTiles();
         }
 
         public void CyclePlayers() {
@@ -190,6 +194,23 @@ namespace GameLibrary.Models {
 
             tile = new LicenseTile();
             ((LicenseTileLocation) GetLocation("License Tile3")).Tile = tile;
+        }
+
+        private void InitializeCardsAndTiles() {
+            //Consultant Cards
+            FileReader.ReadCardDeck();
+
+            ((ConsultantCardLocation) GetLocation("Consultant Card0")).Card = ConCards.Dequeue();
+            ((ConsultantCardLocation) GetLocation("Consultant Card1")).Card = ConCards.Dequeue();
+            ((ConsultantCardLocation) GetLocation("Consultant Card2")).Card = ConCards.Dequeue();
+            ((ConsultantCardLocation) GetLocation("Consultant Card3")).Card = ConCards.Dequeue();
+            
+            //License Tiles
+            FileReader.ReadTileDeck();
+            ((LicenseTileLocation) GetLocation("License Tile0")).Tile = LicenseTiles.Dequeue();
+            ((LicenseTileLocation) GetLocation("License Tile1")).Tile = LicenseTiles.Dequeue();
+            ((LicenseTileLocation) GetLocation("License Tile2")).Tile = LicenseTiles.Dequeue();
+            ((LicenseTileLocation) GetLocation("License Tile3")).Tile = LicenseTiles.Dequeue();
         }
     }
 }
