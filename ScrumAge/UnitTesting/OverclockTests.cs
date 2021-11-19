@@ -39,8 +39,8 @@ namespace UnitTesting
                 }
         }
          [ Test]
-          public void Upgrade_isNotAtMaxLevel_Upgraded()
-          {
+        public void Upgrade_isNotAtMaxLevel_Upgraded()
+        {
             //Arrange
             var overclock = new GameLibrary.Models.Overclock();
             //Assign level and max value
@@ -60,8 +60,8 @@ namespace UnitTesting
 
 
           }
-         [ Test]
-         public void Overclock_hasBeenUsed_UseOperationException()
+         [ Test]    
+        public void Overclock_hasBeenUsed_UseOperationException()
          {
             //initialize variable
             bool HasBeenUsed = true;
@@ -102,16 +102,13 @@ namespace UnitTesting
             overclock.Reset();
            if( HasBeenUsed )
            { 
-            //Assert
-             Assert.Throws<InvalidOperationException>(() => overclock.Use());
+             //Assert
+             Assert.IsFalse(overclock.HasBeenUsed);
            }
             
-            //Assert
-             Assert.IsFalse(overclock.HasBeenUsed);
-
+        
 
         }
-    
         
 
 
