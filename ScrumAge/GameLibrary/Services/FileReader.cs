@@ -10,7 +10,7 @@ namespace GameLibrary.Services {
         static readonly string rootFolder = "ScrumAge/GameLibrary/TextFiles"; 
         public static void ReadCardDeck(){
             //string path = "/Users/briannamartinson/Documents/GitHub/CSCI-4250-002-SE1-Project/ScrumAge/GameLibrary/TextFiles/ConsultantCardDeck.csv";
-            string path = @"ScrumAge/GameLibrary/TextFiles/ConsultantCardDeck.csv";
+            string path = @"TextFiles/ConsultantCardDeck.csv";
 
             // var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly(). CodeBase);
             // var iconPath = Path.Combine(outPutDirectory, "GameLibrary\\TextFiles\\ConsultantCardDeck.csv");
@@ -41,7 +41,7 @@ namespace GameLibrary.Services {
         }
 
         public static void ReadTileDeck(){
-            string textFile = "ScrumAge/GameLibrary/TextFiles/LicenseTileDeck.csv"; 
+            string textFile = "TextFiles/LicenseTileDeck.csv"; 
             try{
                 if(File.Exists(textFile)){
                     string[] lines = File.ReadAllLines(textFile);
