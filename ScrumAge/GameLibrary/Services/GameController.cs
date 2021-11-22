@@ -79,7 +79,7 @@ namespace GameLibrary.Services {
             CheckEndOfTakeActionsRound();
         }
 
-        public static void TakeLocationAction(ILocation location, int overlockAddition) {
+        public static void TakeLocationAction(ILocation location, int overlockAddition, List<int> overclockIndexes) {
             Player player = Gameboard.GetInstance().CurrentPlayer;
             int numberofDevelopers = location.GetNumPlayerDevelopers(player);
 
@@ -91,6 +91,11 @@ namespace GameLibrary.Services {
                     throw new ArgumentException($"Player does not have any developers at {loc.Name}");
                 }
                 loc.TakeAction(ref player, overlockAddition);
+                // here 
+                foreach (var index in overclockIndexes) {
+                    player.Board.Overclocks.RemoveAt(index);
+                }
+                
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
