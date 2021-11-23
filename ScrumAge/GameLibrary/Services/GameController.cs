@@ -13,6 +13,8 @@ namespace GameLibrary.Services {
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
     public static class GameController {
+        private const int NUM_CARD_LOCS = 4;
+
         /// <summary>
         /// Initializes Gameboard object's locations and players
         /// </summary>
@@ -163,15 +165,53 @@ namespace GameLibrary.Services {
 
         public static void StartNewRound() {
             Gameboard game = Gameboard.GetInstance();
+            bool endConditionMet = false;
 
+			// Reset player overclocks
+			foreach (Player player in game.Players)
+				foreach (Overclock overclock in player.Board.Overclocks)
+                    overclock.Reset();
+
+            // Shift consultant cards to right
+            ConsultantCardLocation[] cardLocs = new ConsultantCardLocation[NUM_CARD_LOCS];
+            for (int i = 0; i < NUM_CARD_LOCS; i++)
+                cardLocs[i] = (ConsultantCardLocation)game.GetLocation($"Consultant Card{i}");
+            
+            Queue<ConsultantCard> cards = new Queue<ConsultantCard>();
+            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+                if (cardLocs[i].Card is not null) {
+                    cards.Enqueue(cardLocs[i].Card);
+                    cardLocs[i].Card = null;
+                }
+            }
+
+            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+                if (cards.Count > 0)
+                    cardLocs[i].Card = cards.Dequeue();
+                else if (game.ConCards.Count == 0)
+                    endConditionMet = true;
+                else
+                    cardLocs[i].Card = game.ConCards.Dequeue();
+            }
+
+            // Check if any license tile locations are empty
+            for (int i = 0; i < NUM_CARD_LOCS; i++) {
+                var tileLoc = (LicenseTileLocation)game.GetLocation($"License Tile{i}");
+                if (tileLoc.Tiles.Count == 0)
+                    endConditionMet = true;
+            }
+
+            // Cycle players
             game.CyclePlayers();
             game.PlayersInRound = new Queue<Player>(game.Players);
             game.Round = GameRound.PLACE_FIGURES;
 
-            //TODO: Slide ConCards to right
-            //TODO: Reveal new LicenseTiles
-            //TODO: Check for end of game
-            //TODO: Reset player tool tiles
+            if (endConditionMet)
+                EndGame();
+        }
+
+        public static void EndGame() {
+            throw new NotImplementedException();
         }
     }
 }
