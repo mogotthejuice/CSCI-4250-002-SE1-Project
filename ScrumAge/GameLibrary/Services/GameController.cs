@@ -73,7 +73,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
-                location.ResetPlayerDevelopers(player);
+                return;
             }
 
             CheckEndOfTakeActionsRound();
@@ -99,7 +99,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
-                location.ResetPlayerDevelopers(player);
+                return;
             }
 
             CheckEndOfTakeActionsRound();
@@ -142,6 +142,18 @@ namespace GameLibrary.Services {
             }
             else if (location is InvestmentField && numDevelopers != 1) {
                 throw new ArgumentException("Number of developers to place must equal 1.");
+            }
+
+            // check expections for max stats
+            if (location is TrainingCenter && player.Board.NumDevelopersOwned == ResourceBoard.MAX_DEVELOPERS_OWNED) {
+                throw new ArgumentException("Already have max number of developers; action would not do anything.");
+            }
+            if (location is InvestmentField && player.Board.NumBitcoinInvestments == ResourceBoard.MAX_BITCOIN_INVESTMENTS) {
+                throw new ArgumentException("Already have max level of bitcoin; action would not do anything.");
+            }
+            if (location is NerdLocation && player.Board.Overclocks.Count == ResourceBoard.MAX_OVERCLOCKS) {
+                if(player.Board.Overclocks[2].Level == Overclock.MAX_LEVEL)
+                    throw new ArgumentException("Already have max amount and level of overclocks; action would not do anything.");
             }
 
             // check exceptions for all locations
