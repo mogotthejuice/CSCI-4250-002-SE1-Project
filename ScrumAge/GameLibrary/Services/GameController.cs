@@ -167,6 +167,11 @@ namespace GameLibrary.Services {
             Gameboard game = Gameboard.GetInstance();
             bool endConditionMet = false;
 
+			// Reset player overclocks
+			foreach (Player player in game.Players)
+				foreach (Overclock overclock in player.Board.Overclocks)
+                    overclock.Reset();
+
             // Shift consultant cards to right
             ConsultantCardLocation[] cardLocs = new ConsultantCardLocation[NUM_CARD_LOCS];
             for (int i = 0; i < NUM_CARD_LOCS; i++)
@@ -203,12 +208,10 @@ namespace GameLibrary.Services {
 
             if (endConditionMet)
                 EndGame();
-
-            //TODO: Reset player tool tiles
         }
 
         public static void EndGame() {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
