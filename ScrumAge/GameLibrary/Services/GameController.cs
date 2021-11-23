@@ -211,7 +211,7 @@ namespace GameLibrary.Services {
         }
 
         public static void EndGame() {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

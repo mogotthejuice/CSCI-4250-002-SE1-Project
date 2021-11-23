@@ -171,21 +171,28 @@ namespace GameLibrary.Models {
                 new SandLowerConCard(SandConCardPerson.THERAPIST, 1));
             ((ConsultantCardLocation) GetLocation("Consultant Card3")).Card = card;
 
+            for (int i = 0; i < 15; i++)
+                ConCards.Enqueue(card);
+
             Dictionary<Resources, int> reqResources = new Dictionary<Resources, int>() {
                 { Resources.Coffee, 2 }, { Resources.Power, 1 } };
             LicenseTile tile = new LicenseTile(reqResources);
-            ((LicenseTileLocation) GetLocation("License Tile0")).Tiles.Enqueue(tile);
+            for (int i = 0; i < 5; i++)
+                ((LicenseTileLocation) GetLocation("License Tile0")).Tiles.Enqueue(tile);
 
             reqResources = new Dictionary<Resources, int>() {
                 { Resources.USB_Sticks, 2 }, { Resources.CPU_Cores, 1 } };
             tile = new LicenseTile(reqResources);
-            ((LicenseTileLocation) GetLocation("License Tile1")).Tiles.Enqueue(tile);
+            for (int i = 0; i < 5; i++)
+                ((LicenseTileLocation) GetLocation("License Tile1")).Tiles.Enqueue(tile);
 
             tile = new LicenseTile(4, 2);
-            ((LicenseTileLocation) GetLocation("License Tile2")).Tiles.Enqueue(tile);
+            for (int i = 0; i < 5; i++)
+                ((LicenseTileLocation) GetLocation("License Tile2")).Tiles.Enqueue(tile);
 
             tile = new LicenseTile();
-            ((LicenseTileLocation) GetLocation("License Tile3")).Tiles.Enqueue(tile);
+            for (int i = 0; i < 5; i++)
+                ((LicenseTileLocation) GetLocation("License Tile3")).Tiles.Enqueue(tile);
         }
     }
 }
