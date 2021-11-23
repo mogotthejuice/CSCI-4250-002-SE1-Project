@@ -73,7 +73,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
-                return;
+                location.ResetPlayerDevelopers(player);
             }
 
             CheckEndOfTakeActionsRound();
@@ -99,7 +99,7 @@ namespace GameLibrary.Services {
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
-                return;
+                location.ResetPlayerDevelopers(player);
             }
 
             CheckEndOfTakeActionsRound();
