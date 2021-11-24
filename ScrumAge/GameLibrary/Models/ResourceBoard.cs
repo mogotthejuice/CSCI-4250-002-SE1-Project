@@ -8,11 +8,11 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class ResourceBoard {
-        private const int MAX_DEVELOPERS_OWNED = 10;
-        private const int MAX_BITCOIN_INVESTMENTS = 10;
-        private const int MAX_OVERCLOCKS = 3;
-        private const int START_NUM_DEVELOPERS_OWNED = 5;
-        private const int START_NUM_MONEY = 12;
+        public const int MAX_DEVELOPERS_OWNED = 10;
+        public const int MAX_BITCOIN_INVESTMENTS = 10;
+        public const int MAX_OVERCLOCKS = 3;
+        public const int START_NUM_DEVELOPERS_OWNED = 5;
+        public const int START_NUM_MONEY = 12;
 
         public int NumDevelopersOwned { get; private set; }
         public int NumDevelopersUnplaced { get; set; }
