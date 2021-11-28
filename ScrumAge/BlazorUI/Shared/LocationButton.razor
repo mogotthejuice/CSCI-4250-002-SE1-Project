@@ -8,15 +8,18 @@
 <div>
     <div style="float:left">
         <button @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
-            @if (IsOverButton == false) {
+            @if (IsOverButton == false) 
+            {
                 <p front-title>@Location.Name</p>
             }
-            else if (IsOverButton == true) {
+            else if (IsOverButton == true)
+            {
                 <p back-title>@Location.Name</p>
                 <p back-details>
-                    @if (Location != Gameboard.GetInstance().GetLocation("Overtime")) {
+                    @if (Location != Gameboard.GetInstance().GetLocation("Overtime")) 
+                    {
                         @GetSpaces() <br>
-                   }
+                    }
 
                     @GetResource()
                 </p>
@@ -113,16 +116,26 @@
         }
         else if (Location is ConsultantCardLocation) {
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
-            details += $"Resource:     insert cons card details";
+
+            string cardDetails = GetConsCardDetails();
+            details += $"Resource:     {cardDetails}";
         }
         else if (Location is LicenseTileLocation) {
             LicenseTileLocation loc = (LicenseTileLocation)Location;
             details += $"Resource:     insert lic tile details";
         }
 
+
         return details;
     }
 
+
+    public string GetConsCardDetails()
+    {
+        string consultantCardDetails = null;
+        consultantCardDetails = Gameboard.GetInstance().CurrentPlayer.Board.ConsultantCards[^1].Upper.Components.ToString();
+        return consultantCardDetails;
+    }
 
     public string GetFigures(Player p, string location)
     {
