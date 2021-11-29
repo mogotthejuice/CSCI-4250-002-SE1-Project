@@ -33,7 +33,7 @@ namespace GameLibrary.Services
 			{
 				if (card.Lower is GreenLowerConCard)
 				{
-					GreenConCardBackground background = ((GreenLowerConCard) card.Lower).Background);
+					GreenConCardBackground background = ((GreenLowerConCard) card.Lower).Background;
 					if (firstSet.Contains(background))
 						secondSet.Add(background);
 					else
