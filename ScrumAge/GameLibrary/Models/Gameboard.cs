@@ -182,8 +182,8 @@ namespace GameLibrary.Models {
 
 
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new UpperConCard(UpperConCardComponents.VICTORY_POINTS, 1),
+                new SandLowerConCard(SandConCardPerson.INVESTOR, 1));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
                 new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
