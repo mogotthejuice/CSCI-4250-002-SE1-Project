@@ -223,6 +223,7 @@ namespace GameLibrary.Services {
         }
 
         public static void EndGame() {
+            ScoringHandler.CalcFinalScores();
             throw new NotImplementedException();
         }
     }
