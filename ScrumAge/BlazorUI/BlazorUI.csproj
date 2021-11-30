@@ -19,16 +19,4 @@
     <ProjectReference Include="..\GameLibrary\GameLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\TextFiles %28copy%29\ConsultantCardDeck.csv" />
-    <Content Remove="wwwroot\TextFiles %28copy%29\LicenseTileDeck.csv" />
-    <Content Remove="wwwroot\TextFiles %28copy%29\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\TextFiles %28copy%29\ConsultantCardDeck.csv" />
-    <None Include="wwwroot\TextFiles %28copy%29\LicenseTileDeck.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\TextFiles %28copy%29\" />
-  </ItemGroup>
 </Project>

@@ -25,6 +25,10 @@ namespace GameLibrary.Models {
         /// The pile of Consultant Cards
         /// </summary>
         public Queue<ConsultantCard> ConCards { get; set; }
+        /// <summary>
+        /// The pile of License Tiles
+        /// </summary>
+        public Queue<LicenseTile> LicenseTiles { get; set; }
 
         /// <summary>Queue of Players in a Round; First player in queue is player whose turn it is.</summary>
         public Queue<Player> PlayersInRound { get; set; }
@@ -130,7 +134,8 @@ namespace GameLibrary.Models {
                 Locations.Add(tileLoc);
             }
 
-            InitializeCardsAndTiles();
+            TempInitializeCardsAndTiles();
+            //InitializeCardsAndTiles(); //TODO fix path problem in FileReader.cs
         }
 
         public void CyclePlayers() {
@@ -152,8 +157,8 @@ namespace GameLibrary.Models {
 
         // Initialize cards and tiles locations with instances of cards/tiles for testing
         private void TempInitializeCardsAndTiles() {
+            //Consultant Cards
             ConCards = new Queue<ConsultantCard>();
-            ConCards.Enqueue(new ConsultantCard(null, null));
 
             ConsultantCard card = new ConsultantCard(
                 new UpperConCard(UpperConCardComponents.RESOURCE, 2, Resources.Power),
@@ -175,9 +180,50 @@ namespace GameLibrary.Models {
                 new SandLowerConCard(SandConCardPerson.THERAPIST, 1));
             ((ConsultantCardLocation) GetLocation("Consultant Card3")).Card = card;
 
-            for (int i = 0; i < 15; i++)
-                ConCards.Enqueue(card);
 
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+            ConCards.Enqueue(card);
+
+
+            //License Tiles
             Dictionary<Resources, int> reqResources = new Dictionary<Resources, int>() {
                 { Resources.Coffee, 2 }, { Resources.Power, 1 } };
             LicenseTile tile = new LicenseTile(reqResources);
@@ -210,10 +256,10 @@ namespace GameLibrary.Models {
             
             //License Tiles
             FileReader.ReadTileDeck();
-            ((LicenseTileLocation) GetLocation("License Tile0")).Tile = LicenseTiles.Dequeue();
-            ((LicenseTileLocation) GetLocation("License Tile1")).Tile = LicenseTiles.Dequeue();
-            ((LicenseTileLocation) GetLocation("License Tile2")).Tile = LicenseTiles.Dequeue();
-            ((LicenseTileLocation) GetLocation("License Tile3")).Tile = LicenseTiles.Dequeue();
+            ((LicenseTileLocation)GetLocation("License Tile0")).Tiles.Enqueue(LicenseTiles.Dequeue());
+            ((LicenseTileLocation) GetLocation("License Tile1")).Tiles.Enqueue(LicenseTiles.Dequeue());
+            ((LicenseTileLocation) GetLocation("License Tile2")).Tiles.Enqueue(LicenseTiles.Dequeue());
+            ((LicenseTileLocation) GetLocation("License Tile3")).Tiles.Enqueue(LicenseTiles.Dequeue());
         }
     }
 }
