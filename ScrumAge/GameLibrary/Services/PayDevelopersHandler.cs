@@ -26,6 +26,8 @@ namespace GameLibrary.Services {
 			game.PlayersInRound = new Queue<Player>();
 
 			foreach (Player player in game.Players) {
+				player.Board.NumResources[Resources.Money] += player.Board.NumBitcoinInvestments;
+
 				int numDevelopersToPay = player.Board.NumDevelopersOwned;
 				int numMoney = player.Board.GetNumResource(Resources.Money);
 

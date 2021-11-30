@@ -85,7 +85,6 @@ namespace GameLibrary.Models {
                         break;
                     default:
                         throw new InvalidOperationException($"Cannot calculate score using invalid resource {resource}.");
-                        break;
                 }
             }
 

@@ -13,6 +13,8 @@ namespace GameLibrary.Services {
     /// Initializes Game and acts as the interface between the backend and UI
     /// </summary>
     public static class GameController {
+        private const int NUM_CARD_LOCS = 4;
+
         /// <summary>
         /// Initializes Gameboard object's locations and players
         /// </summary>
@@ -79,7 +81,7 @@ namespace GameLibrary.Services {
             CheckEndOfTakeActionsRound();
         }
 
-        public static void TakeLocationAction(ILocation location, int overlockAddition) {
+        public static void TakeLocationAction(ILocation location, int overlockAddition, List<int> overclockIndexes) {
             Player player = Gameboard.GetInstance().CurrentPlayer;
             int numberofDevelopers = location.GetNumPlayerDevelopers(player);
 
@@ -91,6 +93,11 @@ namespace GameLibrary.Services {
                     throw new ArgumentException($"Player does not have any developers at {loc.Name}");
                 }
                 loc.TakeAction(ref player, overlockAddition);
+                // here 
+                foreach (var index in overclockIndexes) {
+                    player.Board.Overclocks.RemoveAt(index);
+                }
+                
             }
             catch (Exception e) {
                 Gameboard.GetInstance().AddToGameLog($"Sorry, {e.Message}");
@@ -139,6 +146,18 @@ namespace GameLibrary.Services {
                 throw new ArgumentException("Number of developers to place must equal 1.");
             }
 
+            // check expections for max stats
+            if (location is TrainingCenter && player.Board.NumDevelopersOwned == ResourceBoard.MAX_DEVELOPERS_OWNED) {
+                throw new ArgumentException("Already have max number of developers; action would not do anything.");
+            }
+            if (location is InvestmentField && player.Board.NumBitcoinInvestments == ResourceBoard.MAX_BITCOIN_INVESTMENTS) {
+                throw new ArgumentException("Already have max level of bitcoin; action would not do anything.");
+            }
+            if (location is NerdLocation && player.Board.Overclocks.Count == ResourceBoard.MAX_OVERCLOCKS) {
+                if(player.Board.Overclocks[2].Level == Overclock.MAX_LEVEL)
+                    throw new ArgumentException("Already have max amount and level of overclocks; action would not do anything.");
+            }
+
             // check exceptions for all locations
             if (numDevelopers > player.Board.NumDevelopersUnplaced) {
                 throw new ArgumentException("Number of developers to place cannot exceed number of developers player has.");
@@ -158,15 +177,54 @@ namespace GameLibrary.Services {
 
         public static void StartNewRound() {
             Gameboard game = Gameboard.GetInstance();
+            bool endConditionMet = false;
 
+			// Reset player overclocks
+			foreach (Player player in game.Players)
+				foreach (Overclock overclock in player.Board.Overclocks)
+                    overclock.Reset();
+
+            // Shift consultant cards to right
+            ConsultantCardLocation[] cardLocs = new ConsultantCardLocation[NUM_CARD_LOCS];
+            for (int i = 0; i < NUM_CARD_LOCS; i++)
+                cardLocs[i] = (ConsultantCardLocation)game.GetLocation($"Consultant Card{i}");
+            
+            Queue<ConsultantCard> cards = new Queue<ConsultantCard>();
+            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+                if (cardLocs[i].Card is not null) {
+                    cards.Enqueue(cardLocs[i].Card);
+                    cardLocs[i].Card = null;
+                }
+            }
+
+            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+                if (cards.Count > 0)
+                    cardLocs[i].Card = cards.Dequeue();
+                else if (game.ConCards.Count == 0)
+                    endConditionMet = true;
+                else
+                    cardLocs[i].Card = game.ConCards.Dequeue();
+            }
+
+            // Check if any license tile locations are empty
+            for (int i = 0; i < NUM_CARD_LOCS; i++) {
+                var tileLoc = (LicenseTileLocation)game.GetLocation($"License Tile{i}");
+                if (tileLoc.Tiles.Count == 0)
+                    endConditionMet = true;
+            }
+
+            // Cycle players
             game.CyclePlayers();
             game.PlayersInRound = new Queue<Player>(game.Players);
             game.Round = GameRound.PLACE_FIGURES;
 
-            //TODO: Slide ConCards to right
-            //TODO: Reveal new LicenseTiles
-            //TODO: Check for end of game
-            //TODO: Reset player tool tiles
+            if (endConditionMet)
+                EndGame();
+        }
+
+        public static void EndGame() {
+            ScoringHandler.CalcFinalScores();
+            throw new NotImplementedException();
         }
     }
 }
