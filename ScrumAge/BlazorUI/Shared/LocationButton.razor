@@ -21,7 +21,7 @@
                         @GetSpaces() <br>
                     }
 
-                    @GetResource()
+                    @((MarkupString)@GetResource())
                 </p>
             }
         </button>
@@ -116,13 +116,43 @@
         }
         else if (Location is ConsultantCardLocation) {
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
-
-            string cardDetails = GetConsCardDetails();
-            details += $"Resource:     {cardDetails}";
+            string resource = loc.Card.Upper.Resource.ToString();
+            string number = loc.Card.Upper.Number.ToString();
+            details += $"Resource: {resource} <br> Number: {number}";
         }
-        else if (Location is LicenseTileLocation) {
+        else if (Location is LicenseTileLocation) 
+        {
             LicenseTileLocation loc = (LicenseTileLocation)Location;
-            details += $"Resource:     insert lic tile details";
+
+            string requiredResources = "";
+
+            if(loc.Tile.RequiredResources != null)
+            {
+                foreach (Resources resource in loc.Tile.RequiredResources.Keys)
+                {
+                    requiredResources += resource.ToString();
+                    requiredResources += ", ";
+                }
+            }
+            
+
+
+            string tileType = loc.Tile.Type.ToString();
+            string numResources = loc.Tile.NumResources.ToString();
+            string resourceTypes = loc.Tile.NumResourceTypes.ToString();
+            if(loc.Tile.Type == LicenseTileType.FIXED_RESOURCES)
+            {
+                 details += $"Resource: {requiredResources} <br> Tile Type: {tileType} <br> Required Resources: {requiredResources}";
+            }
+            else if(loc.Tile.Type == LicenseTileType.FIXED_NUM_RESOURCES)
+            {
+                details += $"Resource Types Number: {resourceTypes} <br> Tile Type: {tileType} <br> Number of Resources: {numResources}";
+            }
+            else
+            {
+                details += $"Number of Resources: {numResources} <br> Tile Type: {tileType}";
+            }
+           
         }
 
 
