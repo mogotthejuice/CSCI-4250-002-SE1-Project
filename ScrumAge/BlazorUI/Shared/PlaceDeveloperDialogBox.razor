@@ -9,6 +9,7 @@
         <button class="btn btn-primary" @onclick="IncrementCount">+1</button>
         <button class="btn btn-primary" @onclick="DecrementCount">-1</button>
         <button class="btn btn-primary" @onclick="PlaceDevelopers">Place!</button>
+        <button class="btn btn-primary" @onclick="ExitDialog">Back</button>
     </div>
 </div>
 
@@ -52,6 +53,9 @@
 
     private async Task PlaceDevelopers() {
         GameController.PlaceDevelopers(numDevelopers, Location);
+        await OnPlaceDeveloper.InvokeAsync(false);
+    }
+    public async Task ExitDialog() {
         await OnPlaceDeveloper.InvokeAsync(false);
     }
 }
