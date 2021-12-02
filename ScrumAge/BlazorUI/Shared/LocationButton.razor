@@ -3,11 +3,12 @@
 @using GameLibrary.Models
 @using GameLibrary.Interfaces
 @using System.Drawing
+@using System.IO
 @using static GameLibrary.Services.GameController
 
 <div>
     <div style="float:left">
-        <button @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+        <button style="background:url(@BackImage), url(@BackImage2); background-position: left top, left bottom; background-repeat: no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
             @if (IsOverButton == false) 
             {
                 <p front-title>@Location.Name</p>
@@ -44,6 +45,8 @@
         display: inline-block;
         transition-duration: 0.4s;
     }
+
+
     .buttonStyle
     {
 
@@ -68,6 +71,10 @@
 @code {
     public bool IsOverButton { get; set; } = false;
 
+    string BackImage { get; set; } = "/img/cat.jpeg";
+
+    string BackImage2 { get; set; } = "/img/Cogs.jpeg";
+
 
     [Parameter]
     public ILocation Location { get; set; }
@@ -77,6 +84,8 @@
 
     public void MouseHover() {
         IsOverButton = true;
+
+
     }
 
     public void MouseExit() {
@@ -115,9 +124,47 @@
             details += $"Resource:     Overclock Upgrade";
         }
         else if (Location is ConsultantCardLocation) {
+           
+            
+            
+            
+            
+            
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
-            string resource = loc.Card.Upper.Resource.ToString();
+            UpperConCard conCardComp = loc.Card.Upper;
+            
+
+            //For upper consultant card
+            switch(conCardComp.Components)
+            {
+                case UpperConCardComponents.RESOURCE:
+                    BackImage = "/img/";
+                    break;
+                case UpperConCardComponents.RESOURCE_DICE_ROLL:
+                    BackImage = "/img/Dice.png";
+                    break;
+                case UpperConCardComponents.VICTORY_POINTS:
+                    BackImage = "/img/VictoryPoint.png";
+                    break;
+                case UpperConCardComponents.OVERCLOCK:
+
+                    break;
+                case UpperConCardComponents.BITCOIN_INVESTMENT:
+                    break;
+                case UpperConCardComponents.CONSULTANT_CARD:
+                    break;
+                case UpperConCardComponents.ONE_USE_OVERCLOCK:
+                    break;
+                case UpperConCardComponents.ANY_2_RESOURCES:
+                    break;
+            }
+            
+            
+            
             string number = loc.Card.Upper.Number.ToString();
+            string resource = conCardComp.Resource.ToString();
+        
+        
             details += $"Resource: {resource} <br> Number: {number}";
         }
         else if (Location is LicenseTileLocation) 
