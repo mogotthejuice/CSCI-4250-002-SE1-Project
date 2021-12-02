@@ -8,7 +8,7 @@ using GameLibrary.Models;
 
 namespace GameLibrary.Models {
     public class UpperConCard {
-        public UpperConCardComponents Components { get; private set; }
+        public UpperConCardComponents Components { get; set; }
         public int Number { get; private set; }
         public Resources Resource { get; private set; }
 
