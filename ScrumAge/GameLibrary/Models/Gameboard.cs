@@ -167,11 +167,11 @@ namespace GameLibrary.Models {
 
             card = new ConsultantCard(
                 new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new GreenLowerConCard(GreenConCardBackground.DATABASE));
             ((ConsultantCardLocation) GetLocation("Consultant Card1")).Card = card;
 
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.CONSULTANT_CARD, 1),
+                new UpperConCard(UpperConCardComponents.RESOURCE, 1, Resources.Coffee),
                 new SandLowerConCard(SandConCardPerson.INVESTOR, 3));
             ((ConsultantCardLocation) GetLocation("Consultant Card2")).Card = card;
 
@@ -186,40 +186,40 @@ namespace GameLibrary.Models {
                 new SandLowerConCard(SandConCardPerson.INVESTOR, 1));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new UpperConCard(UpperConCardComponents.OVERCLOCK, 1),
+                new GreenLowerConCard(GreenConCardBackground.BACKEND));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.VICTORY_POINTS, 2),
+                new GreenLowerConCard(GreenConCardBackground.NETWORKING));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
                 new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
                 new SandLowerConCard(SandConCardPerson.LAWYER, 2));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
+                new UpperConCard(UpperConCardComponents.RESOURCE_DICE_ROLL, 2, Resources.Power),
+                new GreenLowerConCard(GreenConCardBackground.HR));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.RESOURCE_DICE_ROLL, 1, Resources.Money),
+                new SandLowerConCard(SandConCardPerson.NERD, 3));
+            ConCards.Enqueue(card);
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.RESOURCE, 3, Resources.USB_Sticks),
                 new SandLowerConCard(SandConCardPerson.LAWYER, 2));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new UpperConCard(UpperConCardComponents.RESOURCE, 1, Resources.CPU_Cores),
+                new GreenLowerConCard(GreenConCardBackground.LEGAL));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new UpperConCard(UpperConCardComponents.RESOURCE, 1, Resources.Coffee),
+                new SandLowerConCard(SandConCardPerson.INVESTOR, 2));
             ConCards.Enqueue(card);
             card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
-            ConCards.Enqueue(card);
-            card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
-            ConCards.Enqueue(card);
-            card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
-            ConCards.Enqueue(card);
-            card = new ConsultantCard(
-                new UpperConCard(UpperConCardComponents.BITCOIN_INVESTMENT, 1),
-                new SandLowerConCard(SandConCardPerson.LAWYER, 2));
+                new UpperConCard(UpperConCardComponents.RESOURCE, 2, Resources.Victory_Points),
+                new GreenLowerConCard(GreenConCardBackground.HARDWARE));
             ConCards.Enqueue(card);
 
 

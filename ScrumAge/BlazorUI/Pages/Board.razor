@@ -268,6 +268,7 @@ else {
                 // Correct payment
                 player.Board.RemoveResources(NumResources);
                 ClickedLocation.TakeAction(ref player);
+                this.StateHasChanged();
             }
             else {
                 // Incorrect payment
