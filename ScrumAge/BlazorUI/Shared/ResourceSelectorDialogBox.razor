@@ -25,9 +25,9 @@
             <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.Power)">&#x26A1 -1</button>
         </p>
         <button class="btn btn-primary" @onclick="Confirm">Confirm</button>
-        @if (game.Round != GameRound.TALLY_SCORE) {
-            <button class="btn btn-primary" @onclick="Decline">Decline</button>
-        }
+        
+        <button class="btn btn-primary" @onclick="Decline">Decline</button>
+        
     </div>
 
     <ResourceBoardComponent _Player="player" />
