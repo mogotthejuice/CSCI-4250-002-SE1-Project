@@ -10,30 +10,23 @@
             <p>At @Location.Name, Would you like to add Overclocks? (@TotalOverclock)</p>
             <ul style="list-style:circle">
                 @foreach (Overclock overclock in Gameboard.GetInstance().CurrentPlayer.Board.Overclocks) {
-                <li style="display:inline">
-                    <label class="switch">
-                        &#9881 @overclock.Level
-                        <input type="checkbox" @onchange="eventArgs => {OverclockSelect(overclock, eventArgs.Value); }">
-                        <span class="slider"></span>
-                    </label>
-                </li>
+                    <li style="display:inline">
+                        <label class="switch">
+                            &#9881 @overclock.Level
+                            <input type="checkbox" @onchange="eventArgs => {OverclockSelect(overclock, eventArgs.Value); }">
+                            <span class="slider"></span>
+                        </label>
+                    </li>
                 }
             </ul>
-            <button @onclick="TakeLocationActionwithOverclock">Do it!!</button>
+            <button class="btn btn-primary" @onclick="TakeLocationActionwithOverclock">Do it!!</button>
         }
         else {
             <p>At @Location.Name, Take action?</p>
-            <button @onclick="TakeLocationAction">Do it!!</button>
+            <button class="btn btn-primary" @onclick="TakeLocationAction">Do it!!</button>
         }
+        <button class="btn btn-primary" @onclick="ExitDialog">Back</button>
 
-    <label>
-        @foreach (var item in OverclockIndexes) {
-            @item
-        }
-        @Gameboard.GetInstance().CurrentPlayer.Name
-
-        @Gameboard.GetInstance().CurrentPlayer.Board.Overclocks.Count;
-    </label>
     </div>
 </div>
 
@@ -98,6 +91,9 @@
     private async Task TakeLocationAction() {
         GameController.TakeLocationAction(Location);
 
+        await OnPlaceDeveloper.InvokeAsync(false);
+    }
+    public async Task ExitDialog() {
         await OnPlaceDeveloper.InvokeAsync(false);
     }
 }

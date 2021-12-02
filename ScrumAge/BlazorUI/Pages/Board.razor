@@ -269,6 +269,9 @@ else {
                 player.Board.RemoveResources(NumResources);
                 ClickedLocation.TakeAction(ref player);
             }
+            else if (HelperFunctions.TotalNumResources(NumResources) == -1) {
+                ClickedLocation.TakeAction(ref player);
+            }
             else {
                 // Incorrect payment
                 UpdateMessage($"Must purchase consultant card with {cost} resources.");
