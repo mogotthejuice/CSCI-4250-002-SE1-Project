@@ -25,9 +25,9 @@
             <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.Power)">&#x26A1 -1</button>
         </p>
         <button class="btn btn-primary" @onclick="Confirm">Confirm</button>
-        @if (game.Round != GameRound.TALLY_SCORE) {
-            <button class="btn btn-primary" @onclick="Decline">Decline</button>
-        }
+        
+        <button class="btn btn-primary" @onclick="Decline">Decline</button>
+        
     </div>
 
     <ResourceBoardComponent _Player="player" />
@@ -55,10 +55,10 @@
 </style>
 
 @code {
-        [Parameter]
-        public string Message { get; set; } = "";
-        [Parameter]
-        public EventCallback<bool> OnConfirm { get; set; }
+    [Parameter]
+    public string Message { get; set; } = "";
+    [Parameter]
+    public EventCallback<bool> OnConfirm { get; set; }
 
     private static Gameboard game = Gameboard.GetInstance();
     private static GameLog log = GameLog.GetInstance();
@@ -84,6 +84,9 @@
         await OnConfirm.InvokeAsync(false);
     }
     private async Task Decline() {
+        if (game.Round == GameRound.TALLY_SCORE) {
+            player.Score -= 10;
+        }
         Board.NumResources = new Dictionary<Resources, int> { {Resources.Coffee, -1 } };
         await OnConfirm.InvokeAsync(false);
     }
