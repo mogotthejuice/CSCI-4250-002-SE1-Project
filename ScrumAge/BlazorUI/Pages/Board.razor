@@ -1,4 +1,5 @@
 @page "/board/{playerNames}"
+@inject NavigationManager UriHelper
 @inject IJSRuntime JSRuntime
 @using Microsoft.JSInterop
 @using static GameLibrary.Services.GameController
@@ -12,8 +13,11 @@
 
 <h1>@message</h1>
 
-@if (ShowDialog) {
-    @switch(Game.Round) {
+@if (Game.Round == GameRound.ENDGAME) {
+    UriHelper.NavigateTo("/endgame");
+}
+else if (ShowDialog) {
+    @switch (Game.Round) {
         case GameRound.PLACE_FIGURES:
             <PlaceDeveloperDialogBox Location="ClickedLocation" OnPlaceDeveloper="ShowDialogChanged" />
             break;
@@ -51,70 +55,70 @@ else {
         <!-- #region Location Buttons -->
 
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[4] LocationClick="@(e => LocationClick(e, Game.Locations[4]))" />
                 
             </th>
             <th class="padColOne">
 
             </th>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[0] LocationClick="@(e => LocationClick(e, Game.Locations[0]))" />
             </th>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[1] LocationClick="@(e => LocationClick(e, Game.Locations[1]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[5] LocationClick="@(e => LocationClick(e, Game.Locations[5]))" />
             </th>
             <th></th>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[2] LocationClick="@(e => LocationClick(e, Game.Locations[2]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[6] LocationClick="@(e => LocationClick(e, Game.Locations[6]))" />
             </th>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[7] LocationClick="@(e => LocationClick(e, Game.Locations[7]))" />
             </th>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[3] LocationClick="@(e => LocationClick(e, Game.Locations[3]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
             </th>
             <th></th>
-            <th class="padColOne" >
+            <th class="padColOne">
                 <LocationButton Location=@Game.Locations[8] LocationClick="@(e => LocationClick(e, Game.Locations[8]))" />
             </th>
-            <th class="padColOne" >
+            <th class="padColOne">
                 <LocationButton Location=@Game.Locations[9] LocationClick="@(e => LocationClick(e, Game.Locations[9]))" />
             </th>
-            <th class="padColOne" >
+            <th class="padColOne">
                 <LocationButton Location=@Game.Locations[10] LocationClick="@(e => LocationClick(e, Game.Locations[10]))" />
             </th>
-            <th class="padColOne" >
+            <th class="padColOne">
                 <LocationButton Location=@Game.Locations[11] LocationClick="@(e => LocationClick(e, Game.Locations[11]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[13] LocationClick="@(e => LocationClick(e, Game.Locations[13]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[14] LocationClick="@(e => LocationClick(e, Game.Locations[14]))" />
             </th>
         </tr>
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[15] LocationClick="@(e => LocationClick(e, Game.Locations[15]))" />
             </th>
         </tr>
@@ -123,7 +127,7 @@ else {
         <!-- #region Player Resource Board -->
 
         <tr>
-            <th class="padColOne" width = "350">
+            <th class="padColOne" width="350">
                 <h3 style="display: block">Game Round: @Game.Round</h3>
                 <ResourceBoardComponent _Player="Game.CurrentPlayer" />
             </th>
@@ -232,7 +236,7 @@ else {
         if (ClickedLocation.Name.StartsWith('L')) {
             // License Tile
             LicenseTile tile = ((LicenseTileLocation) ClickedLocation).Tile;
-            switch(tile.Type) {
+            switch (tile.Type) {
                 case LicenseTileType.FIXED_RESOURCES:
                     _message = "Buy License Tile for";
                     foreach (Resources r in tile.RequiredResources.Keys)
@@ -313,12 +317,10 @@ else {
 <!-- #endregion -->
 
 <style>
-
-#wrapperBox
-{
-    width: 300px;
-    height: 150px;
-    background: red;
-    display: inline-block;
-}
+    #wrapperBox {
+        width: 300px;
+        height: 150px;
+        background: red;
+        display: inline-block;
+    }
 </style>

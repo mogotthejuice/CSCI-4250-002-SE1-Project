@@ -1,0 +1,48 @@
+@page "/endgame"
+@inject IJSRuntime JSRuntime
+@using Microsoft.JSInterop
+@using GameboardComponents
+
+<h1>Game Over!</h1>
+<h3></h3>
+<h1>Results:</h1>
+
+@for (int i = 0; i < PlayersByScore.Count; i++)
+{
+    <tr>
+        <th>@(i+1). @PlayersByScore[i].Name (@PlayersByScore[i].Score points) </th>
+        <th> <ResourceBoardComponent _Player="PlayersByScore[i]" /> </th>
+    </tr>
+}
+<h2></h2>
+
+@code
+{
+    public static Gameboard Game = Gameboard.GetInstance();
+    public static List<Player> PlayersByScore = GetPlayersByScore();
+
+    public static List<Player> GetPlayersByScore()
+    {
+        List<Player> playersByScore = new List<Player>();
+
+        List<Player> playersLeft = Game.Players.ToList<Player>();
+        while (playersLeft.Count > 0)
+        {
+            int highScore = int.MinValue;
+            Player highScorePlayer = null;
+            foreach (var player in playersLeft)
+            {
+                if (player.Score > highScore)
+                {
+                    highScore = player.Score;
+                    highScorePlayer = player;
+                }
+            }
+
+            playersByScore.Add(highScorePlayer);
+            playersLeft.Remove(highScorePlayer);
+        }
+
+        return playersByScore;
+    }
+}
