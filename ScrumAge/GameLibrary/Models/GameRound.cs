@@ -10,6 +10,7 @@ namespace GameLibrary.Models
 		PLACE_FIGURES,
 		TAKE_ACTIONS,
 		PAY_DEVELOPERS,
-		TALLY_SCORE
+		TALLY_SCORE,
+		ENDGAME
 	}
 }

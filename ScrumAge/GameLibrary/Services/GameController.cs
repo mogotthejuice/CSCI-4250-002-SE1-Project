@@ -223,8 +223,10 @@ namespace GameLibrary.Services {
         }
 
         public static void EndGame() {
+            Gameboard game = Gameboard.GetInstance();
+
+            game.Round = GameRound.ENDGAME;
             ScoringHandler.CalcFinalScores();
-            throw new NotImplementedException();
         }
     }
 }
