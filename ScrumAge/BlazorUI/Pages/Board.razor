@@ -274,7 +274,7 @@ else {
                 ClickedLocation.TakeAction(ref player);
             }
             else if (HelperFunctions.TotalNumResources(NumResources) == -1) {
-                ClickedLocation.TakeAction(ref player);
+                ((ConsultantCardLocation) ClickedLocation).TakeActionOnDecline(ref player);
             }
             else {
                 // Incorrect payment

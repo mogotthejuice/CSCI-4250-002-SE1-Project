@@ -8,12 +8,10 @@ namespace GameLibrary.Services
     public class ConCardHandler {
         private static Gameboard game = Gameboard.GetInstance();
         private static GameLog log = GameLog.GetInstance();
-        public static ConsultantCard activeCard;
 
         public static void MethodPicker()
         {
             ConsultantCard card = game.CurrentPlayer.Board.ConsultantCards[^1];
-            activeCard.Upper.Components = card.Upper.Components;
             switch (card.Upper.Components)
             { //execute Method based on component
                 case UpperConCardComponents.RESOURCE:
@@ -84,15 +82,6 @@ namespace GameLibrary.Services
         public static void Any2Resources()
         {
             throw new NotImplementedException(); //LOW PRIORITY ITEM
-        }
-
-        /// <summary>
-        /// Gets the type of consultant card for use for display
-        /// </summary>
-        /// <returns>The type of consultant card for use with the display</returns>
-        public static UpperConCardComponents GetCardType()
-        {
-            return activeCard.Upper.Components;
         }
     }
 }

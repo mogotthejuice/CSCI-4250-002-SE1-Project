@@ -20,8 +20,13 @@ namespace GameLibrary.Models.Locations
 
 		public override void TakeAction(ref Player player) {
 			player.Board.AddConsultantCard(Card);
-			Card = null;
+			//Card = null;
 			ConCardHandler.MethodPicker();
+			ResetPlayerDevelopers(player);
+			GameController.CheckEndOfTakeActionsRound();
+		}
+
+		public void TakeActionOnDecline(ref Player player) {
 			ResetPlayerDevelopers(player);
 			GameController.CheckEndOfTakeActionsRound();
 		}
