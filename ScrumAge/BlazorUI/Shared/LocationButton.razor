@@ -5,9 +5,8 @@
 @using System.Drawing
 @using static GameLibrary.Services.GameController
 
-<div>
-    <div style="float:left">
-        <button @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+
+    <button  style="overflow-y:auto" class="scrum-button" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
             @if (IsOverButton == false) 
             {
                 <p front-title>@Location.Name</p>
@@ -15,59 +14,67 @@
             else if (IsOverButton == true)
             {
                 <p back-title>@Location.Name</p>
-                <p back-details>
-                    @if (Location != Gameboard.GetInstance().GetLocation("Overtime")) 
-                    {
-                        @GetSpaces() <br>
-                    }
+                @if (Location != Gameboard.GetInstance().GetLocation("Overtime"))
+                {
+                    <div back-spaces >
 
+                        @for (int i = 0; i < @Game.Players.Count; i++)
+                        {
+                            GetNumDevs(i);
+                            @for (int j = 0; j < @numOfDevs; j++)
+                            {
+                                <span class="oi oi-media-record" style="color:@Players[i].FigColor;"> </span>
+
+                            }
+                        }
+                        @for (int k = 0; k < Location.SpacesLeft; k++)
+                        {
+                            <span class="oi oi-media-record" style="color:white"> </span>
+                        }
+                </div>
+                }
+                <div back-details>
                     @((MarkupString)@GetResource())
-                </p>
+                </div>
+                
             }
         </button>
-    </div>
-    <div style="float:right">
-    @for(int i = 0; i < @Gameboard.GetInstance().Players.Count; i++)
-    {
-        <p style="display: inline-block;padding-right:100px;">@((MarkupString)@GetFigures(@Gameboard.GetInstance().Players.ToArray()[i], @Gameboard.GetInstance().GetLocation(@Location.Name).Name))</p>
-        <br>
-    } 
-    </div>
-    
-</div>
+
 
 <style>
-    button {
-        width: 175px;
-        height: 135px;
-        border: none;
-        display: inline-block;
-        transition-duration: 0.4s;
-    }
-    .buttonStyle
-    {
-
-    }
+    
     p[front-title] {
         font-size: larger;
         font-weight: bolder;
     }
     p[back-title] {
-        height: 20%;
+        height: 10%;
         z-index: 1;
         font-size: medium;
         font-weight: bolder;
     }
-    p[back-details] {
+    div[back-details] {
+        text-align:left;
         height: 85%;
+        width:30%;
         font-size: small;
         z-index: 2;
+    }
+    div[back-spaces] {
+        height: 85%;
+        width:50%;
+        font-size: small;
+        z-index: 2;
+        float:right;
     }
 </style>
 
 @code {
     public bool IsOverButton { get; set; } = false;
+    public Gameboard Game = Gameboard.GetInstance();
+    List<Player> Players = Gameboard.GetInstance().Players.ToList();
 
+    private int numOfDevs;
 
     [Parameter]
     public ILocation Location { get; set; }
@@ -83,6 +90,7 @@
         IsOverButton = false;
     }
 
+
     public string GetSpaces() {
         string details = string.Empty;
 
@@ -93,6 +101,12 @@
 
 
         return details;
+    }
+
+    private int GetNumDevs(int i)
+    {
+        numOfDevs =  Location.numPlayerDevelopers[i];
+        return numOfDevs;
     }
 
     public string GetResource() {

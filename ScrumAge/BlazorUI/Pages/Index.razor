@@ -5,11 +5,14 @@
 @using GameLibrary.Services
 @using System.Drawing
 
-<h1>SCRUM AGE</h1>
 
-<button @onclick=@Navigate>Start a New Game</button>
+<div class="scrum-container" style="height:300px">
+    <h1>SCRUM AGE</h1>
+    <hr style="border-bottom: 1px solid #43304c"/>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <button class="btn-primary" @onclick=@Navigate>Start a New Game</button>
+</div>
+
 
 @code
 {
