@@ -41,7 +41,7 @@
 <style>
     button {
         width: 175px;
-        height: 135px;
+        height: 200px;
         border: none;
         display: inline-block;
         transition-duration: 0.4s;
@@ -211,6 +211,8 @@
                         BackImage2 = "/img/Sand_Lawyer.jpeg";
                         break;
                 }
+                string person = sandCard.Person.ToString();
+                details += $"Person: {person} <br>";
             }
             else
             {
@@ -244,6 +246,11 @@
                         BackImage2 = "/img/Green_ArtDesigner.jpeg";
                         break;
                 }
+
+
+                string cardType = greenConCard.Background.ToString();
+                details += $"Card Type: {cardType} <br>";
+
             }
 
 
@@ -251,6 +258,7 @@
             
             string number = loc.Card.Upper.Number.ToString();
             string resource = conCardComp.Resource.ToString();
+            
         
         
             details += $"Resource: {resource} <br> Number: {number}";
@@ -275,6 +283,21 @@
             string tileType = loc.Tile.Type.ToString();
             string numResources = loc.Tile.NumResources.ToString();
             string resourceTypes = loc.Tile.NumResourceTypes.ToString();
+
+
+            switch(loc.Tile.Type)
+            {
+                case LicenseTileType.FIXED_RESOURCES: 
+                    break;
+                case LicenseTileType.FIXED_NUM_RESOURCES:
+                    break;
+                case LicenseTileType.VARIABLE_NUM_RESOURCES:
+                    break;
+            }
+
+
+
+
             if(loc.Tile.Type == LicenseTileType.FIXED_RESOURCES)
             {
                  details += $"Resource: {requiredResources} <br> Tile Type: {tileType} <br> Required Resources: {requiredResources}";
