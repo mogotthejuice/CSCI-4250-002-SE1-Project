@@ -8,43 +8,37 @@
 @using GameLibrary.Services
 @using static GameLibrary.Services.GameController
 
-<div>
-    <div style="float:left">
-        <button style="background:url(@BackImage), url(@BackImageResource), url(@BackImage2); background-position: left top, center top, left bottom; background-repeat: no-repeat, no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+<button class="scrum-button" style="background:url(@BackImage), url(@BackImageResource), url(@BackImage2); background-position: left top, center top, left bottom; background-repeat: no-repeat, no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat; background-color: grey;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+    @if (IsOverButton == false)
+    {
+        <p front-title>@Location.Name</p>
+    }
+    else if (IsOverButton == true)
+    {
+        <p back-title>@Location.Name</p>
+        @if (Location != Gameboard.GetInstance().GetLocation("Overtime"))
+        {
+            <div back-spaces>
 
-            @if (IsOverButton == false) 
-            {
-                <p front-title>@Location.Name</p>
-            }
-            else if (IsOverButton == true)
-            {
-                <p back-title>@Location.Name</p>
-                @if (Location != Gameboard.GetInstance().GetLocation("Overtime"))
+                @for (int i = 0; i < @Game.Players.Count; i++)
                 {
-                    <div back-spaces >
-
-                        @for (int i = 0; i < @Game.Players.Count; i++)
-                        {
-                            GetNumDevs(i);
-                            @for (int j = 0; j < @numOfDevs; j++)
-                            {
-                                <span class="oi oi-media-record" style="color:@Players[i].FigColor;"> </span>
-
-                            }
-                        }
-                        @for (int k = 0; k < Location.SpacesLeft; k++)
-                        {
-                            <span class="oi oi-media-record" style="color:white"> </span>
-                        }
-                </div>
+                    GetNumDevs(i);
+                    @for (int j = 0; j < @numOfDevs; j++)
+                    {
+                        <span class="oi oi-media-record" style="color:@Players[i].FigColor;"> </span>
+                    }
                 }
-                <div back-details>
-                    @((MarkupString)@GetResource())
-                </div>
-                
-            }
-        </button>
-
+                @for (int k = 0; k < Location.SpacesLeft; k++)
+                {
+                    <span class="oi oi-media-record" style="color:white"> </span>
+                }
+            </div>
+        }
+        <div back-details>
+            @((MarkupString)@GetResource())
+        </div>
+    }
+</button>
 <style>
     button {
         width: 175px;
@@ -90,11 +84,11 @@
     public Gameboard Game = Gameboard.GetInstance();
     List<Player> Players = Gameboard.GetInstance().Players.ToList();
 
-    string BackImage { get; set; } = "/img/noresource.jpg";
+    string BackImage { get; set; } = null; //"/img/noresource.jpg";
 
-    string BackImageResource { get; set; } = "/img/noresource.jpg";
+    string BackImageResource { get; set; } = null; //"/img/noresource.jpg";
 
-    string BackImage2 { get; set; } = "/img/noresource.jpg";
+    string BackImage2 { get; set; } = null; //"/img/noresource.jpg";
 
     private int numOfDevs;
 
@@ -151,11 +145,11 @@
             details += $"Resource:     Overclock Upgrade";
         }
         else if (Location is ConsultantCardLocation) {
-             
+
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
             UpperConCard conCardComp = loc.Card.Upper;
             ILowerConCard conCardLower = loc.Card.Lower;
-            
+
 
             //For upper consultant card component
             switch(conCardComp.Components)
@@ -191,7 +185,7 @@
             switch(conCardComp.Resource)
             {
                 case Resources.No_Resource:
-                    BackImageResource = "/img/noresource.jpg";
+                    BackImageResource = null; //"/img/noresource.jpg";
                     break;
                 case Resources.Money:
                     BackImageResource = "/img/money.png";
@@ -219,7 +213,7 @@
             if(CardType == "SandLowerConCard")
             {
                 SandLowerConCard sandCard = (SandLowerConCard) conCardLower;
-                
+
                 switch(sandCard.Person)
                 {
                     case SandConCardPerson.THERAPIST:
@@ -245,7 +239,7 @@
                 switch(greenConCard.Background)
                 {
 
-                     case GreenConCardBackground.BACKEND:
+                    case GreenConCardBackground.BACKEND:
                         BackImage2 = "/img/Green_BackendConsultant.jpeg";
                         break;
                     case GreenConCardBackground.DATABASE:
@@ -278,16 +272,16 @@
             }
 
 
-            
-            
+
+
             string number = loc.Card.Upper.Number.ToString();
             string resource = conCardComp.Resource.ToString();
-            
-        
-        
+
+
+
             details += $"Resource: {resource} <br> Number: {number}";
         }
-        else if (Location is LicenseTileLocation) 
+        else if (Location is LicenseTileLocation)
         {
             LicenseTileLocation loc = (LicenseTileLocation)Location;
 
@@ -301,36 +295,33 @@
                     requiredResources += ", ";
                 }
             }
-            
-
 
             string tileType = loc.Tile.Type.ToString();
             string numResources = loc.Tile.NumResources.ToString();
             string resourceTypes = loc.Tile.NumResourceTypes.ToString();
 
-
             switch(loc.Tile.Type)
             {
-                case LicenseTileType.FIXED_RESOURCES: 
+                case LicenseTileType.FIXED_RESOURCES:
                     if(loc.Tile.RequiredResources != null)
                     {
                         int image = 0;
                         foreach (Resources resource in loc.Tile.RequiredResources.Keys)
                         {
-                           switch(resource)
+                            switch(resource)
                             {
                                 case Resources.No_Resource:
                                     if (image == 0)
-                                        BackImage = "/img/noresource.jpg";
+                                        BackImage = null; //"/img/noresource.jpg";
                                     else if (image == 1)
-                                        BackImageResource = "/img/noresource.jpg";
+                                        BackImageResource = null; //"/img/noresource.jpg";
                                     else if (image == 2)
-                                        BackImage2 = "/img/noresource.jpg";
-                                    
+                                        BackImage2 = null; //"/img/noresource.jpg";
+
                                     image++;
                                     break;
                                 case Resources.Money:
-                                     if (image == 0)
+                                    if (image == 0)
                                         BackImage = "/img/money.jpg";
                                     else if (image == 1)
                                         BackImageResource = "/img/money.jpg";
@@ -340,7 +331,7 @@
                                     image++;
                                     break;
                                 case Resources.Coffee:
-                                     if (image == 0)
+                                    if (image == 0)
                                         BackImage = "/img/coffee.jpg";
                                     else if (image == 1)
                                         BackImageResource = "/img/coffee.jpg";
@@ -351,7 +342,7 @@
                                     image++;
                                     break;
                                 case Resources.USB_Sticks:
-                                     if (image == 0)
+                                    if (image == 0)
                                         BackImage = "/img/usbsticks.png";
                                     else if (image == 1)
                                         BackImageResource = "/img/usbsticks.png";
@@ -383,7 +374,7 @@
                                     image++;
                                     break;
                                 case Resources.Victory_Points:
-                                     if (image == 0)
+                                    if (image == 0)
                                         BackImage = "/img/VictoryPoint.png";
                                     else if (image == 1)
                                         BackImageResource = "/img/VictoryPoint.png";
@@ -396,7 +387,7 @@
                             }
                         }
                     }
-            
+
 
                     break;
                 case LicenseTileType.FIXED_NUM_RESOURCES:
@@ -424,7 +415,7 @@
                             BackImage = "/img/7.png";
                             break;
                     }
-                     switch(loc.Tile.NumResourceTypes)
+                    switch(loc.Tile.NumResourceTypes)
                     {
                         case 1:
                             BackImageResource = "/img/1.png";
@@ -448,13 +439,13 @@
                             BackImageResource = "/img/7.png";
                             break;
                     }
-                    
+
 
 
                     break;
                 case LicenseTileType.VARIABLE_NUM_RESOURCES:
-                     
-                     switch(loc.Tile.NumResources)
+
+                    switch(loc.Tile.NumResources)
                     {
                         case 1:
                             BackImageResource = "/img/1.png";
@@ -481,12 +472,9 @@
                     break;
             }
 
-
-
-
             if(loc.Tile.Type == LicenseTileType.FIXED_RESOURCES)
             {
-                 details += $"Tile Type: {tileType} <br> Required Resources: {requiredResources}";
+                details += $"Tile Type: {tileType} <br> Required Resources: {requiredResources}";
             }
             else if(loc.Tile.Type == LicenseTileType.FIXED_NUM_RESOURCES)
             {
@@ -496,10 +484,12 @@
             {
                 details += $"Number of Resources: {numResources} <br> Tile Type: {tileType}";
             }
-           
         }
 
-
+        if (Location is LicenseTileLocation || Location is ConsultantCardLocation)
+        {
+            return "";
+        }
         return details;
     }
 
@@ -525,7 +515,7 @@
         else if(p.FigColor.ToUpper() == "BLUE")
         {
             color = $"&#x1F535";
-        } 
+        }
         else
         {
             color = $"&#x1F7E2";
@@ -534,12 +524,10 @@
         return color + " " + Gameboard.GetInstance().GetLocation(location).GetNumPlayerDevelopers(p).ToString();
     }
 
-
-
     public void SetImages()
     {
-        BackImage = "/img/noresource.jpg";
-        BackImage2 = "/img/noresource.jpg";
-        BackImageResource = "/img/noresource.jpg";
+        BackImage = null; //"/img/noresource.jpg";
+        BackImage2 = null; //"/img/noresource.jpg";
+        BackImageResource = null; //"/img/noresource.jpg";
     }
 }
