@@ -24,5 +24,11 @@ namespace GameLibrary.Models.Locations
 			ResetPlayerDevelopers(player);
 			GameController.CheckEndOfTakeActionsRound();
 		}
+
+		public void TakeActionOnDecline(ref Player player)
+		{
+			ResetPlayerDevelopers(player);
+			GameController.CheckEndOfTakeActionsRound();
+		}
 	}
 }

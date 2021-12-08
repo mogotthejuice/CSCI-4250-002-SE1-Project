@@ -1,16 +1,19 @@
 @namespace GameboardComponents
-@using BlazorUI.Pages
-@using GameLibrary.Models
+@using BlazorUI.Pages;
+@using GameLibrary.Models;
+@using GameLibrary.Models.Locations;
 @using GameLibrary.Services;
 @using GameLibrary.Interfaces;
 
+@if (true) InitMessage();
+<h1>@TopMessage</h1>
 <div resourceselectorarea>
     <div resourceselectordialog>
-        <p>@Message</p>
+        <p>@message</p>
         <p>Please select a number for each resource.</p>
         <p>
-            &#x2615 @numResources[Resources.Coffee] &#x1F4BE @numResources[Resources.USB_Sticks]
-            &#x1F4BB @numResources[Resources.CPU_Cores] &#x26A1 @numResources[Resources.Power]
+            &#x2615 @numResourcesSelected[Resources.Coffee] &#x1F4BE @numResourcesSelected[Resources.USB_Sticks]
+            &#x1F4BB @numResourcesSelected[Resources.CPU_Cores] &#x26A1 @numResourcesSelected[Resources.Power]
         </p>
         <p>
             <button class="btn btn-primary" @onclick="() => IncrementCount(Resources.Coffee)">&#x2615 +1</button>
@@ -55,36 +58,144 @@
 </style>
 
 @code {
-        [Parameter]
-        public string Message { get; set; } = "";
-        [Parameter]
-        public EventCallback<bool> OnConfirm { get; set; }
+    [Parameter]
+    public ILocation ClickedLocation { get; set; } = null;
+    [Parameter]
+    public EventCallback<bool> OnConfirm { get; set; }
+
+    public string TopMessage = "";
 
     private static Gameboard game = Gameboard.GetInstance();
     private static GameLog log = GameLog.GetInstance();
-    private static Player player = game.CurrentPlayer;
+    private Player player = game.CurrentPlayer;
+    private string message;
 
-    private Dictionary<Resources, int> numResources = new Dictionary<Resources, int>() {
+    private Dictionary<Resources, int> numResourcesSelected = new Dictionary<Resources, int>() {
         { Resources.Coffee, 0 }, { Resources.USB_Sticks, 0 },
         { Resources.CPU_Cores, 0 }, { Resources.Power, 0 }
     };
 
+    private void InitMessage() {
+        if (game.Round == GameRound.TAKE_ACTIONS)
+            message = GetCardLocationMessage();
+        else
+            message = log.CurrentMessage;
+    }
+
     private void IncrementCount(Resources resource) {
-        if (numResources[resource] < player.Board.GetNumResource(resource))
-            numResources[resource]++;
+        if (numResourcesSelected[resource] < player.Board.GetNumResource(resource))
+            numResourcesSelected[resource]++;
     }
 
     private void DecrementCount(Resources resource) {
-        if (numResources[resource] > 0)
-            numResources[resource]--;
+        if (numResourcesSelected[resource] > 0)
+            numResourcesSelected[resource]--;
     }
 
     private async Task Confirm() {
-        Board.NumResources = numResources;
+        if (game.Round == GameRound.TAKE_ACTIONS) {
+            if (CheckCardPayment())
+                await OnConfirm.InvokeAsync(false);
+        }
+        else if (game.Round == GameRound.PAY_DEVELOPERS) {
+            if (PayDevelopersHandler.CheckResourcePayment(Board.PlayerNumberToNumDevelopersLeft, numResourcesSelected)) {
+                TopMessage = log.CurrentMessage;
+            }
+            else {
+                Board.PlayerNumberToNumDevelopersLeft.Remove(player.Number);
+                if (Board.PlayerNumberToNumDevelopersLeft.Count == 0) {
+                    Board.PlayerNumberToNumDevelopersLeft = null;
+                    GameController.StartNewRound();
+                }
+                await OnConfirm.InvokeAsync(false);
+            }
+        }
+    }
+
+    private async Task Decline() {
+        if (game.Round == GameRound.TAKE_ACTIONS) {
+            if (ClickedLocation.Name.StartsWith('C'))
+                ((ConsultantCardLocation)ClickedLocation).TakeActionOnDecline(ref player);
+            else
+                ((LicenseTileLocation)ClickedLocation).TakeActionOnDecline(ref player);
+        }
+        else if (game.Round == GameRound.PAY_DEVELOPERS) {
+            log.AddMessage($"{player.Name} did not pay remaining developers with resources and lost 10 points.");
+            player.Score -= PayDevelopersHandler.SCORE_PENALTY;
+            game.PlayersInRound.Dequeue();
+            Board.PlayerNumberToNumDevelopersLeft.Remove(player.Number);
+            if (Board.PlayerNumberToNumDevelopersLeft.Count == 0) {
+                Board.PlayerNumberToNumDevelopersLeft = null;
+                GameController.StartNewRound();
+            }
+        }
+
         await OnConfirm.InvokeAsync(false);
     }
-    private async Task Decline() {
-        Board.NumResources = new Dictionary<Resources, int> { {Resources.Coffee, -1 } };
-        await OnConfirm.InvokeAsync(false);
+
+    private bool CheckCardPayment() {
+        if (ClickedLocation.Name.StartsWith('C')) {
+            // Consultant Card
+            int cost = ((ConsultantCardLocation)ClickedLocation).Cost;
+            if (HelperFunctions.TotalNumResources(numResourcesSelected) == cost) {
+                // Correct payment
+                player.Board.RemoveResources(numResourcesSelected);
+                ClickedLocation.TakeAction(ref player);
+                return true;
+            }
+            else {
+                // Incorrect payment
+                TopMessage = $"Must purchase consultant card with {cost} resources.";
+            }
+        }
+        else {
+            // License Tile
+            LicenseTile tile = ((LicenseTileLocation)ClickedLocation).Tile;
+            try {
+                int score = tile.GetScore(numResourcesSelected);
+                player.Score += score;
+                player.Board.RemoveResources(numResourcesSelected);
+                ClickedLocation.TakeAction(ref player);
+                return true;
+            }
+            catch (InvalidOperationException f) {
+                // Incorrect payment
+                TopMessage = f.Message;
+            }
+        }
+
+        return false;
+    }
+
+    private string GetCardLocationMessage() {
+        string _message = "";
+
+        if (ClickedLocation.Name.StartsWith('L')) {
+            // License Tile
+            LicenseTile tile = ((LicenseTileLocation) ClickedLocation).Tile;
+            switch (tile.Type) {
+                case LicenseTileType.FIXED_RESOURCES:
+                    _message = "Buy License Tile for";
+                    foreach (Resources r in tile.RequiredResources.Keys)
+                        _message += $" {tile.RequiredResources[r]} {r.ToString()},";
+
+                    _message = _message.Remove(_message.Length - 1) + '?';
+                    break;
+                case LicenseTileType.FIXED_NUM_RESOURCES:
+                    _message = $"Buy License Tile for {tile.NumResources} resources of {tile.NumResourceTypes} different types?";
+                    break;
+                case LicenseTileType.VARIABLE_NUM_RESOURCES:
+                    _message = "Buy License Tile for between 1 and 7 resources?";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            // Consultant Card
+            _message = $"Buy Consultant Card with {((ConsultantCardLocation) ClickedLocation).Cost} resources.";
+        }
+
+        return _message;
     }
 }
