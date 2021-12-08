@@ -4,7 +4,7 @@
 @using GameLibrary.Models.Locations
 
 <div takeactionarea>
-    <div takeactiondialog>
+    <div class="scrum-container">
 
         @if (Location is OvertimeLocation || Location is ResourceLocation) {
             <p>At @Location.Name, Would you like to add Overclocks? (@TotalOverclock)</p>
@@ -38,16 +38,6 @@
         vertical-align: middle;
         background-color: transparent;
         z-index: 5;
-    }
-
-    div[takeactiondialog] {
-        height: 200px;
-        width: 400px;
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-        background-color: darkseagreen;
-        z-index: 4;
     }
 </style>
 

@@ -1,0 +1,19 @@
+﻿@namespace GameboardComponents
+@using BlazorUI.Pages
+@using GameLibrary.Models.Locations
+@using GameLibrary.Models
+@using GameLibrary.Interfaces
+@using static GameLibrary.Services.GameController
+@using static BlazorUI.Pages.Board
+
+<div>
+    <h2>Game Log</h2>
+    <div>
+        @GameLog.GetInstance().Messages.Count
+        @foreach (string message in GameLog.GetInstance().Messages)
+        {
+            @message
+        }
+
+    </div>
+</div>

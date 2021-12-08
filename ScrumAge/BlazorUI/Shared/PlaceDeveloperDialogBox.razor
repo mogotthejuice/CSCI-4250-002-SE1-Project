@@ -3,7 +3,7 @@
 @using GameLibrary.Interfaces;
 
 <div takeactionarea>
-    <div takeactiondialog>
+    <div class="scrum-container">
         <p>How many developers would you like to place at @Location.Name?</p>
         <p>Current count: @numDevelopers</p>
         <button class="btn btn-primary" @onclick="IncrementCount">+1</button>
@@ -21,16 +21,6 @@
         vertical-align: middle;
         background-color: transparent;
         z-index: 5;
-    }
-
-    div[takeactiondialog] {
-        height: 200px;
-        width: 400px;
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-        background-color: darkseagreen;
-        z-index: 4;
     }
 </style>
 
