@@ -15,7 +15,7 @@ namespace GameLibrary.Models {
             get { return Board.NumResources[Resources.Victory_Points]; }
             set { Board.NumResources[Resources.Victory_Points] = value; }
         }
-        private Color figColor;
+        public Color figColor { get; set; }
         public string FigColor { get { return figColor.Name; } }
         public ResourceBoard Board { get; private set; }
         

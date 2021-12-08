@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace GameLibrary.Interfaces
 {
     public interface ILocation {
+        public List<int> numPlayerDevelopers { get; set; }
         public string Name { get; set; }
         public int MaxPlayers { get; set; }
         public int SpacesLeft { get; }

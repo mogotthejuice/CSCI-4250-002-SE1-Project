@@ -5,7 +5,7 @@
 @using GameLibrary.Interfaces;
 
 <div resourceselectorarea>
-    <div resourceselectordialog>
+    <div class="scrum-container">
         <p>@Message</p>
         <p>Please select a number for each resource.</p>
         <p>
@@ -25,7 +25,10 @@
             <button class="btn btn-primary" @onclick="() => DecrementCount(Resources.Power)">&#x26A1 -1</button>
         </p>
         <button class="btn btn-primary" @onclick="Confirm">Confirm</button>
-</div>
+        @if (game.Round != GameRound.TALLY_SCORE) {
+            <button class="btn btn-primary" @onclick="Decline">Decline</button>
+        }
+    </div>
 
     <ResourceBoardComponent _Player="player" />
 </div>
@@ -39,23 +42,13 @@
         background-color: transparent;
         z-index: 5;
     }
-
-    div[resourceselectordialog] {
-        height: 280px;
-        width: 400px;
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-        background-color: darkseagreen;
-        z-index: 4;
-    }
 </style>
 
 @code {
-    [Parameter]
-    public string Message { get; set; } = "";
-    [Parameter]
-    public EventCallback<bool> OnConfirm { get; set; }
+        [Parameter]
+        public string Message { get; set; } = "";
+        [Parameter]
+        public EventCallback<bool> OnConfirm { get; set; }
 
     private static Gameboard game = Gameboard.GetInstance();
     private static GameLog log = GameLog.GetInstance();
@@ -78,6 +71,10 @@
 
     private async Task Confirm() {
         Board.NumResources = numResources;
+        await OnConfirm.InvokeAsync(false);
+    }
+    private async Task Decline() {
+        Board.NumResources = new Dictionary<Resources, int> { {Resources.Coffee, -1 } };
         await OnConfirm.InvokeAsync(false);
     }
 }
