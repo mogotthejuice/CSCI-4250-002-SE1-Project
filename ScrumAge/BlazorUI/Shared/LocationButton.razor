@@ -1,12 +1,17 @@
 ﻿@namespace GameboardComponents
+@using GameLibrary.Models.Cards
 @using GameLibrary.Models.Locations
 @using GameLibrary.Models
 @using GameLibrary.Interfaces
 @using System.Drawing
+@using System.IO
+@using GameLibrary.Services
 @using static GameLibrary.Services.GameController
 
+<div>
+    <div style="float:left">
+        <button style="background:url(@BackImage), url(@BackImageResource), url(@BackImage2); background-position: left top, center top, left bottom; background-repeat: no-repeat, no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
 
-    <button  style="overflow-y:auto" class="scrum-button" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
             @if (IsOverButton == false) 
             {
                 <p front-title>@Location.Name</p>
@@ -40,8 +45,19 @@
             }
         </button>
 
-
 <style>
+    button {
+        width: 175px;
+        height: 200px;
+        border: none;
+        display: inline-block;
+        transition-duration: 0.4s;
+    }
+
+    background
+    {
+        z-index: 3;
+    }
     
     p[front-title] {
         font-size: larger;
@@ -74,6 +90,12 @@
     public Gameboard Game = Gameboard.GetInstance();
     List<Player> Players = Gameboard.GetInstance().Players.ToList();
 
+    string BackImage { get; set; } = "/img/noresource.jpg";
+
+    string BackImageResource { get; set; } = "/img/noresource.jpg";
+
+    string BackImage2 { get; set; } = "/img/noresource.jpg";
+
     private int numOfDevs;
 
     [Parameter]
@@ -88,12 +110,12 @@
 
     public void MouseExit() {
         IsOverButton = false;
+        SetImages();
     }
 
 
     public string GetSpaces() {
         string details = string.Empty;
-
 
         if (Location != Gameboard.GetInstance().GetLocation("Overtime")) {
             details += $"Spaces Left:  {Location.SpacesLeft}";
@@ -129,9 +151,140 @@
             details += $"Resource:     Overclock Upgrade";
         }
         else if (Location is ConsultantCardLocation) {
+             
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
-            string resource = loc.Card.Upper.Resource.ToString();
+            UpperConCard conCardComp = loc.Card.Upper;
+            ILowerConCard conCardLower = loc.Card.Lower;
+            
+
+            //For upper consultant card component
+            switch(conCardComp.Components)
+            {
+                case UpperConCardComponents.RESOURCE:
+                    BackImage = "/img/resource.png";
+                    break;
+                case UpperConCardComponents.RESOURCE_DICE_ROLL:
+                    BackImage = "/img/Dice.png";
+                    break;
+                case UpperConCardComponents.VICTORY_POINTS:
+                    BackImage = "/img/VictoryPoint.png";
+                    break;
+                case UpperConCardComponents.OVERCLOCK:
+                    BackImage = "/img/overclock.png";
+                    break;
+                case UpperConCardComponents.BITCOIN_INVESTMENT:
+                    BackImage = "/img/bitcoin.jpg";
+                    break;
+                case UpperConCardComponents.CONSULTANT_CARD:
+                    BackImage = "/img/bitcoin.jpg";
+                    break;
+                case UpperConCardComponents.ONE_USE_OVERCLOCK:
+                    BackImage = "img/consultantcard.png";
+                    break;
+                case UpperConCardComponents.ANY_2_RESOURCES:
+                    BackImage = "/img/resource.png";
+                    break;
+            }
+
+            //add another image for the resource
+
+            switch(conCardComp.Resource)
+            {
+                case Resources.No_Resource:
+                    BackImageResource = "/img/noresource.jpg";
+                    break;
+                case Resources.Money:
+                    BackImageResource = "/img/money.png";
+                    break;
+                case Resources.Coffee:
+                    BackImageResource = "/img/coffee.png";
+                    break;
+                case Resources.USB_Sticks:
+                    BackImageResource = "/img/usbsticks.png";
+
+                    break;
+                case Resources.CPU_Cores:
+                    BackImageResource = "/img/CPUcore.jpg";
+                    break;
+                case Resources.Power:
+                    BackImageResource = "/img/power.png";
+                    break;
+                case Resources.Victory_Points:
+                    BackImageResource = "/img/VictoryPoint.png";
+                    break;
+            }
+
+            string CardType = conCardLower.GetType().Name.ToString();
+
+            if(CardType == "SandLowerConCard")
+            {
+                SandLowerConCard sandCard = (SandLowerConCard) conCardLower;
+                
+                switch(sandCard.Person)
+                {
+                    case SandConCardPerson.THERAPIST:
+                        BackImage2 = "/img/Sand_Therapist.jpeg";
+                        break;
+                    case SandConCardPerson.NERD:
+                        BackImage2 = "/img/Sand_Nerd.jpeg";
+                        break;
+                    case SandConCardPerson.INVESTOR:
+                        BackImage2 = "/img/Sand_StockbrokerInvestor.jpeg";
+                        break;
+                    case SandConCardPerson.LAWYER:
+                        BackImage2 = "/img/Sand_Lawyer.jpeg";
+                        break;
+                }
+                string person = sandCard.Person.ToString();
+                details += $"Person: {person} <br>";
+            }
+            else
+            {
+                GreenLowerConCard greenConCard = (GreenLowerConCard) conCardLower;
+
+                switch(greenConCard.Background)
+                {
+
+                     case GreenConCardBackground.BACKEND:
+                        BackImage2 = "/img/Green_BackendConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.DATABASE:
+                        BackImage2 = "/img/Green_DatabaseConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.HR:
+                        BackImage2 = "/img/Green_HRConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.FRONTEND:
+                        BackImage2 = "/img/Green_FrontendConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.LEGAL:
+                        BackImage2 = "/img/Green_LegalConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.HARDWARE:
+                        BackImage2 = "/img/Green_HardwareConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.NETWORKING:
+                        BackImage2 = "/img/Green_NetworkingConsultant.jpeg";
+                        break;
+                    case GreenConCardBackground.ART:
+                        BackImage2 = "/img/Green_ArtDesigner.jpeg";
+                        break;
+                }
+
+
+                string cardType = greenConCard.Background.ToString();
+                details += $"Card Type: {cardType} <br>";
+
+            }
+
+
+            
+            
             string number = loc.Card.Upper.Number.ToString();
+            string resource = conCardComp.Resource.ToString();
+            
+        
+        
             details += $"Resource: {resource} <br> Number: {number}";
         }
         else if (Location is LicenseTileLocation) 
@@ -154,9 +307,186 @@
             string tileType = loc.Tile.Type.ToString();
             string numResources = loc.Tile.NumResources.ToString();
             string resourceTypes = loc.Tile.NumResourceTypes.ToString();
+
+
+            switch(loc.Tile.Type)
+            {
+                case LicenseTileType.FIXED_RESOURCES: 
+                    if(loc.Tile.RequiredResources != null)
+                    {
+                        int image = 0;
+                        foreach (Resources resource in loc.Tile.RequiredResources.Keys)
+                        {
+                           switch(resource)
+                            {
+                                case Resources.No_Resource:
+                                    if (image == 0)
+                                        BackImage = "/img/noresource.jpg";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/noresource.jpg";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/noresource.jpg";
+                                    
+                                    image++;
+                                    break;
+                                case Resources.Money:
+                                     if (image == 0)
+                                        BackImage = "/img/money.jpg";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/money.jpg";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/money.jpg";
+
+                                    image++;
+                                    break;
+                                case Resources.Coffee:
+                                     if (image == 0)
+                                        BackImage = "/img/coffee.jpg";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/coffee.jpg";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/coffee.jpg";
+
+
+                                    image++;
+                                    break;
+                                case Resources.USB_Sticks:
+                                     if (image == 0)
+                                        BackImage = "/img/usbsticks.png";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/usbsticks.png";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/usbsticks.png";
+
+                                    image++;
+                                    break;
+                                case Resources.CPU_Cores:
+                                    if (image == 0)
+                                        BackImage = "/img/CPUcore.jpg";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/CPUcore.jpg";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/CPUcore.jpg";
+
+
+                                    image++;
+                                    break;
+                                case Resources.Power:
+                                    if (image == 0)
+                                        BackImage = "/img/power.jpg";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/power.jpg";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/power.jpg";
+
+
+                                    image++;
+                                    break;
+                                case Resources.Victory_Points:
+                                     if (image == 0)
+                                        BackImage = "/img/VictoryPoint.png";
+                                    else if (image == 1)
+                                        BackImageResource = "/img/VictoryPoint.png";
+                                    else if (image == 2)
+                                        BackImage2 = "/img/VictoryPoint.png";
+
+
+                                    image++;
+                                    break;
+                            }
+                        }
+                    }
+            
+
+                    break;
+                case LicenseTileType.FIXED_NUM_RESOURCES:
+                    switch(loc.Tile.NumResources)
+                    {
+                        case 1:
+                            BackImage = "/img/1.png";
+                            break;
+                        case 2:
+                            BackImage = "/img/2.png";
+                            break;
+                        case 3:
+                            BackImage = "/img/3.png";
+                            break;
+                        case 4:
+                            BackImage = "/img/4.png";
+                            break;
+                        case 5:
+                            BackImage = "/img/5.png";
+                            break;
+                        case 6:
+                            BackImage = "/img/6.png";
+                            break;
+                        case 7:
+                            BackImage = "/img/7.png";
+                            break;
+                    }
+                     switch(loc.Tile.NumResourceTypes)
+                    {
+                        case 1:
+                            BackImageResource = "/img/1.png";
+                            break;
+                        case 2:
+                            BackImageResource = "/img/2.png";
+                            break;
+                        case 3:
+                            BackImageResource = "/img/3.png";
+                            break;
+                        case 4:
+                            BackImageResource = "/img/4.png";
+                            break;
+                        case 5:
+                            BackImageResource = "/img/5.png";
+                            break;
+                        case 6:
+                            BackImageResource = "/img/6.png";
+                            break;
+                        case 7:
+                            BackImageResource = "/img/7.png";
+                            break;
+                    }
+                    
+
+
+                    break;
+                case LicenseTileType.VARIABLE_NUM_RESOURCES:
+                     
+                     switch(loc.Tile.NumResources)
+                    {
+                        case 1:
+                            BackImageResource = "/img/1.png";
+                            break;
+                        case 2:
+                            BackImageResource = "/img/2.png";
+                            break;
+                        case 3:
+                            BackImageResource = "/img/3.png";
+                            break;
+                        case 4:
+                            BackImageResource = "/img/4.png";
+                            break;
+                        case 5:
+                            BackImageResource = "/img/5.png";
+                            break;
+                        case 6:
+                            BackImageResource = "/img/6.png";
+                            break;
+                        case 7:
+                            BackImageResource = "/img/7.png";
+                            break;
+                    }
+                    break;
+            }
+
+
+
+
             if(loc.Tile.Type == LicenseTileType.FIXED_RESOURCES)
             {
-                 details += $"Resource: {requiredResources} <br> Tile Type: {tileType} <br> Required Resources: {requiredResources}";
+                 details += $"Tile Type: {tileType} <br> Required Resources: {requiredResources}";
             }
             else if(loc.Tile.Type == LicenseTileType.FIXED_NUM_RESOURCES)
             {
@@ -202,5 +532,14 @@
         }
 
         return color + " " + Gameboard.GetInstance().GetLocation(location).GetNumPlayerDevelopers(p).ToString();
+    }
+
+
+
+    public void SetImages()
+    {
+        BackImage = "/img/noresource.jpg";
+        BackImage2 = "/img/noresource.jpg";
+        BackImageResource = "/img/noresource.jpg";
     }
 }
