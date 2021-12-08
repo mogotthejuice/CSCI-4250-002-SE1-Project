@@ -8,7 +8,7 @@
 
 <div>
     <div style="float:left">
-        <button style="background:url(@BackImage), url(@BackImage2); background-position: left top, left bottom; background-repeat: no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
+        <button class="images" style="background:url(@BackImage), url(@BackImageResource), url(@BackImage2); background-position: left top, center top, left bottom; background-repeat: no-repeat, no-repeat, no-repeat;  background-size:50px; background-repeat: no-repeat;" @onmouseover="MouseHover" @onmouseout="MouseExit" @onclick="LocationClick">
             @if (IsOverButton == false) 
             {
                 <p front-title>@Location.Name</p>
@@ -46,11 +46,11 @@
         transition-duration: 0.4s;
     }
 
-
-    .buttonStyle
+    .images
     {
-
+        z-index: 3;
     }
+    
     p[front-title] {
         font-size: larger;
         font-weight: bolder;
@@ -71,9 +71,11 @@
 @code {
     public bool IsOverButton { get; set; } = false;
 
-    string BackImage { get; set; } = "/img/cat.jpeg";
+    string BackImage { get; set; } = "/img/noresource.jpg";
 
-    string BackImage2 { get; set; } = "/img/Cogs.jpeg";
+    string BackImageResource { get; set; } = "/img/noresource.jpg";
+
+    string BackImage2 { get; set; } = "/img/noresource.jpg";
 
 
     [Parameter]
@@ -124,21 +126,16 @@
             details += $"Resource:     Overclock Upgrade";
         }
         else if (Location is ConsultantCardLocation) {
-           
-            
-            
-            
-            
-            
+             
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
             UpperConCard conCardComp = loc.Card.Upper;
             
 
-            //For upper consultant card
+            //For upper consultant card component
             switch(conCardComp.Components)
             {
                 case UpperConCardComponents.RESOURCE:
-                    BackImage = "/img/";
+                    BackImage = "/img/resource.png";
                     break;
                 case UpperConCardComponents.RESOURCE_DICE_ROLL:
                     BackImage = "/img/Dice.png";
@@ -147,15 +144,47 @@
                     BackImage = "/img/VictoryPoint.png";
                     break;
                 case UpperConCardComponents.OVERCLOCK:
-
+                    BackImage = "/img/overclock.png";
                     break;
                 case UpperConCardComponents.BITCOIN_INVESTMENT:
+                    BackImage = "/img/bitcoin.jpg";
                     break;
                 case UpperConCardComponents.CONSULTANT_CARD:
+                    BackImage = "/img/bitcoin.jpg";
                     break;
                 case UpperConCardComponents.ONE_USE_OVERCLOCK:
+                    BackImage = "img/consultantcard.png";
                     break;
                 case UpperConCardComponents.ANY_2_RESOURCES:
+                    BackImage = "/img/resource.png";
+                    break;
+            }
+
+            //add another image for the resource
+
+            switch(conCardComp.Resource)
+            {
+                case Resources.No_Resource:
+                    BackImageResource = "/img/noresource.jpg";
+                    break;
+                case Resources.Money:
+                    BackImageResource = "/img/money.png";
+                    break;
+                case Resources.Coffee:
+                    BackImageResource = "/img/coffee.png";
+                    break;
+                case Resources.USB_Sticks:
+                    BackImageResource = "/img/usbsticks.png";
+
+                    break;
+                case Resources.CPU_Cores:
+                    BackImageResource = "/img/CPUcore.jpg";
+                    break;
+                case Resources.Power:
+                    BackImageResource = "/img/power.png";
+                    break;
+                case Resources.Victory_Points:
+                    BackImageResource = "/img/VictoryPoint.png";
                     break;
             }
             
@@ -200,6 +229,16 @@
                 details += $"Number of Resources: {numResources} <br> Tile Type: {tileType}";
             }
            
+
+
+            BackImageResource = "/img/noresource.jpg";
+            BackImage = "/img/noresource.png";
+            BackImage2 = "/img/noresource.png";
+
+
+
+
+
         }
 
 
