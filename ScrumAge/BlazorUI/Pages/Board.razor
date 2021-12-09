@@ -10,6 +10,25 @@
 @using GameLibrary.Services
 @using GameboardComponents
 
+<div  class="scrum-overlay">
+    <div class="scrum-container" style="height:300px; width:100%">
+        <ResourceBoardComponent _Player="Game.CurrentPlayer"/>
+        <h3 style="display: block;">Game Round: @Game.Round</h3>
+        <h1>@message</h1>
+    </div>
+    <div class="scrum-container" style="height:200px;  width:100%">
+        
+    <h2>Game Log</h2>
+    <div style="text-align:left; overflow-y:scroll; height: 80%; scrollbar-face-color: #43304c;">
+    @foreach (string message in GameLog.GetInstance().Messages)
+    {
+        <p style="border-bottom:2px solid #43304c">@message</p>
+    }
+    
+</div>
+    </div>
+</div>
+<div style="width:70%;">
 @if (Game.Round == GameRound.ENDGAME) {
     UriHelper.NavigateTo("/endgame");
 }
@@ -84,10 +103,13 @@ else {
                 <LocationButton Location=@Game.Locations[3] LocationClick="@(e => LocationClick(e, Game.Locations[3]))" />
             </th>
         </tr>
+
+
+        @**@
+        <tr style="height:30px">
+        </tr>
         <tr>
-            <th class="padColOne" width="350">
-                <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
-            </th>
+            
             <th></th>
             <th class="padColOne">
                 <LocationButton Location=@Game.Locations[8] LocationClick="@(e => LocationClick(e, Game.Locations[8]))" />
@@ -103,36 +125,28 @@ else {
             </th>
         </tr>
         <tr>
+            <th></th>
+            <th class="padColOne" width="350">
+                <LocationButton Location=@Game.Locations[12] LocationClick="@(e => LocationClick(e, Game.Locations[12]))" />
+            </th>
             <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[13] LocationClick="@(e => LocationClick(e, Game.Locations[13]))" />
             </th>
-        </tr>
-        <tr>
+        
             <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[14] LocationClick="@(e => LocationClick(e, Game.Locations[14]))" />
             </th>
-        </tr>
-        <tr>
             <th class="padColOne" width="350">
                 <LocationButton Location=@Game.Locations[15] LocationClick="@(e => LocationClick(e, Game.Locations[15]))" />
             </th>
         </tr>
 
         <!-- #endregion -->
-        <!-- #region Player Resource Board -->
-
-        <tr>
-            <th class="padColOne" width="350">
-                <h3 style="display: block">Game Round: @Game.Round</h3>
-                <ResourceBoardComponent _Player="Game.CurrentPlayer" />
-            </th>
-        </tr>
-
-        <!-- #endregion -->
+        
 
     </table>
 }
-
+</div>
 <!-- #region Code-Behind -->
 
 @code
@@ -236,7 +250,6 @@ else {
     }
 }
 <!-- #endregion -->
-
 <style>
     #wrapperBox {
         width: 300px;

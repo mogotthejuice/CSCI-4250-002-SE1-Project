@@ -8,8 +8,8 @@
 @if (true) InitMessage();
 <h1>@TopMessage</h1>
 <div resourceselectorarea>
-    <div resourceselectordialog>
-        <p>@message</p>
+    <div class="scrum-container">
+        <p>@Message</p>
         <p>Please select a number for each resource.</p>
         <p>
             &#x2615 @numResourcesSelected[Resources.Coffee] &#x1F4BE @numResourcesSelected[Resources.USB_Sticks]
@@ -44,16 +44,6 @@
         vertical-align: middle;
         background-color: transparent;
         z-index: 5;
-    }
-
-    div[resourceselectordialog] {
-        height: 280px;
-        width: 400px;
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-        background-color: darkseagreen;
-        z-index: 4;
     }
 </style>
 
