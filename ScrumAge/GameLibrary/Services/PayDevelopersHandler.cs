@@ -12,7 +12,7 @@ namespace GameLibrary.Services {
 	 * Provides methods to pay developers at the end of each round.
 	 */
 	public class PayDevelopersHandler {
-		private const int SCORE_PENALTY = 10;
+		public const int SCORE_PENALTY = 10;
 
 		private static Gameboard game = Gameboard.GetInstance();
 		private static GameLog log = GameLog.GetInstance();
@@ -60,7 +60,7 @@ namespace GameLibrary.Services {
 		/*
 		 * Pays the current player's developers using the numResources dictionary passed. If resource payment is
 		 * invalid, the current player is not cycled.
-		 * Returns true if any player will still need to pay with resources.
+		 * Returns true if player resource payment is incorrect.
 		 */
 		public static bool CheckResourcePayment(
 			Dictionary<int, int> playerNumberToNumDevelopersLeft, Dictionary<Resources, int> numResources) {
@@ -88,15 +88,14 @@ namespace GameLibrary.Services {
 			foreach (Resources resource in numResources.Keys)
 				player.Board.NumResources[resource] -= numResources[resource];
 			game.PlayersInRound.Dequeue();
+			log.AddMessage($"{player.Name} paid remaining developers with resources.");
 
-			// Start new round or move to next player
+			// Move to next player
 			if (game.PlayersInRound.Count > 0) {
 				log.AddMessage($"{player.Name} must pay {playerNumberToNumDevelopersLeft[player.Number]}"
 					+ " developers with resources.");
-				return true;
 			}
 
-			GameController.StartNewRound();
 			return false;
 		}
 	}

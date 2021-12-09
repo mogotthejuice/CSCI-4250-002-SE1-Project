@@ -190,14 +190,14 @@ namespace GameLibrary.Services {
                 cardLocs[i] = (ConsultantCardLocation)game.GetLocation($"Consultant Card{i}");
             
             Queue<ConsultantCard> cards = new Queue<ConsultantCard>();
-            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+            for (int i = NUM_CARD_LOCS - 1; i >= 0; i--) {
                 if (cardLocs[i].Card is not null) {
                     cards.Enqueue(cardLocs[i].Card);
                     cardLocs[i].Card = null;
                 }
             }
 
-            for (int i = NUM_CARD_LOCS - 1; i > 0; i--) {
+            for (int i = NUM_CARD_LOCS - 1; i >= 0; i--) {
                 if (cards.Count > 0)
                     cardLocs[i].Card = cards.Dequeue();
                 else if (game.ConCards.Count == 0)
