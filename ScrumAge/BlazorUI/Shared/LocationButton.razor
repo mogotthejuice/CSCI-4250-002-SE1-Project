@@ -114,8 +114,6 @@
         if (Location != Gameboard.GetInstance().GetLocation("Overtime")) {
             details += $"Spaces Left:  {Location.SpacesLeft}";
         }
-
-
         return details;
     }
 
@@ -150,7 +148,6 @@
             UpperConCard conCardComp = loc.Card.Upper;
             ILowerConCard conCardLower = loc.Card.Lower;
 
-
             //For upper consultant card component
             switch(conCardComp.Components)
             {
@@ -170,10 +167,10 @@
                     BackImage = "/img/bitcoin.jpg";
                     break;
                 case UpperConCardComponents.CONSULTANT_CARD:
-                    BackImage = "/img/bitcoin.jpg";
+                    BackImage = "/img/consultantcard.png";
                     break;
                 case UpperConCardComponents.ONE_USE_OVERCLOCK:
-                    BackImage = "img/consultantcard.png";
+                    BackImage = "img/overclock.png";
                     break;
                 case UpperConCardComponents.ANY_2_RESOURCES:
                     BackImage = "/img/resource.png";
@@ -181,7 +178,6 @@
             }
 
             //add another image for the resource
-
             switch(conCardComp.Resource)
             {
                 case Resources.No_Resource:
@@ -195,7 +191,6 @@
                     break;
                 case Resources.USB_Sticks:
                     BackImageResource = "/img/usbsticks.png";
-
                     break;
                 case Resources.CPU_Cores:
                     BackImageResource = "/img/CPUcore.jpg";
@@ -238,7 +233,6 @@
 
                 switch(greenConCard.Background)
                 {
-
                     case GreenConCardBackground.BACKEND:
                         BackImage2 = "/img/Green_BackendConsultant.jpeg";
                         break;
@@ -264,20 +258,12 @@
                         BackImage2 = "/img/Green_ArtDesigner.jpeg";
                         break;
                 }
-
-
                 string cardType = greenConCard.Background.ToString();
                 details += $"Card Type: {cardType} <br>";
-
             }
-
-
-
 
             string number = loc.Card.Upper.Number.ToString();
             string resource = conCardComp.Resource.ToString();
-
-
 
             details += $"Resource: {resource} <br> Number: {number}";
         }
