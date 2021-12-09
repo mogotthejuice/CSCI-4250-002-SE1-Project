@@ -144,7 +144,7 @@
             NerdLocation loc = (NerdLocation)Location;
             details += $"Resource:     Overclock Upgrade";
         }
-        else if (Location is ConsultantCardLocation) {
+        else if (Location is ConsultantCardLocation && ((ConsultantCardLocation)Location).Card is not null) {
 
             ConsultantCardLocation loc = (ConsultantCardLocation)Location;
             UpperConCard conCardComp = loc.Card.Upper;
@@ -281,7 +281,7 @@
 
             details += $"Resource: {resource} <br> Number: {number}";
         }
-        else if (Location is LicenseTileLocation)
+        else if (Location is LicenseTileLocation && ((LicenseTileLocation)Location).Tile is not null)
         {
             LicenseTileLocation loc = (LicenseTileLocation)Location;
 

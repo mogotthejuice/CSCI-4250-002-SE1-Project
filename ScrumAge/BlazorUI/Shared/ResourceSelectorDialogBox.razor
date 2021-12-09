@@ -9,7 +9,7 @@
 <h1>@TopMessage</h1>
 <div resourceselectorarea>
     <div class="scrum-container">
-        <p>@Message</p>
+        <p>@message</p>
         <p>Please select a number for each resource.</p>
         <p>
             &#x2615 @numResourcesSelected[Resources.Coffee] &#x1F4BE @numResourcesSelected[Resources.USB_Sticks]
@@ -32,8 +32,6 @@
             <button class="btn btn-primary" @onclick="Decline">Decline</button>
         }
     </div>
-
-    <ResourceBoardComponent _Player="player" />
 </div>
 
 <style>
