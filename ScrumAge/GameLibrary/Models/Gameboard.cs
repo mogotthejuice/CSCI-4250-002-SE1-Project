@@ -40,7 +40,6 @@ namespace GameLibrary.Models {
             InitializeLocations();
             Round = GameRound.PLACE_FIGURES;
 
-            GameLog gamelog = GameLog.GetInstance();
             AddToGameLog($"Welcome to SCRUM Age!");
         }
 
@@ -149,7 +148,6 @@ namespace GameLibrary.Models {
         // Initialize cards and tiles locations with instances of cards/tiles for testing
         private void TempInitializeCardsAndTiles() {
             ConCards = new Queue<ConsultantCard>();
-            ConCards.Enqueue(new ConsultantCard(null, null));
 
             ConsultantCard card = new ConsultantCard(
                 new UpperConCard(UpperConCardComponents.RESOURCE, 2, Resources.Power),
@@ -171,6 +169,9 @@ namespace GameLibrary.Models {
                 new SandLowerConCard(SandConCardPerson.THERAPIST, 1));
             ((ConsultantCardLocation) GetLocation("Consultant Card3")).Card = card;
 
+            card = new ConsultantCard(
+                new UpperConCard(UpperConCardComponents.RESOURCE, 2, Resources.Power),
+                new SandLowerConCard(SandConCardPerson.NERD, 1));
             for (int i = 0; i < 15; i++)
                 ConCards.Enqueue(card);
 

@@ -16,54 +16,26 @@
 
 @code
 {
-    async void Navigate() 
+    async void Navigate()
     {
         //Ask for names before navigating to the board 
-        #if !DEBUG
         var playersPro = await JSRuntime.InvokeAsync<string>("prompt", "How many players are playing?");
-        #endif
-        #if DEBUG
-        var playersPro = "2";
-        #endif
-
-       
-
-
-
-
         int playerCount = Int32.Parse(playersPro);
-        
+
         while(playerCount > 4)
         {
             playersPro = await JSRuntime.InvokeAsync<string>("prompt", "Player count must be less than four. Enter a player count less than four");
             playerCount = Int32.Parse(playersPro);
         }
 
-
-
-        
-        
-        
-        string playerNames = string.Empty;
-
-        #if !DEBUG
-        
         //for loop establishing player names and assigning colors
-        for(int i = 0; i < playerCount; i++ )
+        string playerNames = string.Empty;
+        for (int i = 0; i < playerCount; i++ )
         {
             string name = await JSRuntime.InvokeAsync<string>("prompt", "Player Name: ");
             playerNames += name + ";";
 
         }
-        #endif
-
-
-        
-
-
-        #if DEBUG
-        playerNames = "seth;drew;";
-        #endif
 
         UriHelper.NavigateTo($"board/{playerNames}");
     }

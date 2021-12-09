@@ -9,7 +9,14 @@ namespace GameLibrary.Models.Locations
 {
 	public class LicenseTileLocation : AbstractLocation
 	{
-		public LicenseTile Tile { get { return Tiles.Peek(); } }
+		public LicenseTile Tile { 
+			get {
+				if (Tiles.Count > 0)
+					return Tiles.Peek();
+				else
+					return null;
+			}
+		}
 		public Queue<LicenseTile> Tiles { get; set; }
 
 		public LicenseTileLocation() {
@@ -21,6 +28,12 @@ namespace GameLibrary.Models.Locations
 
 		public override void TakeAction(ref Player player) {
 			player.Board.AddLicenseTile(Tiles.Dequeue());
+			ResetPlayerDevelopers(player);
+			GameController.CheckEndOfTakeActionsRound();
+		}
+
+		public void TakeActionOnDecline(ref Player player)
+		{
 			ResetPlayerDevelopers(player);
 			GameController.CheckEndOfTakeActionsRound();
 		}
